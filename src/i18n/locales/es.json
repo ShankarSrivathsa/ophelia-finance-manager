@@ -1,0 +1,79 @@
+{
+  "app": {
+    "title": "Gestor de Dinero",
+    "subtitle": "Gestión financiera simple con seguimiento inteligente de ahorros",
+    "loading": "Cargando tus datos...",
+    "signOut": "Cerrar Sesión"
+  },
+  "auth": {
+    "signIn": "Iniciar Sesión",
+    "signUp": "Registrarse",
+    "email": "Correo Electrónico",
+    "password": "Contraseña",
+    "enterEmail": "Ingresa tu correo electrónico",
+    "enterPassword": "Ingresa tu contraseña",
+    "alreadyHaveAccount": "¿Ya tienes una cuenta? Inicia sesión",
+    "noAccount": "¿No tienes una cuenta? Regístrate",
+    "secureData": "Tus datos están almacenados de forma segura y sincronizados en todos los dispositivos"
+  },
+  "navigation": {
+    "expenses": "Gastos",
+    "income": "Ingresos",
+    "savings": "Ahorros",
+    "budgets": "Presupuestos",
+    "analytics": "Análisis",
+    "accounts": "Cuentas",
+    "transactions": "Transacciones",
+    "journal": "Diario",
+    "ledger": "Libro Mayor",
+    "profitLoss": "P&G",
+    "trialBalance": "Balance de Comprobación",
+    "data": "Datos",
+    "aiAdvisor": "Asesor IA",
+    "smartBudget": "Presupuesto Inteligente",
+    "aiReports": "Informes IA"
+  },
+  "billing": {
+    "title": "Facturación y Suscripción",
+    "currentPlan": "Plan Actual",
+    "freePlan": "Plan Gratuito",
+    "proPlan": "Plan Pro",
+    "upgrade": "Actualizar a Pro",
+    "manage": "Gestionar Suscripción",
+    "features": {
+      "free": "Las funciones gratuitas incluyen: Gastos, Ingresos, Presupuesto, Ahorros, Cuentas y Análisis",
+      "pro": "Las funciones Pro incluyen: Asesor IA, Presupuesto Inteligente, Informes IA y Soporte Prioritario"
+    },
+    "price": "$9.99/mes"
+  },
+  "expenses": {
+    "title": "Agregar Gasto Diario",
+    "amount": "Cantidad",
+    "date": "Fecha",
+    "category": "Categoría",
+    "description": "Descripción",
+    "notes": "Notas (Opcional)",
+    "recurring": "Este es un gasto recurrente",
+    "addExpense": "Agregar Gasto",
+    "recentExpenses": "Gastos Recientes",
+    "placeholder": {
+      "amount": "0.00",
+      "description": "¿En qué gastaste?",
+      "notes": "Notas adicionales..."
+    }
+  },
+  "common": {
+    "cancel": "Cancelar",
+    "save": "Guardar",
+    "delete": "Eliminar",
+    "edit": "Editar",
+    "add": "Agregar",
+    "update": "Actualizar",
+    "loading": "Cargando...",
+    "error": "Error",
+    "success": "Éxito",
+    "confirm": "¿Estás seguro?",
+    "yes": "Sí",
+    "no": "No"
+  }
+}

@@ -1,0 +1,50 @@
+{
+  "app": {
+    "title": "マネーマネージャー",
+    "subtitle": "スマートな貯蓄追跡機能付きのシンプルな財務管理",
+    "loading": "データを読み込んでいます...",
+    "signOut": "ログアウト"
+  },
+  "auth": {
+    "signIn": "ログイン",
+    "signUp": "サインアップ",
+    "email": "メール",
+    "password": "パスワード",
+    "enterEmail": "メールアドレスを入力",
+    "enterPassword": "パスワードを入力",
+    "alreadyHaveAccount": "アカウントをお持ちですか？ログイン",
+    "noAccount": "アカウントをお持ちでないですか？サインアップ",
+    "secureData": "データは安全に保存され、すべてのデバイス間で同期されます"
+  },
+  "navigation": {
+    "expenses": "支出",
+    "income": "収入",
+    "savings": "貯蓄",
+    "budgets": "予算",
+    "analytics": "分析",
+    "accounts": "アカウント",
+    "transactions": "取引",
+    "journal": "仕訳帳",
+    "ledger": "元帳",
+    "profitLoss": "損益計算書",
+    "trialBalance": "試算表",
+    "data": "データ",
+    "aiAdvisor": "AIアドバイザー",
+    "smartBudget": "スマート予算",
+    "aiReports": "AIレポート"
+  },
+  "common": {
+    "cancel": "キャンセル",
+    "save": "保存",
+    "delete": "削除",
+    "edit": "編集",
+    "add": "追加",
+    "update": "更新",
+    "loading": "読み込み中...",
+    "error": "エラー",
+    "success": "成功",
+    "confirm": "よろしいですか？",
+    "yes": "はい",
+    "no": "いいえ"
+  }
+}

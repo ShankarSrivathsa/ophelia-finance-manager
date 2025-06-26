@@ -1,0 +1,50 @@
+{
+  "app": {
+    "title": "Gerenciador de Dinheiro",
+    "subtitle": "Gestão financeira simples com rastreamento inteligente de poupanças",
+    "loading": "Carregando seus dados...",
+    "signOut": "Sair"
+  },
+  "auth": {
+    "signIn": "Entrar",
+    "signUp": "Cadastrar",
+    "email": "Email",
+    "password": "Senha",
+    "enterEmail": "Digite seu email",
+    "enterPassword": "Digite sua senha",
+    "alreadyHaveAccount": "Já tem uma conta? Entre",
+    "noAccount": "Não tem uma conta? Cadastre-se",
+    "secureData": "Seus dados são armazenados com segurança e sincronizados em todos os dispositivos"
+  },
+  "navigation": {
+    "expenses": "Despesas",
+    "income": "Renda",
+    "savings": "Poupanças",
+    "budgets": "Orçamentos",
+    "analytics": "Análises",
+    "accounts": "Contas",
+    "transactions": "Transações",
+    "journal": "Diário",
+    "ledger": "Razão",
+    "profitLoss": "DRE",
+    "trialBalance": "Balancete",
+    "data": "Dados",
+    "aiAdvisor": "Consultor IA",
+    "smartBudget": "Orçamento Inteligente",
+    "aiReports": "Relatórios IA"
+  },
+  "common": {
+    "cancel": "Cancelar",
+    "save": "Salvar",
+    "delete": "Excluir",
+    "edit": "Editar",
+    "add": "Adicionar",
+    "update": "Atualizar",
+    "loading": "Carregando...",
+    "error": "Erro",
+    "success": "Sucesso",
+    "confirm": "Tem certeza?",
+    "yes": "Sim",
+    "no": "Não"
+  }
+}

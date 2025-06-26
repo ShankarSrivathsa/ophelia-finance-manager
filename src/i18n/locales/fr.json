@@ -1,0 +1,50 @@
+{
+  "app": {
+    "title": "Gestionnaire d'Argent",
+    "subtitle": "Gestion financière simple avec suivi intelligent des économies",
+    "loading": "Chargement de vos données...",
+    "signOut": "Se Déconnecter"
+  },
+  "auth": {
+    "signIn": "Se Connecter",
+    "signUp": "S'Inscrire",
+    "email": "Email",
+    "password": "Mot de Passe",
+    "enterEmail": "Entrez votre email",
+    "enterPassword": "Entrez votre mot de passe",
+    "alreadyHaveAccount": "Vous avez déjà un compte ? Connectez-vous",
+    "noAccount": "Vous n'avez pas de compte ? Inscrivez-vous",
+    "secureData": "Vos données sont stockées en sécurité et synchronisées sur tous les appareils"
+  },
+  "navigation": {
+    "expenses": "Dépenses",
+    "income": "Revenus",
+    "savings": "Économies",
+    "budgets": "Budgets",
+    "analytics": "Analyses",
+    "accounts": "Comptes",
+    "transactions": "Transactions",
+    "journal": "Journal",
+    "ledger": "Grand Livre",
+    "profitLoss": "P&P",
+    "trialBalance": "Balance de Vérification",
+    "data": "Données",
+    "aiAdvisor": "Conseiller IA",
+    "smartBudget": "Budget Intelligent",
+    "aiReports": "Rapports IA"
+  },
+  "common": {
+    "cancel": "Annuler",
+    "save": "Sauvegarder",
+    "delete": "Supprimer",
+    "edit": "Modifier",
+    "add": "Ajouter",
+    "update": "Mettre à jour",
+    "loading": "Chargement...",
+    "error": "Erreur",
+    "success": "Succès",
+    "confirm": "Êtes-vous sûr ?",
+    "yes": "Oui",
+    "no": "Non"
+  }
+}

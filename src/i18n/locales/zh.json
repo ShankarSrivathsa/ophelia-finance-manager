@@ -1,0 +1,50 @@
+{
+  "app": {
+    "title": "资金管理器",
+    "subtitle": "简单的财务管理与智能储蓄跟踪",
+    "loading": "正在加载您的数据...",
+    "signOut": "退出登录"
+  },
+  "auth": {
+    "signIn": "登录",
+    "signUp": "注册",
+    "email": "邮箱",
+    "password": "密码",
+    "enterEmail": "输入您的邮箱",
+    "enterPassword": "输入您的密码",
+    "alreadyHaveAccount": "已有账户？登录",
+    "noAccount": "没有账户？注册",
+    "secureData": "您的数据安全存储并在所有设备间同步"
+  },
+  "navigation": {
+    "expenses": "支出",
+    "income": "收入",
+    "savings": "储蓄",
+    "budgets": "预算",
+    "analytics": "分析",
+    "accounts": "账户",
+    "transactions": "交易",
+    "journal": "日记账",
+    "ledger": "分类账",
+    "profitLoss": "损益表",
+    "trialBalance": "试算平衡表",
+    "data": "数据",
+    "aiAdvisor": "AI顾问",
+    "smartBudget": "智能预算",
+    "aiReports": "AI报告"
+  },
+  "common": {
+    "cancel": "取消",
+    "save": "保存",
+    "delete": "删除",
+    "edit": "编辑",
+    "add": "添加",
+    "update": "更新",
+    "loading": "加载中...",
+    "error": "错误",
+    "success": "成功",
+    "confirm": "您确定吗？",
+    "yes": "是",
+    "no": "否"
+  }
+}

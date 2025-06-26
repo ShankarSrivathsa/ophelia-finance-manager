@@ -1,0 +1,166 @@
+{
+  "app": {
+    "title": "Money Manager",
+    "subtitle": "Simple financial management with smart savings tracking",
+    "loading": "Loading your data...",
+    "signOut": "Sign Out"
+  },
+  "auth": {
+    "signIn": "Sign In",
+    "signUp": "Sign Up",
+    "email": "Email",
+    "password": "Password",
+    "enterEmail": "Enter your email",
+    "enterPassword": "Enter your password",
+    "alreadyHaveAccount": "Already have an account? Sign in",
+    "noAccount": "Don't have an account? Sign up",
+    "secureData": "Your data is securely stored and synced across devices"
+  },
+  "navigation": {
+    "expenses": "Expenses",
+    "income": "Income",
+    "savings": "Savings",
+    "budgets": "Budgets",
+    "analytics": "Analytics",
+    "accounts": "Accounts",
+    "transactions": "Transactions",
+    "journal": "Journal",
+    "ledger": "Ledger",
+    "profitLoss": "P&L",
+    "trialBalance": "Trial Balance",
+    "data": "Data",
+    "aiAdvisor": "AI Advisor",
+    "smartBudget": "Smart Budget",
+    "aiReports": "AI Reports"
+  },
+  "billing": {
+    "title": "Billing & Subscription",
+    "currentPlan": "Current Plan",
+    "freePlan": "Free Plan",
+    "proPlan": "Pro Plan",
+    "upgrade": "Upgrade to Pro",
+    "manage": "Manage Subscription",
+    "features": {
+      "free": "Free features include: Expenses, Income, Budget, Savings, Accounts, and Analytics",
+      "pro": "Pro features include: AI Advisor, Smart Budget, AI Reports, and Priority Support"
+    },
+    "price": "$9.99/month"
+  },
+  "expenses": {
+    "title": "Add Daily Expense",
+    "amount": "Amount",
+    "date": "Date",
+    "category": "Category",
+    "description": "Description",
+    "notes": "Notes (Optional)",
+    "recurring": "This is a recurring expense",
+    "addExpense": "Add Expense",
+    "recentExpenses": "Recent Expenses",
+    "placeholder": {
+      "amount": "0.00",
+      "description": "What did you spend on?",
+      "notes": "Any additional notes..."
+    }
+  },
+  "income": {
+    "title": "Add Income",
+    "addIncome": "Add Income",
+    "recentIncome": "Recent Income",
+    "recurring": "This is recurring income",
+    "placeholder": {
+      "description": "Source of income"
+    }
+  },
+  "savings": {
+    "title": "Savings Tracker",
+    "addGoal": "Add Goal",
+    "addTransaction": "Add Transaction",
+    "totalSaved": "Total Saved",
+    "monthlyAverage": "Monthly Average",
+    "savingsRate": "Savings Rate",
+    "savingsGoals": "Savings Goals",
+    "recentTransactions": "Recent Savings Transactions",
+    "noGoals": "No savings goals yet. Create your first goal to start saving!",
+    "goalName": "Goal Name",
+    "targetAmount": "Target Amount",
+    "targetDate": "Target Date",
+    "progress": "Progress",
+    "remaining": "Remaining",
+    "daysLeft": "days left",
+    "daysOverdue": "days overdue"
+  },
+  "budgets": {
+    "title": "Budget Manager",
+    "addBudget": "Add Budget",
+    "monthlyBudgets": "Monthly Budgets",
+    "budgeted": "Budgeted",
+    "spent": "Spent",
+    "remaining": "Remaining",
+    "underBudget": "Under Budget",
+    "onTrack": "On Track",
+    "overBudget": "Over Budget",
+    "noBudgets": "No budgets set for this month. Add your first budget to get started!"
+  },
+  "analytics": {
+    "title": "Analytics & Reports",
+    "totalIncome": "Total Income",
+    "totalExpenses": "Total Expenses",
+    "netIncome": "Net Income",
+    "totalBudget": "Total Budget",
+    "budgetVsActual": "Budget vs Actual",
+    "spendingByCategory": "Spending by Category",
+    "monthlyTrends": "Monthly Financial Trends",
+    "topCategories": "Top Spending Categories",
+    "smartInsights": "Smart Insights",
+    "noExpenses": "No expenses recorded yet",
+    "noInsights": "No insights available yet. Add more data to see smart insights!"
+  },
+  "ai": {
+    "advisor": {
+      "title": "AI Financial Advisor",
+      "getAdvice": "Get AI Advice",
+      "personalizedAdvice": "AI Financial Advice",
+      "recommendations": "Personalized Recommendations",
+      "insights": "Key Insights",
+      "description": "Get personalized financial advice based on your spending patterns, income, and goals.",
+      "selectType": "Select an advice type and click \"Get AI Advice\" to start."
+    },
+    "budgetOptimizer": {
+      "title": "Smart Budget Optimizer",
+      "optimizeBudget": "Optimize Budget",
+      "summary": "Optimization Summary",
+      "potentialSavings": "Potential Monthly Savings",
+      "adjustmentsSuggested": "Adjustments Suggested",
+      "recommendedAdjustments": "Recommended Budget Adjustments",
+      "apply": "Apply",
+      "applied": "Applied to your budget",
+      "confidence": "confidence",
+      "description": "Get smart recommendations to optimize your budget based on your spending patterns and financial goals."
+    },
+    "reports": {
+      "title": "Automated Reports",
+      "generateReport": "Generate Report",
+      "download": "Download",
+      "reportType": "Report Type",
+      "startDate": "Start Date",
+      "endDate": "End Date",
+      "keyMetrics": "Key Metrics",
+      "recommendations": "AI Recommendations",
+      "description": "Generate comprehensive financial reports with AI-powered insights and recommendations."
+    }
+  },
+  "common": {
+    "cancel": "Cancel",
+    "save": "Save",
+    "delete": "Delete",
+    "edit": "Edit",
+    "add": "Add",
+    "update": "Update",
+    "loading": "Loading...",
+    "error": "Error",
+    "success": "Success",
+    "confirm": "Are you sure?",
+    "yes": "Yes",
+    "no": "No"
+  }
+}

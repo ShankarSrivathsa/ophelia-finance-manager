@@ -1,0 +1,50 @@
+{
+  "app": {
+    "title": "Geld-Manager",
+    "subtitle": "Einfache Finanzverwaltung mit intelligentem Spartracking",
+    "loading": "Lade deine Daten...",
+    "signOut": "Abmelden"
+  },
+  "auth": {
+    "signIn": "Anmelden",
+    "signUp": "Registrieren",
+    "email": "E-Mail",
+    "password": "Passwort",
+    "enterEmail": "Gib deine E-Mail ein",
+    "enterPassword": "Gib dein Passwort ein",
+    "alreadyHaveAccount": "Hast du bereits ein Konto? Anmelden",
+    "noAccount": "Hast du kein Konto? Registrieren",
+    "secureData": "Deine Daten werden sicher gespeichert und auf allen Geräten synchronisiert"
+  },
+  "navigation": {
+    "expenses": "Ausgaben",
+    "income": "Einkommen",
+    "savings": "Ersparnisse",
+    "budgets": "Budgets",
+    "analytics": "Analysen",
+    "accounts": "Konten",
+    "transactions": "Transaktionen",
+    "journal": "Journal",
+    "ledger": "Hauptbuch",
+    "profitLoss": "G&V",
+    "trialBalance": "Probebilanz",
+    "data": "Daten",
+    "aiAdvisor": "KI-Berater",
+    "smartBudget": "Intelligentes Budget",
+    "aiReports": "KI-Berichte"
+  },
+  "common": {
+    "cancel": "Abbrechen",
+    "save": "Speichern",
+    "delete": "Löschen",
+    "edit": "Bearbeiten",
+    "add": "Hinzufügen",
+    "update": "Aktualisieren",
+    "loading": "Laden...",
+    "error": "Fehler",
+    "success": "Erfolg",
+    "confirm": "Bist du sicher?",
+    "yes": "Ja",
+    "no": "Nein"
+  }
+}
