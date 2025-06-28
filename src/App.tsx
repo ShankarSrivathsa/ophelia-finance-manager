@@ -290,9 +290,11 @@ function AppContent() {
       { id: 'accounts', label: t('navigation.accounts'), icon: Building2 }
     ];
 
-    // Add AI-powered features (Pro features) - show for all users but indicate Pro status
+    // Add AI Advisor to all users (now free)
+    baseTabs.push({ id: 'ai-advisor', label: t('navigation.aiAdvisor'), icon: Brain });
+
+    // Add Pro features - show for all users but indicate Pro status
     baseTabs.push(
-      { id: 'ai-advisor', label: t('navigation.aiAdvisor'), icon: Brain },
       { id: 'budget-optimizer', label: t('navigation.smartBudget'), icon: Zap },
       { id: 'reports', label: t('navigation.aiReports'), icon: FileText }
     );
@@ -402,7 +404,7 @@ function AppContent() {
           <div className="flex flex-wrap justify-center gap-2 p-2 bg-white/55 backdrop-blur-sm rounded-xl shadow-lg">
             {tabs.map((tab) => {
               const Icon = tab.icon;
-              const isProFeature = ['ai-advisor', 'budget-optimizer', 'reports'].includes(tab.id);
+              const isProFeature = ['budget-optimizer', 'reports'].includes(tab.id);
               
               return (
                 <button
@@ -461,24 +463,7 @@ function AppContent() {
           )}
 
           {activeTab === 'ai-advisor' && (
-            isProUser ? (
-              <AIFinancialAdvisor onAdviceGenerated={handleDataUpdate} />
-            ) : (
-              <div className="bg-white/55 backdrop-blur-sm rounded-xl shadow-lg p-8 text-center">
-                <Crown className="w-16 h-16 text-gray-400 mx-auto mb-4" />
-                <h3 className="text-lg font-semibold text-gray-800 mb-2">Pro Feature</h3>
-                <p className="text-gray-600 mb-4">
-                  Upgrade to Pro to access AI-powered financial advice and insights.
-                </p>
-                <button
-                  onClick={() => setActiveTab('billing')}
-                  className="bg-gradient-to-r from-blue-600 to-purple-600 text-white px-6 py-3 rounded-lg hover:from-blue-700 hover:to-purple-700 transition-all duration-200 flex items-center gap-2 mx-auto"
-                >
-                  <Crown className="w-5 h-5" />
-                  Upgrade to Pro
-                </button>
-              </div>
-            )
+            <AIFinancialAdvisor onAdviceGenerated={handleDataUpdate} />
           )}
 
           {activeTab === 'budget-optimizer' && (

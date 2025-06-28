@@ -62,19 +62,20 @@ export const BillingPage: React.FC<BillingPageProps> = ({ userEmail, onBack, onP
     'Savings goal tracking',
     'Account management',
     'Basic analytics & reports',
+    'AI Financial Advisor',
     'Data export/import',
     'Multi-language support'
   ];
 
   const proFeatures = [
     'All Free features',
-    'AI Financial Advisor',
     'Smart Budget Optimizer',
     'AI-Generated Reports',
     'Advanced analytics',
     'Priority customer support',
     'Unlimited savings goals',
-    'Custom categories'
+    'Custom categories',
+    'Premium insights'
   ];
 
   return (
@@ -177,7 +178,14 @@ export const BillingPage: React.FC<BillingPageProps> = ({ userEmail, onBack, onP
                 {freeFeatures.map((feature, index) => (
                   <li key={index} className="flex items-center gap-3">
                     <Check className="w-4 h-4 text-green-600 flex-shrink-0" />
-                    <span className="text-gray-700">{feature}</span>
+                    <span className={`text-gray-700 ${feature === 'AI Financial Advisor' ? 'font-medium' : ''}`}>
+                      {feature}
+                      {feature === 'AI Financial Advisor' && (
+                        <span className="ml-2 text-xs bg-gradient-to-r from-blue-400 to-purple-500 text-white px-2 py-0.5 rounded-full">
+                          AI
+                        </span>
+                      )}
+                    </span>
                   </li>
                 ))}
               </ul>
@@ -241,9 +249,9 @@ export const BillingPage: React.FC<BillingPageProps> = ({ userEmail, onBack, onP
                 {proFeatures.map((feature, index) => (
                   <li key={index} className="flex items-center gap-3">
                     <Check className="w-4 h-4 text-blue-600 flex-shrink-0" />
-                    <span className={`${index === 0 ? 'text-gray-500' : 'text-gray-700'} ${index > 0 && index <= 3 ? 'font-medium' : ''}`}>
+                    <span className={`${index === 0 ? 'text-gray-500' : 'text-gray-700'} ${index > 0 && index <= 2 ? 'font-medium' : ''}`}>
                       {feature}
-                      {index > 0 && index <= 3 && (
+                      {index > 0 && index <= 2 && (
                         <span className="ml-2 text-xs bg-gradient-to-r from-yellow-400 to-orange-500 text-white px-2 py-0.5 rounded-full">
                           AI
                         </span>
@@ -266,14 +274,10 @@ export const BillingPage: React.FC<BillingPageProps> = ({ userEmail, onBack, onP
                 </div>
                 <div>
                   <h3 className="text-lg font-semibold text-green-800">Welcome to Pro!</h3>
-                  <p className="text-green-700">You now have access to all premium features including AI-powered insights.</p>
+                  <p className="text-green-700">You now have access to all premium features including advanced AI-powered insights.</p>
                 </div>
               </div>
               <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-4">
-                <div className="bg-white/50 p-3 rounded-lg">
-                  <div className="font-medium text-gray-800">🧠 AI Financial Advisor</div>
-                  <div className="text-sm text-gray-600">Get personalized financial advice</div>
-                </div>
                 <div className="bg-white/50 p-3 rounded-lg">
                   <div className="font-medium text-gray-800">⚡ Smart Budget Optimizer</div>
                   <div className="text-sm text-gray-600">Optimize your spending automatically</div>
@@ -281,6 +285,10 @@ export const BillingPage: React.FC<BillingPageProps> = ({ userEmail, onBack, onP
                 <div className="bg-white/50 p-3 rounded-lg">
                   <div className="font-medium text-gray-800">📊 AI Reports</div>
                   <div className="text-sm text-gray-600">Generate detailed financial reports</div>
+                </div>
+                <div className="bg-white/50 p-3 rounded-lg">
+                  <div className="font-medium text-gray-800">🎯 Premium Insights</div>
+                  <div className="text-sm text-gray-600">Advanced analytics and recommendations</div>
                 </div>
               </div>
             </div>
@@ -310,7 +318,7 @@ export const BillingPage: React.FC<BillingPageProps> = ({ userEmail, onBack, onP
               
               <div>
                 <h4 className="font-medium text-gray-800 mb-2">How does the AI advisor work?</h4>
-                <p className="text-gray-600">Our AI analyzes your spending patterns, income, and goals to provide personalized financial advice and budget optimizations.</p>
+                <p className="text-gray-600">Our AI analyzes your spending patterns, income, and goals to provide personalized financial advice. The basic AI advisor is free, while Pro users get advanced optimization features.</p>
               </div>
             </div>
           </div>
