@@ -1,4 +1,4 @@
-import { serve } from "npm:@deno/std@0.168.0/http/server.ts";
+import { serve } from "https://deno.land/std@0.168.0/http/server.ts";
 import { createClient } from "npm:@supabase/supabase-js@2";
 
 const corsHeaders = {
@@ -51,6 +51,7 @@ serve(async (req) => {
     }
 
     const requestData: FinancialAdviceRequest = await req.json();
+    console.log('Financial advice request:', requestData);
 
     // Calculate net income and savings rate
     const netIncome = requestData.userProfile.monthlyIncome - requestData.userProfile.monthlyExpenses;
@@ -111,6 +112,13 @@ serve(async (req) => {
         impact: "Avoid tax surprises and penalties",
         priority: "high"
       });
+    } else if (requestData.userProfile.persona === "business") {
+      recommendations.push({
+        category: "Business Finances",
+        action: "Separate personal and business expenses",
+        impact: "Better financial organization and tax preparation",
+        priority: "high"
+      });
     }
 
     // Add spending insights based on transaction data
@@ -131,11 +139,25 @@ serve(async (req) => {
       }
     });
 
-    if (topCategory) {
+    if (topCategory && topAmount > 0) {
       insights.push({
         type: "opportunity",
-        message: `Your highest spending category is ${topCategory}. Look for ways to reduce these expenses.`
+        message: `Your highest spending category is ${topCategory} ($${topAmount.toFixed(2)}). Look for ways to optimize these expenses.`
       });
+    }
+
+    // Add savings goal insights
+    if (requestData.userProfile.savingsGoals.length > 0) {
+      const activeGoals = requestData.userProfile.savingsGoals.filter(goal => goal.currentAmount < goal.targetAmount);
+      if (activeGoals.length > 0) {
+        const totalNeeded = activeGoals.reduce((sum, goal) => sum + (goal.targetAmount - goal.currentAmount), 0);
+        recommendations.push({
+          category: "Savings Goals",
+          action: `Focus on your ${activeGoals.length} active savings goals`,
+          impact: `Reach your financial targets totaling $${totalNeeded.toFixed(2)}`,
+          priority: "medium"
+        });
+      }
     }
 
     // Response object
@@ -145,6 +167,8 @@ serve(async (req) => {
       insights
     };
 
+    console.log('Financial advice response:', response);
+
     return new Response(JSON.stringify(response), {
       headers: { ...corsHeaders, "Content-Type": "application/json" },
     });
@@ -153,12 +177,27 @@ serve(async (req) => {
     
     // Fallback response
     const fallbackResponse = {
-      advice: "I'm currently unable to provide personalized advice. Please try again later.",
-      recommendations: [],
-      insights: [{
-        type: "warning",
-        message: "AI advisor temporarily unavailable"
-      }]
+      advice: "I'm currently analyzing your financial data to provide personalized advice. Based on general best practices, focus on tracking your expenses and maintaining a budget.",
+      recommendations: [
+        {
+          category: "Budgeting",
+          action: "Create and maintain a monthly budget",
+          impact: "Better control over your finances",
+          priority: "high"
+        },
+        {
+          category: "Emergency Fund",
+          action: "Build an emergency fund covering 3-6 months of expenses",
+          impact: "Financial security and peace of mind",
+          priority: "high"
+        }
+      ],
+      insights: [
+        {
+          type: "opportunity",
+          message: "Regular expense tracking can help identify areas for savings"
+        }
+      ]
     };
 
     return new Response(JSON.stringify(fallbackResponse), {

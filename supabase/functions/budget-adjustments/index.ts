@@ -1,4 +1,4 @@
-import { serve } from "npm:@deno/std@0.168.0/http/server.ts";
+import { serve } from "https://deno.land/std@0.168.0/http/server.ts";
 import { createClient } from "npm:@supabase/supabase-js@2";
 
 const corsHeaders = {
@@ -49,6 +49,7 @@ serve(async (req) => {
     }
 
     const requestData: BudgetAdjustmentRequest = await req.json();
+    console.log('Budget adjustment request:', requestData);
 
     // Generate budget adjustments
     const adjustments = [];
@@ -63,7 +64,7 @@ serve(async (req) => {
           category: budget.category,
           currentAmount: budget.budgeted,
           suggestedAmount,
-          reasoning: `Your spending in ${budget.category} consistently exceeds your budget. Increasing to a more realistic amount will help you maintain your budget.`,
+          reasoning: `Your spending in ${budget.category} consistently exceeds your budget. Increasing to $${suggestedAmount} will help you maintain a realistic budget.`,
           confidence: 0.85
         });
         
@@ -78,7 +79,7 @@ serve(async (req) => {
           category: budget.category,
           currentAmount: budget.budgeted,
           suggestedAmount,
-          reasoning: `You consistently spend less than budgeted in ${budget.category}. You could reallocate some of this budget to savings or other categories.`,
+          reasoning: `You consistently spend less than budgeted in ${budget.category}. You could reallocate $${(budget.budgeted - suggestedAmount).toFixed(2)} to savings or other categories.`,
           confidence: 0.75
         });
         
@@ -95,7 +96,7 @@ serve(async (req) => {
           category: pattern.category,
           currentAmount: 0,
           suggestedAmount: Math.ceil(pattern.averageMonthly * 1.1),
-          reasoning: `You regularly spend on ${pattern.category} but don't have a budget for it. Adding this category will help you track these expenses.`,
+          reasoning: `You regularly spend $${pattern.averageMonthly.toFixed(2)} on ${pattern.category} but don't have a budget for it. Adding this category will help you track these expenses.`,
           confidence: 0.8
         });
       }
@@ -104,11 +105,13 @@ serve(async (req) => {
     // Generate impact analysis
     let impactAnalysis = "";
     if (adjustments.length === 0) {
-      impactAnalysis = "Your budgets are well-aligned with your spending patterns. No adjustments are needed at this time.";
+      impactAnalysis = "Your budgets are well-aligned with your spending patterns. No major adjustments are needed at this time. Consider minor optimizations to increase savings.";
     } else if (totalSavings > 0) {
-      impactAnalysis = `The suggested adjustments could free up $${totalSavings.toFixed(2)} that you could allocate to savings or other financial goals.`;
+      impactAnalysis = `The suggested adjustments could free up $${totalSavings.toFixed(2)} monthly that you could allocate to savings or other financial goals. This represents a ${((totalSavings / requestData.currentBudgets.reduce((sum, b) => sum + b.budgeted, 0)) * 100).toFixed(1)}% optimization of your budget.`;
+    } else if (totalSavings < 0) {
+      impactAnalysis = `The suggested adjustments will increase your total budget by $${Math.abs(totalSavings).toFixed(2)} to better reflect your actual spending patterns. This will help you maintain realistic budgets and reduce financial stress.`;
     } else {
-      impactAnalysis = "The suggested adjustments will make your budget more realistic and help you better track your finances, even though they don't result in immediate savings.";
+      impactAnalysis = "The suggested adjustments will make your budget more realistic and help you better track your finances without significantly changing your total budget.";
     }
 
     // Response object
@@ -117,6 +120,8 @@ serve(async (req) => {
       totalSavings: Math.max(0, totalSavings), // Only show positive savings
       impactAnalysis
     };
+
+    console.log('Budget adjustment response:', response);
 
     return new Response(JSON.stringify(response), {
       headers: { ...corsHeaders, "Content-Type": "application/json" },
@@ -128,7 +133,7 @@ serve(async (req) => {
     const fallbackResponse = {
       adjustments: [],
       totalSavings: 0,
-      impactAnalysis: "Unable to generate budget adjustments at this time."
+      impactAnalysis: "Unable to generate specific budget adjustments at this time. Consider reviewing your spending patterns and adjusting budgets for categories where you consistently overspend."
     };
 
     return new Response(JSON.stringify(fallbackResponse), {

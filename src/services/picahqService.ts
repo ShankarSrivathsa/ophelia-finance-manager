@@ -16,6 +16,8 @@ class PicaHQService {
         throw new Error('User must be authenticated');
       }
 
+      console.log(`Calling edge function: ${functionName}`, payload);
+
       const { data, error } = await supabase.functions.invoke(functionName, {
         body: payload,
         headers: {
@@ -24,9 +26,11 @@ class PicaHQService {
       });
 
       if (error) {
+        console.error(`Edge function ${functionName} error:`, error);
         throw new Error(`Edge function error: ${error.message}`);
       }
 
+      console.log(`Edge function ${functionName} response:`, data);
       return data;
     } catch (error) {
       console.error(`PicaHQ ${functionName} error:`, error);
