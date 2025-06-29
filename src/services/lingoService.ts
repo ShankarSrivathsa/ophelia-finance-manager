@@ -29,21 +29,7 @@ class LingoService {
         { code: 'zh', name: 'Chinese', nativeName: '中文', flag: '🇨🇳' },
         { code: 'ja', name: 'Japanese', nativeName: '日本語', flag: '🇯🇵' },
         { code: 'ko', name: 'Korean', nativeName: '한국어', flag: '🇰🇷' },
-        { code: 'ar', name: 'Arabic', nativeName: 'العربية', flag: '🇸🇦' },
-        { code: 'hi', name: 'Hindi', nativeName: 'हिन्दी', flag: '🇮🇳' },
-        { code: 'bn', name: 'Bengali', nativeName: 'বাংলা', flag: '🇧🇩' },
-        { code: 'tr', name: 'Turkish', nativeName: 'Türkçe', flag: '🇹🇷' },
-        { code: 'nl', name: 'Dutch', nativeName: 'Nederlands', flag: '🇳🇱' },
-        { code: 'sv', name: 'Swedish', nativeName: 'Svenska', flag: '🇸🇪' },
-        { code: 'fi', name: 'Finnish', nativeName: 'Suomi', flag: '🇫🇮' },
-        { code: 'pl', name: 'Polish', nativeName: 'Polski', flag: '🇵🇱' },
-        { code: 'uk', name: 'Ukrainian', nativeName: 'Українська', flag: '🇺🇦' },
-        { code: 'el', name: 'Greek', nativeName: 'Ελληνικά', flag: '🇬🇷' },
-        { code: 'he', name: 'Hebrew', nativeName: 'עברית', flag: '🇮🇱' },
-        { code: 'th', name: 'Thai', nativeName: 'ไทย', flag: '🇹🇭' },
-        { code: 'vi', name: 'Vietnamese', nativeName: 'Tiếng Việt', flag: '🇻🇳' },
-        { code: 'id', name: 'Indonesian', nativeName: 'Bahasa Indonesia', flag: '🇮🇩' },
-        { code: 'ms', name: 'Malay', nativeName: 'Bahasa Melayu', flag: '🇲🇾' }
+        { code: 'ar', name: 'Arabic', nativeName: 'العربية', flag: '🇸🇦' }
       ];
 
       // Cache the languages
@@ -51,7 +37,7 @@ class LingoService {
       return languages;
     } catch (error) {
       console.error('Error fetching languages:', error);
-      return [];
+      return this.getFallbackLanguages();
     }
   }
 
@@ -69,36 +55,14 @@ class LingoService {
     );
   }
 
-  async getTranslation(key: string, language: string): Promise<string> {
-    // In a real app, you would fetch this from the Lingo API
-    // For now, we'll just return the key
-    return key;
-  }
-
-  // This method would be used in a real app to fetch translations from the Lingo API
-  private async fetchFromAPI(endpoint: string, params: Record<string, string> = {}): Promise<any> {
-    try {
-      const queryParams = new URLSearchParams({
-        ...params,
-        api_key: this.apiKey
-      });
-
-      const response = await fetch(`${this.baseUrl}/${endpoint}?${queryParams.toString()}`, {
-        headers: {
-          'Content-Type': 'application/json',
-          'Accept': 'application/json'
-        }
-      });
-
-      if (!response.ok) {
-        throw new Error(`Lingo API error: ${response.status}`);
-      }
-
-      return await response.json();
-    } catch (error) {
-      console.error(`Error fetching from Lingo API (${endpoint}):`, error);
-      throw error;
-    }
+  private getFallbackLanguages(): Language[] {
+    return [
+      { code: 'en', name: 'English', nativeName: 'English', flag: '🇺🇸' },
+      { code: 'es', name: 'Spanish', nativeName: 'Español', flag: '🇪🇸' },
+      { code: 'fr', name: 'French', nativeName: 'Français', flag: '🇫🇷' },
+      { code: 'de', name: 'German', nativeName: 'Deutsch', flag: '🇩🇪' },
+      { code: 'zh', name: 'Chinese', nativeName: '中文', flag: '🇨🇳' }
+    ];
   }
 }
 

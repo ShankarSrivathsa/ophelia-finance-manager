@@ -6,16 +6,17 @@ import { Language } from '../types/language';
 import { lingoService } from '../services/lingoService';
 
 export const LanguageSelector: React.FC = () => {
-  const { i18n, t } = useTranslation();
+  const { i18n } = useTranslation();
   const [isOpen, setIsOpen] = useState(false);
   const [dropdownPosition, setDropdownPosition] = useState({ top: 0, left: 0 });
-  const [currentLang, setCurrentLang] = useState(i18n.language);
+  const [currentLang, setCurrentLang] = useState(i18n.language.split('-')[0]);
   const [searchQuery, setSearchQuery] = useState('');
   const [languages, setLanguages] = useState<Language[]>([]);
   const [filteredLanguages, setFilteredLanguages] = useState<Language[]>([]);
   const [loading, setLoading] = useState(false);
   const buttonRef = useRef<HTMLButtonElement>(null);
   const searchInputRef = useRef<HTMLInputElement>(null);
+  const dropdownRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const loadLanguages = async () => {
@@ -31,17 +32,19 @@ export const LanguageSelector: React.FC = () => {
 
   const changeLanguage = async (languageCode: string) => {
     try {
-      // Change the language
-      await i18n.changeLanguage(languageCode);
+      console.log('Changing language to:', languageCode);
       
-      // Update local state
+      // Update local state first for immediate UI feedback
       setCurrentLang(languageCode);
       setIsOpen(false);
       
       // Force update localStorage
       localStorage.setItem('i18nextLng', languageCode);
       
-      // Trigger a page reload to ensure all components update
+      // Change the language in i18next
+      await i18n.changeLanguage(languageCode);
+      
+      // Reload the page to ensure all components update properly
       window.location.reload();
     } catch (error) {
       console.error('Error changing language:', error);
@@ -51,9 +54,16 @@ export const LanguageSelector: React.FC = () => {
   const updateDropdownPosition = () => {
     if (buttonRef.current) {
       const rect = buttonRef.current.getBoundingClientRect();
+      const windowWidth = window.innerWidth;
+      
+      // Position dropdown to the left if there's not enough space on the right
+      const left = windowWidth - rect.right < 320 
+        ? rect.left - 320 + rect.width 
+        : rect.left;
+      
       setDropdownPosition({
         top: rect.bottom + window.scrollY + 4,
-        left: rect.right - 320 + window.scrollX
+        left: Math.max(10, left) // Ensure it's not off-screen to the left
       });
     }
   };
@@ -65,15 +75,19 @@ export const LanguageSelector: React.FC = () => {
     setIsOpen(!isOpen);
   };
 
-  const handleSearch = async (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
     const query = e.target.value;
     setSearchQuery(query);
     
     if (query.trim() === '') {
       setFilteredLanguages(languages);
     } else {
-      const results = await lingoService.searchLanguages(query);
-      setFilteredLanguages(results);
+      const filtered = languages.filter(lang => 
+        lang.name.toLowerCase().includes(query.toLowerCase()) ||
+        lang.nativeName.toLowerCase().includes(query.toLowerCase()) ||
+        lang.code.toLowerCase().includes(query.toLowerCase())
+      );
+      setFilteredLanguages(filtered);
     }
   };
 
@@ -88,7 +102,12 @@ export const LanguageSelector: React.FC = () => {
   // Close dropdown when clicking outside
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
-      if (buttonRef.current && !buttonRef.current.contains(event.target as Node)) {
+      if (
+        dropdownRef.current && 
+        !dropdownRef.current.contains(event.target as Node) &&
+        buttonRef.current && 
+        !buttonRef.current.contains(event.target as Node)
+      ) {
         setIsOpen(false);
       }
     };
@@ -106,11 +125,6 @@ export const LanguageSelector: React.FC = () => {
     };
   }, [isOpen]);
 
-  // Update current language when i18n language changes
-  useEffect(() => {
-    setCurrentLang(i18n.language);
-  }, [i18n.language]);
-
   // Focus search input when dropdown opens
   useEffect(() => {
     if (isOpen && searchInputRef.current) {
@@ -119,6 +133,13 @@ export const LanguageSelector: React.FC = () => {
       }, 100);
     }
   }, [isOpen]);
+
+  // Update current language when i18n language changes
+  useEffect(() => {
+    // Extract the language code without region (e.g., 'en' from 'en-US')
+    const langCode = i18n.language.split('-')[0];
+    setCurrentLang(langCode);
+  }, [i18n.language]);
 
   // Get current language info
   const currentLanguage = languages.find(lang => lang.code === currentLang) || 
@@ -131,6 +152,7 @@ export const LanguageSelector: React.FC = () => {
 
   const dropdown = isOpen ? createPortal(
     <div 
+      ref={dropdownRef}
       className="bg-[#1F1F1F] border border-[#2C2C2E] rounded-lg shadow-xl w-[320px]"
       style={{ 
         position: 'absolute',

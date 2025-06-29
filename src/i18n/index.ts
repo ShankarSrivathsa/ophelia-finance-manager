@@ -41,11 +41,26 @@ i18n
     },
     detection: {
       order: ['localStorage', 'navigator', 'htmlTag'],
-      caches: ['localStorage']
+      caches: ['localStorage'],
+      lookupLocalStorage: 'i18nextLng'
     },
     react: {
       useSuspense: false
     }
   });
+
+// Force reload when language changes to ensure all components update
+const originalChangeLanguage = i18n.changeLanguage;
+i18n.changeLanguage = async (lng?: string, callback?: ((err: any, t: any) => void) | undefined) => {
+  console.log('Changing language to:', lng);
+  const result = await originalChangeLanguage.call(i18n, lng, callback);
+  
+  // Store in localStorage to ensure persistence
+  if (lng) {
+    localStorage.setItem('i18nextLng', lng);
+  }
+  
+  return result;
+};
 
 export default i18n;
