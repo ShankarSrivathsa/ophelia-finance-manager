@@ -289,7 +289,7 @@ function AppContent() {
       case 'business': return 'Complete financial management for your business';
       case 'homemaker': return 'Manage household finances and family savings';
       case 'retiree': return 'Monitor spending and preserve your savings';
-      default: return t('app.subtitle');
+      default: return 'Track your expenses and build healthy savings habits';
     }
   };
 
@@ -313,12 +313,9 @@ function AppContent() {
           
           {/* Main Header Content */}
           <div className="inline-block bg-[#1F1F1F] backdrop-blur-sm rounded-xl p-6 shadow-lg mb-6 border border-[#2C2C2E]">
-            <h1 className="text-4xl font-bold text-white mb-2">{t('app.title')}</h1>
+            <h1 className="text-5xl font-bold text-white mb-2">Ophelia</h1>
+            <h2 className="text-2xl font-medium text-gray-200 mb-2">Money Manager</h2>
             <p className="text-lg text-gray-300">{getWelcomeMessage()}</p>
-            <div className="mt-2 flex items-center justify-center gap-2">
-              <Brain className="w-4 h-4 text-blue-400" />
-              <span className="text-sm font-medium text-blue-300">AI Features Included</span>
-            </div>
           </div>
           
           {/* User Profile - Separate from header */}
