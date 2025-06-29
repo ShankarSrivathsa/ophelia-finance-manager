@@ -91,7 +91,7 @@ export const LanguageSelector: React.FC = () => {
 
   const dropdown = isOpen ? createPortal(
     <div 
-      className="bg-white border border-gray-200 rounded-lg shadow-xl min-w-[160px]"
+      className="bg-[#1F1F1F] border border-[#2C2C2E] rounded-lg shadow-xl min-w-[160px]"
       style={{ 
         position: 'absolute',
         top: dropdownPosition.top,
@@ -103,14 +103,14 @@ export const LanguageSelector: React.FC = () => {
         <button
           key={language.code}
           onClick={() => changeLanguage(language.code)}
-          className={`w-full text-left px-3 py-2 text-sm hover:bg-gray-50 transition-colors flex items-center gap-2 first:rounded-t-lg last:rounded-b-lg ${
-            currentLang === language.code ? 'bg-blue-50 text-blue-600 font-medium' : 'text-gray-700'
+          className={`w-full text-left px-3 py-2 text-sm hover:bg-[#2C2C2E] transition-colors flex items-center gap-2 first:rounded-t-lg last:rounded-b-lg ${
+            currentLang === language.code ? 'bg-[#2C2C2E] text-white font-medium' : 'text-gray-300'
           }`}
         >
           <span>{language.flag}</span>
           <span>{language.name}</span>
           {currentLang === language.code && (
-            <span className="ml-auto text-blue-600">✓</span>
+            <span className="ml-auto text-white">✓</span>
           )}
         </button>
       ))}
@@ -123,7 +123,7 @@ export const LanguageSelector: React.FC = () => {
       <button 
         ref={buttonRef}
         onClick={handleToggle}
-        className="flex items-center gap-2 px-3 py-2 text-gray-600 hover:bg-gray-100/55 rounded-lg transition-colors"
+        className="flex items-center gap-2 px-3 py-2 text-gray-300 hover:bg-[#2C2C2E] rounded-lg transition-colors"
         title={`Current language: ${currentLanguage.name}`}
       >
         <Globe className="w-4 h-4" />

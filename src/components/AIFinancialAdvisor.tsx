@@ -138,19 +138,19 @@ export const AIFinancialAdvisor: React.FC<AIFinancialAdvisorProps> = ({ onAdvice
 
   const getInsightIcon = (type: string) => {
     switch (type) {
-      case 'warning': return <AlertTriangle className="w-4 h-4 text-yellow-600" />;
-      case 'opportunity': return <TrendingUp className="w-4 h-4 text-green-600" />;
-      case 'achievement': return <CheckCircle className="w-4 h-4 text-blue-600" />;
-      default: return <Lightbulb className="w-4 h-4 text-purple-600" />;
+      case 'warning': return <AlertTriangle className="w-4 h-4 text-yellow-400" />;
+      case 'opportunity': return <TrendingUp className="w-4 h-4 text-green-400" />;
+      case 'achievement': return <CheckCircle className="w-4 h-4 text-blue-400" />;
+      default: return <Lightbulb className="w-4 h-4 text-purple-400" />;
     }
   };
 
   const getPriorityColor = (priority: string) => {
     switch (priority) {
-      case 'high': return 'border-red-200 bg-red-50/55';
-      case 'medium': return 'border-yellow-200 bg-yellow-50/55';
-      case 'low': return 'border-green-200 bg-green-50/55';
-      default: return 'border-gray-200 bg-gray-50/55';
+      case 'high': return 'border-red-700 bg-red-900/50';
+      case 'medium': return 'border-yellow-700 bg-yellow-900/50';
+      case 'low': return 'border-green-700 bg-green-900/50';
+      default: return 'border-gray-700 bg-gray-900/50';
     }
   };
 
@@ -162,13 +162,13 @@ export const AIFinancialAdvisor: React.FC<AIFinancialAdvisorProps> = ({ onAdvice
       {/* Header */}
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-3">
-          <div className="w-10 h-10 bg-purple-100 rounded-lg flex items-center justify-center">
-            <Brain className="w-5 h-5 text-purple-600" />
+          <div className="w-10 h-10 bg-white rounded-lg flex items-center justify-center">
+            <Brain className="w-5 h-5 text-black" />
           </div>
           <div>
-            <h2 className="text-xl font-semibold text-gray-800">AI Financial Advisor</h2>
+            <h2 className="text-xl font-semibold text-white">AI Financial Advisor</h2>
             {isConfigured && (
-              <p className="text-sm text-gray-500">Powered by {providerName.charAt(0).toUpperCase() + providerName.slice(1)} AI</p>
+              <p className="text-sm text-gray-400">Powered by {providerName.charAt(0).toUpperCase() + providerName.slice(1)} AI</p>
             )}
           </div>
         </div>
@@ -176,7 +176,7 @@ export const AIFinancialAdvisor: React.FC<AIFinancialAdvisorProps> = ({ onAdvice
           <select
             value={requestType}
             onChange={(e) => setRequestType(e.target.value as any)}
-            className="px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent bg-white/55"
+            className="px-3 py-2 border border-[#2C2C2E] rounded-lg focus:ring-2 focus:ring-white focus:border-transparent bg-[#1F1F1F] text-white"
             disabled={!isConfigured}
           >
             <option value="general_advice">General Advice</option>
@@ -187,7 +187,7 @@ export const AIFinancialAdvisor: React.FC<AIFinancialAdvisorProps> = ({ onAdvice
           <button
             onClick={generateAdvice}
             disabled={loading || !isConfigured}
-            className="bg-purple-600 text-white px-4 py-2 rounded-lg hover:bg-purple-700 transition-colors flex items-center gap-2 disabled:opacity-50"
+            className="bg-white text-black px-4 py-2 rounded-lg hover:bg-gray-200 transition-colors flex items-center gap-2 disabled:opacity-50"
           >
             {loading ? (
               <Loader2 className="w-4 h-4 animate-spin" />
@@ -201,25 +201,25 @@ export const AIFinancialAdvisor: React.FC<AIFinancialAdvisorProps> = ({ onAdvice
 
       {/* Configuration Warning */}
       {!isConfigured && (
-        <div className="bg-yellow-50/55 border border-yellow-200 rounded-xl p-6">
+        <div className="bg-yellow-900/50 border border-yellow-700 rounded-xl p-6">
           <div className="flex items-start gap-3">
-            <Key className="w-6 h-6 text-yellow-600 flex-shrink-0 mt-0.5" />
+            <Key className="w-6 h-6 text-yellow-400 flex-shrink-0 mt-0.5" />
             <div>
-              <h3 className="text-lg font-semibold text-yellow-800 mb-2">AI Service Configuration Required</h3>
-              <p className="text-yellow-700 mb-4">
+              <h3 className="text-lg font-semibold text-white mb-2">AI Service Configuration Required</h3>
+              <p className="text-gray-300 mb-4">
                 To use the AI Financial Advisor, you need to configure an AI API key. Add one of the following to your environment variables:
               </p>
-              <ul className="list-disc list-inside text-yellow-700 space-y-1 mb-4">
-                <li><code className="bg-yellow-100 px-2 py-1 rounded">VITE_GEMINI_API_KEY</code> - Google AI Studio (Recommended)</li>
-                <li><code className="bg-yellow-100 px-2 py-1 rounded">VITE_OPENAI_API_KEY</code> - OpenAI GPT</li>
-                <li><code className="bg-yellow-100 px-2 py-1 rounded">VITE_ANTHROPIC_API_KEY</code> - Anthropic Claude</li>
+              <ul className="list-disc list-inside text-gray-300 space-y-1 mb-4">
+                <li><code className="bg-yellow-900/50 px-2 py-1 rounded text-yellow-300">VITE_GEMINI_API_KEY</code> - Google AI Studio (Recommended)</li>
+                <li><code className="bg-yellow-900/50 px-2 py-1 rounded text-yellow-300">VITE_OPENAI_API_KEY</code> - OpenAI GPT</li>
+                <li><code className="bg-yellow-900/50 px-2 py-1 rounded text-yellow-300">VITE_ANTHROPIC_API_KEY</code> - Anthropic Claude</li>
               </ul>
               <div className="flex gap-3">
                 <a
                   href="https://makersuite.google.com/app/apikey"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 text-yellow-700 hover:text-yellow-800 font-medium"
+                  className="inline-flex items-center gap-2 text-yellow-300 hover:text-white font-medium"
                 >
                   <ExternalLink className="w-4 h-4" />
                   Get Gemini API Key (Free)
@@ -228,7 +228,7 @@ export const AIFinancialAdvisor: React.FC<AIFinancialAdvisorProps> = ({ onAdvice
                   href="https://platform.openai.com/api-keys"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 text-yellow-700 hover:text-yellow-800 font-medium"
+                  className="inline-flex items-center gap-2 text-yellow-300 hover:text-white font-medium"
                 >
                   <ExternalLink className="w-4 h-4" />
                   Get OpenAI API Key
@@ -241,7 +241,7 @@ export const AIFinancialAdvisor: React.FC<AIFinancialAdvisorProps> = ({ onAdvice
 
       {/* Error Message */}
       {error && (
-        <div className="bg-red-50/55 border border-red-200 text-red-700 px-4 py-3 rounded-lg">
+        <div className="bg-red-900/50 border border-red-700 text-red-300 px-4 py-3 rounded-lg">
           {error}
         </div>
       )}
@@ -250,35 +250,35 @@ export const AIFinancialAdvisor: React.FC<AIFinancialAdvisorProps> = ({ onAdvice
       {advice && (
         <div className="space-y-6">
           {/* Main Advice */}
-          <div className="bg-white/55 backdrop-blur-sm rounded-xl shadow-lg p-6">
+          <div className="bg-[#1F1F1F] backdrop-blur-sm rounded-xl shadow-lg p-6 border border-[#2C2C2E]">
             <div className="flex items-center gap-3 mb-4">
-              <Brain className="w-6 h-6 text-purple-600" />
-              <h3 className="text-lg font-semibold text-gray-800">AI Financial Advice</h3>
+              <Brain className="w-6 h-6 text-white" />
+              <h3 className="text-lg font-semibold text-white">AI Financial Advice</h3>
             </div>
             <div className="prose prose-gray max-w-none">
-              <p className="text-gray-700 leading-relaxed">{advice.advice}</p>
+              <p className="text-gray-300 leading-relaxed">{advice.advice}</p>
             </div>
           </div>
 
           {/* Recommendations */}
           {advice.recommendations && advice.recommendations.length > 0 && (
-            <div className="bg-white/55 backdrop-blur-sm rounded-xl shadow-lg p-6">
-              <h3 className="text-lg font-semibold text-gray-800 mb-4">Personalized Recommendations</h3>
+            <div className="bg-[#1F1F1F] backdrop-blur-sm rounded-xl shadow-lg p-6 border border-[#2C2C2E]">
+              <h3 className="text-lg font-semibold text-white mb-4">Personalized Recommendations</h3>
               <div className="space-y-3">
                 {advice.recommendations.map((rec, index) => (
                   <div key={index} className={`p-4 rounded-lg border ${getPriorityColor(rec.priority)}`}>
                     <div className="flex items-start justify-between mb-2">
-                      <h4 className="font-medium text-gray-800">{rec.category}</h4>
+                      <h4 className="font-medium text-white">{rec.category}</h4>
                       <span className={`px-2 py-1 rounded-full text-xs font-medium ${
-                        rec.priority === 'high' ? 'bg-red-100 text-red-700' :
-                        rec.priority === 'medium' ? 'bg-yellow-100 text-yellow-700' :
-                        'bg-green-100 text-green-700'
+                        rec.priority === 'high' ? 'bg-red-900/50 text-red-300' :
+                        rec.priority === 'medium' ? 'bg-yellow-900/50 text-yellow-300' :
+                        'bg-green-900/50 text-green-300'
                       }`}>
                         {rec.priority} priority
                       </span>
                     </div>
-                    <p className="text-gray-700 mb-2 font-medium">{rec.action}</p>
-                    <p className="text-sm text-gray-600">{rec.impact}</p>
+                    <p className="text-gray-300 mb-2 font-medium">{rec.action}</p>
+                    <p className="text-sm text-gray-400">{rec.impact}</p>
                   </div>
                 ))}
               </div>
@@ -287,17 +287,17 @@ export const AIFinancialAdvisor: React.FC<AIFinancialAdvisorProps> = ({ onAdvice
 
           {/* Insights */}
           {advice.insights && advice.insights.length > 0 && (
-            <div className="bg-white/55 backdrop-blur-sm rounded-xl shadow-lg p-6">
-              <h3 className="text-lg font-semibold text-gray-800 mb-4">Key Insights</h3>
+            <div className="bg-[#1F1F1F] backdrop-blur-sm rounded-xl shadow-lg p-6 border border-[#2C2C2E]">
+              <h3 className="text-lg font-semibold text-white mb-4">Key Insights</h3>
               <div className="space-y-3">
                 {advice.insights.map((insight, index) => (
-                  <div key={index} className="flex items-start gap-3 p-3 bg-gray-50/55 rounded-lg">
+                  <div key={index} className="flex items-start gap-3 p-3 bg-[#2C2C2E] rounded-lg">
                     {getInsightIcon(insight.type)}
                     <div>
-                      <p className="text-gray-700">{insight.message}</p>
+                      <p className="text-gray-300">{insight.message}</p>
                       {insight.data && (
-                        <div className="mt-2 text-sm text-gray-600">
-                          <pre className="bg-gray-100/55 p-2 rounded text-xs overflow-x-auto">
+                        <div className="mt-2 text-sm text-gray-400">
+                          <pre className="bg-[#1F1F1F] p-2 rounded text-xs overflow-x-auto">
                             {JSON.stringify(insight.data, null, 2)}
                           </pre>
                         </div>
@@ -313,13 +313,13 @@ export const AIFinancialAdvisor: React.FC<AIFinancialAdvisorProps> = ({ onAdvice
 
       {/* Getting Started Message */}
       {!advice && !loading && isConfigured && (
-        <div className="bg-white/55 backdrop-blur-sm rounded-xl shadow-lg p-8 text-center">
-          <Brain className="w-16 h-16 text-purple-600 mx-auto mb-4" />
-          <h3 className="text-lg font-semibold text-gray-800 mb-2">AI-Powered Financial Guidance</h3>
-          <p className="text-gray-600 mb-4">
+        <div className="bg-[#1F1F1F] backdrop-blur-sm rounded-xl shadow-lg p-8 text-center border border-[#2C2C2E]">
+          <Brain className="w-16 h-16 text-white mx-auto mb-4" />
+          <h3 className="text-lg font-semibold text-white mb-2">AI-Powered Financial Guidance</h3>
+          <p className="text-gray-300 mb-4">
             Get personalized financial advice based on your spending patterns, income, and goals.
           </p>
-          <p className="text-sm text-gray-500">
+          <p className="text-sm text-gray-400">
             Select an advice type and click "Get AI Advice" to start.
           </p>
         </div>

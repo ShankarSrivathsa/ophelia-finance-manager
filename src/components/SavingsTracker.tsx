@@ -384,17 +384,17 @@ export const SavingsTracker: React.FC<SavingsTrackerProps> = ({ onSavingsUpdated
   };
 
   const getDaysLeftColor = (daysLeft: number) => {
-    if (daysLeft < 0) return 'text-red-600';
-    if (daysLeft < 30) return 'text-orange-600';
-    if (daysLeft < 90) return 'text-yellow-600';
-    return 'text-green-600';
+    if (daysLeft < 0) return 'text-red-400';
+    if (daysLeft < 30) return 'text-orange-400';
+    if (daysLeft < 90) return 'text-yellow-400';
+    return 'text-green-400';
   };
 
   if (loading) {
     return (
-      <div className="bg-white/55 backdrop-blur-sm rounded-xl shadow-lg p-6">
+      <div className="bg-[#1F1F1F] backdrop-blur-sm rounded-xl shadow-lg p-6 border border-[#2C2C2E]">
         <div className="flex items-center justify-center py-12">
-          <div className="w-8 h-8 border-4 border-blue-200 border-t-blue-600 rounded-full animate-spin"></div>
+          <div className="w-8 h-8 border-4 border-[#2C2C2E] border-t-white rounded-full animate-spin"></div>
         </div>
       </div>
     );
@@ -405,22 +405,22 @@ export const SavingsTracker: React.FC<SavingsTrackerProps> = ({ onSavingsUpdated
       {/* Header */}
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-3">
-          <div className="w-10 h-10 bg-pink-100 rounded-lg flex items-center justify-center">
-            <PiggyBank className="w-5 h-5 text-pink-600" />
+          <div className="w-10 h-10 bg-white rounded-lg flex items-center justify-center">
+            <PiggyBank className="w-5 h-5 text-black" />
           </div>
-          <h2 className="text-xl font-semibold text-gray-800">Savings Tracker</h2>
+          <h2 className="text-xl font-semibold text-white">Savings Tracker</h2>
         </div>
         <div className="flex gap-2">
           <button
             onClick={() => setShowAddGoal(true)}
-            className="bg-pink-600 text-white px-4 py-2 rounded-lg hover:bg-pink-700 transition-colors flex items-center gap-2"
+            className="bg-white text-black px-4 py-2 rounded-lg hover:bg-gray-200 transition-colors flex items-center gap-2"
           >
             <Target className="w-4 h-4" />
             Add Goal
           </button>
           <button
             onClick={() => setShowAddTransaction(true)}
-            className="bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700 transition-colors flex items-center gap-2"
+            className="bg-white text-black px-4 py-2 rounded-lg hover:bg-gray-200 transition-colors flex items-center gap-2"
           >
             <Plus className="w-4 h-4" />
             Add Transaction
@@ -431,32 +431,32 @@ export const SavingsTracker: React.FC<SavingsTrackerProps> = ({ onSavingsUpdated
       {/* Analysis Summary */}
       {analysis && (
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          <div className="bg-white/55 backdrop-blur-sm rounded-xl shadow-lg p-6">
+          <div className="bg-[#1F1F1F] backdrop-blur-sm rounded-xl shadow-lg p-6 border border-[#2C2C2E]">
             <div className="flex items-center gap-3 mb-2">
-              <PiggyBank className="w-8 h-8 text-pink-600" />
+              <PiggyBank className="w-8 h-8 text-white" />
               <div>
-                <h3 className="text-sm font-medium text-gray-600">Total Saved</h3>
-                <p className="text-2xl font-bold text-gray-800">{formatCurrency(analysis.totalSaved)}</p>
+                <h3 className="text-sm font-medium text-gray-300">Total Saved</h3>
+                <p className="text-2xl font-bold text-white">{formatCurrency(analysis.totalSaved)}</p>
               </div>
             </div>
           </div>
 
-          <div className="bg-white/55 backdrop-blur-sm rounded-xl shadow-lg p-6">
+          <div className="bg-[#1F1F1F] backdrop-blur-sm rounded-xl shadow-lg p-6 border border-[#2C2C2E]">
             <div className="flex items-center gap-3 mb-2">
-              <TrendingUp className="w-8 h-8 text-blue-600" />
+              <TrendingUp className="w-8 h-8 text-blue-400" />
               <div>
-                <h3 className="text-sm font-medium text-gray-600">Monthly Average</h3>
-                <p className="text-2xl font-bold text-gray-800">{formatCurrency(analysis.monthlyAverage)}</p>
+                <h3 className="text-sm font-medium text-gray-300">Monthly Average</h3>
+                <p className="text-2xl font-bold text-white">{formatCurrency(analysis.monthlyAverage)}</p>
               </div>
             </div>
           </div>
 
-          <div className="bg-white/55 backdrop-blur-sm rounded-xl shadow-lg p-6">
+          <div className="bg-[#1F1F1F] backdrop-blur-sm rounded-xl shadow-lg p-6 border border-[#2C2C2E]">
             <div className="flex items-center gap-3 mb-2">
-              <Target className="w-8 h-8 text-green-600" />
+              <Target className="w-8 h-8 text-green-400" />
               <div>
-                <h3 className="text-sm font-medium text-gray-600">Savings Rate</h3>
-                <p className="text-2xl font-bold text-gray-800">{analysis.savingsRate.toFixed(1)}%</p>
+                <h3 className="text-sm font-medium text-gray-300">Savings Rate</h3>
+                <p className="text-2xl font-bold text-white">{analysis.savingsRate.toFixed(1)}%</p>
               </div>
             </div>
           </div>
@@ -464,11 +464,11 @@ export const SavingsTracker: React.FC<SavingsTrackerProps> = ({ onSavingsUpdated
       )}
 
       {/* Savings Goals */}
-      <div className="bg-white/55 backdrop-blur-sm rounded-xl shadow-lg p-6">
-        <h3 className="text-lg font-semibold text-gray-800 mb-4">Savings Goals</h3>
+      <div className="bg-[#1F1F1F] backdrop-blur-sm rounded-xl shadow-lg p-6 border border-[#2C2C2E]">
+        <h3 className="text-lg font-semibold text-white mb-4">Savings Goals</h3>
         
         {goals.length === 0 ? (
-          <p className="text-gray-500 text-center py-8">No savings goals yet. Create your first goal to start saving!</p>
+          <p className="text-gray-400 text-center py-8">No savings goals yet. Create your first goal to start saving!</p>
         ) : (
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             {goals.map((goal) => {
@@ -479,11 +479,11 @@ export const SavingsTracker: React.FC<SavingsTrackerProps> = ({ onSavingsUpdated
               const daysLeft = Math.ceil((targetDate.getTime() - today.getTime()) / (1000 * 60 * 60 * 24));
 
               return (
-                <div key={goal.id} className="border border-gray-200 rounded-lg p-4 bg-white/55">
+                <div key={goal.id} className="border border-[#2C2C2E] rounded-lg p-4 bg-[#2C2C2E]">
                   <div className="flex justify-between items-start mb-3">
                     <div>
-                      <h4 className="font-semibold text-gray-800">{goal.name}</h4>
-                      <p className="text-sm text-gray-500">{goal.category}</p>
+                      <h4 className="font-semibold text-white">{goal.name}</h4>
+                      <p className="text-sm text-gray-400">{goal.category}</p>
                     </div>
                     <div className="flex gap-1">
                       <button
@@ -498,13 +498,13 @@ export const SavingsTracker: React.FC<SavingsTrackerProps> = ({ onSavingsUpdated
                           });
                           setShowAddGoal(true);
                         }}
-                        className="p-1 text-gray-400 hover:text-blue-600 transition-colors"
+                        className="p-1 text-gray-400 hover:text-white transition-colors"
                       >
                         <Edit3 className="w-4 h-4" />
                       </button>
                       <button
                         onClick={() => handleDeleteGoal(goal.id)}
-                        className="p-1 text-gray-400 hover:text-red-600 transition-colors"
+                        className="p-1 text-gray-400 hover:text-red-400 transition-colors"
                       >
                         <Trash2 className="w-4 h-4" />
                       </button>
@@ -513,21 +513,21 @@ export const SavingsTracker: React.FC<SavingsTrackerProps> = ({ onSavingsUpdated
 
                   <div className="space-y-2">
                     <div className="flex justify-between text-sm">
-                      <span>Progress</span>
-                      <span className="font-medium">{progress.toFixed(1)}%</span>
+                      <span className="text-gray-300">Progress</span>
+                      <span className="font-medium text-white">{progress.toFixed(1)}%</span>
                     </div>
-                    <div className="w-full bg-gray-200 rounded-full h-2">
+                    <div className="w-full bg-[#1F1F1F] rounded-full h-2">
                       <div 
                         className={`h-2 rounded-full transition-all duration-300 ${getProgressColor(progress)}`}
                         style={{ width: `${Math.min(progress, 100)}%` }}
                       />
                     </div>
-                    <div className="flex justify-between text-sm text-gray-600">
+                    <div className="flex justify-between text-sm text-gray-300">
                       <span>{formatCurrency(goal.current_amount)} saved</span>
                       <span>{formatCurrency(goal.target_amount)} goal</span>
                     </div>
                     <div className="flex justify-between text-sm">
-                      <span className="text-gray-600">Remaining: {formatCurrency(remaining)}</span>
+                      <span className="text-gray-300">Remaining: {formatCurrency(remaining)}</span>
                       <span className={getDaysLeftColor(daysLeft)}>
                         {daysLeft > 0 ? `${daysLeft} days left` : `${Math.abs(daysLeft)} days overdue`}
                       </span>
@@ -542,28 +542,28 @@ export const SavingsTracker: React.FC<SavingsTrackerProps> = ({ onSavingsUpdated
 
       {/* Recent Transactions */}
       {transactions.length > 0 && (
-        <div className="bg-white/55 backdrop-blur-sm rounded-xl shadow-lg p-6">
-          <h3 className="text-lg font-semibold text-gray-800 mb-4">Recent Savings Transactions</h3>
+        <div className="bg-[#1F1F1F] backdrop-blur-sm rounded-xl shadow-lg p-6 border border-[#2C2C2E]">
+          <h3 className="text-lg font-semibold text-white mb-4">Recent Savings Transactions</h3>
           <div className="space-y-3">
             {transactions.map((transaction) => {
               const goal = goals.find(g => g.id === transaction.goal_id);
               return (
-                <div key={transaction.id} className="flex items-center justify-between p-3 bg-gray-50/55 rounded-lg">
+                <div key={transaction.id} className="flex items-center justify-between p-3 bg-[#2C2C2E] rounded-lg">
                   <div className="flex items-center gap-3">
                     {transaction.type === 'deposit' ? (
-                      <ArrowUpCircle className="w-5 h-5 text-green-600" />
+                      <ArrowUpCircle className="w-5 h-5 text-green-400" />
                     ) : (
-                      <ArrowDownCircle className="w-5 h-5 text-red-600" />
+                      <ArrowDownCircle className="w-5 h-5 text-red-400" />
                     )}
                     <div>
-                      <div className="font-medium text-gray-800">{transaction.description}</div>
-                      <div className="text-sm text-gray-500">
+                      <div className="font-medium text-white">{transaction.description}</div>
+                      <div className="text-sm text-gray-400">
                         {goal?.name} • {new Date(transaction.date).toLocaleDateString()}
                       </div>
                     </div>
                   </div>
                   <div className={`text-lg font-semibold ${
-                    transaction.type === 'deposit' ? 'text-green-600' : 'text-red-600'
+                    transaction.type === 'deposit' ? 'text-green-400' : 'text-red-400'
                   }`}>
                     {transaction.type === 'deposit' ? '+' : '-'}{formatCurrency(transaction.amount)}
                   </div>
@@ -577,26 +577,26 @@ export const SavingsTracker: React.FC<SavingsTrackerProps> = ({ onSavingsUpdated
       {/* Add Goal Modal */}
       {showAddGoal && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50">
-          <div className="bg-white/95 backdrop-blur-sm rounded-xl shadow-lg p-6 w-full max-w-md">
-            <h3 className="text-lg font-semibold text-gray-800 mb-4">
+          <div className="bg-[#1F1F1F] backdrop-blur-sm rounded-xl shadow-lg p-6 w-full max-w-md border border-[#2C2C2E]">
+            <h3 className="text-lg font-semibold text-white mb-4">
               {editingGoal ? 'Edit Savings Goal' : 'Add New Savings Goal'}
             </h3>
             
             <form onSubmit={handleAddGoal} className="space-y-4">
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">Goal Name</label>
+                <label className="block text-sm font-medium text-white mb-2">Goal Name</label>
                 <input
                   type="text"
                   value={goalForm.name}
                   onChange={(e) => setGoalForm(prev => ({ ...prev, name: e.target.value }))}
                   placeholder="e.g., Emergency Fund"
-                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-pink-500 focus:border-transparent bg-white/55"
+                  className="w-full px-3 py-2 border border-[#2C2C2E] rounded-lg focus:ring-2 focus:ring-white focus:border-transparent bg-[#1F1F1F] text-white"
                   required
                 />
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">Target Amount</label>
+                <label className="block text-sm font-medium text-white mb-2">Target Amount</label>
                 <input
                   type="number"
                   step="0.01"
@@ -604,28 +604,28 @@ export const SavingsTracker: React.FC<SavingsTrackerProps> = ({ onSavingsUpdated
                   value={goalForm.target_amount}
                   onChange={(e) => setGoalForm(prev => ({ ...prev, target_amount: e.target.value }))}
                   placeholder="0.00"
-                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-pink-500 focus:border-transparent bg-white/55"
+                  className="w-full px-3 py-2 border border-[#2C2C2E] rounded-lg focus:ring-2 focus:ring-white focus:border-transparent bg-[#1F1F1F] text-white"
                   required
                 />
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">Target Date</label>
+                <label className="block text-sm font-medium text-white mb-2">Target Date</label>
                 <input
                   type="date"
                   value={goalForm.target_date}
                   onChange={(e) => setGoalForm(prev => ({ ...prev, target_date: e.target.value }))}
-                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-pink-500 focus:border-transparent bg-white/55"
+                  className="w-full px-3 py-2 border border-[#2C2C2E] rounded-lg focus:ring-2 focus:ring-white focus:border-transparent bg-[#1F1F1F] text-white"
                   required
                 />
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">Category</label>
+                <label className="block text-sm font-medium text-white mb-2">Category</label>
                 <select
                   value={goalForm.category}
                   onChange={(e) => setGoalForm(prev => ({ ...prev, category: e.target.value }))}
-                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-pink-500 focus:border-transparent bg-white/55"
+                  className="w-full px-3 py-2 border border-[#2C2C2E] rounded-lg focus:ring-2 focus:ring-white focus:border-transparent bg-[#1F1F1F] text-white"
                 >
                   {SAVINGS_CATEGORIES.map(category => (
                     <option key={category} value={category}>{category}</option>
@@ -634,13 +634,13 @@ export const SavingsTracker: React.FC<SavingsTrackerProps> = ({ onSavingsUpdated
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">Description (Optional)</label>
+                <label className="block text-sm font-medium text-white mb-2">Description (Optional)</label>
                 <textarea
                   value={goalForm.description}
                   onChange={(e) => setGoalForm(prev => ({ ...prev, description: e.target.value }))}
                   placeholder="Why are you saving for this?"
                   rows={2}
-                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-pink-500 focus:border-transparent bg-white/55"
+                  className="w-full px-3 py-2 border border-[#2C2C2E] rounded-lg focus:ring-2 focus:ring-white focus:border-transparent bg-[#1F1F1F] text-white"
                 />
               </div>
 
@@ -658,13 +658,13 @@ export const SavingsTracker: React.FC<SavingsTrackerProps> = ({ onSavingsUpdated
                       description: ''
                     });
                   }}
-                  className="flex-1 px-4 py-2 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition-colors"
+                  className="flex-1 px-4 py-2 border border-[#2C2C2E] text-gray-300 rounded-lg hover:bg-[#2C2C2E] transition-colors"
                 >
                   Cancel
                 </button>
                 <button
                   type="submit"
-                  className="flex-1 bg-pink-600 text-white px-4 py-2 rounded-lg hover:bg-pink-700 transition-colors"
+                  className="flex-1 bg-white text-black px-4 py-2 rounded-lg hover:bg-gray-200 transition-colors"
                 >
                   {editingGoal ? 'Update Goal' : 'Add Goal'}
                 </button>
@@ -677,16 +677,16 @@ export const SavingsTracker: React.FC<SavingsTrackerProps> = ({ onSavingsUpdated
       {/* Add Transaction Modal */}
       {showAddTransaction && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50">
-          <div className="bg-white/95 backdrop-blur-sm rounded-xl shadow-lg p-6 w-full max-w-md">
-            <h3 className="text-lg font-semibold text-gray-800 mb-4">Add Savings Transaction</h3>
+          <div className="bg-[#1F1F1F] backdrop-blur-sm rounded-xl shadow-lg p-6 w-full max-w-md border border-[#2C2C2E]">
+            <h3 className="text-lg font-semibold text-white mb-4">Add Savings Transaction</h3>
             
             <form onSubmit={handleAddTransaction} className="space-y-4">
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">Savings Goal</label>
+                <label className="block text-sm font-medium text-white mb-2">Savings Goal</label>
                 <select
                   value={transactionForm.goal_id}
                   onChange={(e) => setTransactionForm(prev => ({ ...prev, goal_id: e.target.value }))}
-                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent bg-white/55"
+                  className="w-full px-3 py-2 border border-[#2C2C2E] rounded-lg focus:ring-2 focus:ring-white focus:border-transparent bg-[#1F1F1F] text-white"
                   required
                 >
                   <option value="">Select a goal</option>
@@ -697,11 +697,11 @@ export const SavingsTracker: React.FC<SavingsTrackerProps> = ({ onSavingsUpdated
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">Type</label>
+                <label className="block text-sm font-medium text-white mb-2">Type</label>
                 <select
                   value={transactionForm.type}
                   onChange={(e) => setTransactionForm(prev => ({ ...prev, type: e.target.value as 'deposit' | 'withdrawal' }))}
-                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent bg-white/55"
+                  className="w-full px-3 py-2 border border-[#2C2C2E] rounded-lg focus:ring-2 focus:ring-white focus:border-transparent bg-[#1F1F1F] text-white"
                 >
                   <option value="deposit">Deposit (Add Money)</option>
                   <option value="withdrawal">Withdrawal (Take Money)</option>
@@ -709,7 +709,7 @@ export const SavingsTracker: React.FC<SavingsTrackerProps> = ({ onSavingsUpdated
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">Amount</label>
+                <label className="block text-sm font-medium text-white mb-2">Amount</label>
                 <input
                   type="number"
                   step="0.01"
@@ -717,30 +717,30 @@ export const SavingsTracker: React.FC<SavingsTrackerProps> = ({ onSavingsUpdated
                   value={transactionForm.amount}
                   onChange={(e) => setTransactionForm(prev => ({ ...prev, amount: e.target.value }))}
                   placeholder="0.00"
-                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent bg-white/55"
+                  className="w-full px-3 py-2 border border-[#2C2C2E] rounded-lg focus:ring-2 focus:ring-white focus:border-transparent bg-[#1F1F1F] text-white"
                   required
                 />
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">Date</label>
+                <label className="block text-sm font-medium text-white mb-2">Date</label>
                 <input
                   type="date"
                   value={transactionForm.date}
                   onChange={(e) => setTransactionForm(prev => ({ ...prev, date: e.target.value }))}
-                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent bg-white/55"
+                  className="w-full px-3 py-2 border border-[#2C2C2E] rounded-lg focus:ring-2 focus:ring-white focus:border-transparent bg-[#1F1F1F] text-white"
                   required
                 />
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">Description</label>
+                <label className="block text-sm font-medium text-white mb-2">Description</label>
                 <input
                   type="text"
                   value={transactionForm.description}
                   onChange={(e) => setTransactionForm(prev => ({ ...prev, description: e.target.value }))}
                   placeholder="e.g., Monthly savings deposit"
-                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent bg-white/55"
+                  className="w-full px-3 py-2 border border-[#2C2C2E] rounded-lg focus:ring-2 focus:ring-white focus:border-transparent bg-[#1F1F1F] text-white"
                   required
                 />
               </div>
@@ -758,13 +758,13 @@ export const SavingsTracker: React.FC<SavingsTrackerProps> = ({ onSavingsUpdated
                       date: new Date().toISOString().split('T')[0]
                     });
                   }}
-                  className="flex-1 px-4 py-2 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition-colors"
+                  className="flex-1 px-4 py-2 border border-[#2C2C2E] text-gray-300 rounded-lg hover:bg-[#2C2C2E] transition-colors"
                 >
                   Cancel
                 </button>
                 <button
                   type="submit"
-                  className="flex-1 bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700 transition-colors"
+                  className="flex-1 bg-white text-black px-4 py-2 rounded-lg hover:bg-gray-200 transition-colors"
                 >
                   Add Transaction
                 </button>

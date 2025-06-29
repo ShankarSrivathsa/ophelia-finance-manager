@@ -89,12 +89,12 @@ export const AccountManager: React.FC<AccountManagerProps> = ({ onAccountsUpdate
 
   const getCategoryColor = (category: string) => {
     switch (category) {
-      case 'asset': return 'bg-blue-50 text-blue-700 border-blue-200';
-      case 'liability': return 'bg-red-50 text-red-700 border-red-200';
-      case 'equity': return 'bg-purple-50 text-purple-700 border-purple-200';
-      case 'revenue': return 'bg-green-50 text-green-700 border-green-200';
-      case 'expense': return 'bg-orange-50 text-orange-700 border-orange-200';
-      default: return 'bg-gray-50 text-gray-700 border-gray-200';
+      case 'asset': return 'bg-blue-900/50 text-blue-300 border-blue-700';
+      case 'liability': return 'bg-red-900/50 text-red-300 border-red-700';
+      case 'equity': return 'bg-purple-900/50 text-purple-300 border-purple-700';
+      case 'revenue': return 'bg-green-900/50 text-green-300 border-green-700';
+      case 'expense': return 'bg-orange-900/50 text-orange-300 border-orange-700';
+      default: return 'bg-gray-900/50 text-gray-300 border-gray-700';
     }
   };
 
@@ -103,14 +103,14 @@ export const AccountManager: React.FC<AccountManagerProps> = ({ onAccountsUpdate
       {/* Header */}
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-3">
-          <div className="w-10 h-10 bg-indigo-100 rounded-lg flex items-center justify-center">
-            <Building2 className="w-5 h-5 text-indigo-600" />
+          <div className="w-10 h-10 bg-white rounded-lg flex items-center justify-center">
+            <Building2 className="w-5 h-5 text-black" />
           </div>
-          <h2 className="text-xl font-semibold text-gray-800">Account Manager</h2>
+          <h2 className="text-xl font-semibold text-white">Account Manager</h2>
         </div>
         <button
           onClick={() => setShowAddForm(true)}
-          className="bg-indigo-600 text-white px-4 py-2 rounded-lg hover:bg-indigo-700 transition-colors flex items-center gap-2"
+          className="bg-white text-black px-4 py-2 rounded-lg hover:bg-gray-200 transition-colors flex items-center gap-2"
         >
           <Plus className="w-4 h-4" />
           Add Account
@@ -118,24 +118,24 @@ export const AccountManager: React.FC<AccountManagerProps> = ({ onAccountsUpdate
       </div>
 
       {/* Accounts List */}
-      <div className="bg-white/55 backdrop-blur-sm rounded-xl shadow-lg p-6">
-        <h3 className="text-lg font-semibold text-gray-800 mb-4">Custom Accounts</h3>
+      <div className="bg-[#1F1F1F] backdrop-blur-sm rounded-xl shadow-lg p-6 border border-[#2C2C2E]">
+        <h3 className="text-lg font-semibold text-white mb-4">Custom Accounts</h3>
         
         {accounts.length === 0 ? (
-          <p className="text-gray-500 text-center py-8">No custom accounts yet. Add your first account to get started!</p>
+          <p className="text-gray-400 text-center py-8">No custom accounts yet. Add your first account to get started!</p>
         ) : (
           <div className="space-y-3">
             {accounts.map((account) => (
-              <div key={account.id} className="flex items-center justify-between p-3 bg-gray-50/55 rounded-lg">
+              <div key={account.id} className="flex items-center justify-between p-3 bg-[#2C2C2E] rounded-lg">
                 <div className="flex items-center gap-3">
-                  <div className="font-medium text-gray-800">{account.name}</div>
+                  <div className="font-medium text-white">{account.name}</div>
                   <span className={`px-2 py-1 rounded-full text-xs font-medium border ${getCategoryColor(account.category)}`}>
                     {account.category.charAt(0).toUpperCase() + account.category.slice(1)}
                   </span>
                 </div>
                 <button
                   onClick={() => handleDelete(account.id)}
-                  className="p-1 text-gray-400 hover:text-red-600 transition-colors"
+                  className="p-1 text-gray-400 hover:text-red-400 transition-colors"
                 >
                   <Trash2 className="w-4 h-4" />
                 </button>
@@ -148,28 +148,28 @@ export const AccountManager: React.FC<AccountManagerProps> = ({ onAccountsUpdate
       {/* Add Account Modal */}
       {showAddForm && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50">
-          <div className="bg-white/95 backdrop-blur-sm rounded-xl shadow-lg p-6 w-full max-w-md">
-            <h3 className="text-lg font-semibold text-gray-800 mb-4">Add New Account</h3>
+          <div className="bg-[#1F1F1F] backdrop-blur-sm rounded-xl shadow-lg p-6 w-full max-w-md border border-[#2C2C2E]">
+            <h3 className="text-lg font-semibold text-white mb-4">Add New Account</h3>
             
             <form onSubmit={handleSubmit} className="space-y-4">
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">Account Name</label>
+                <label className="block text-sm font-medium text-white mb-2">Account Name</label>
                 <input
                   type="text"
                   value={formData.name}
                   onChange={(e) => setFormData(prev => ({ ...prev, name: e.target.value }))}
                   placeholder="e.g., Personal Savings, Business Checking"
-                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent bg-white/55"
+                  className="w-full px-3 py-2 border border-[#2C2C2E] rounded-lg focus:ring-2 focus:ring-white focus:border-transparent bg-[#1F1F1F] text-white"
                   required
                 />
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">Category</label>
+                <label className="block text-sm font-medium text-white mb-2">Category</label>
                 <select
                   value={formData.category}
                   onChange={(e) => setFormData(prev => ({ ...prev, category: e.target.value as any }))}
-                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent bg-white/55"
+                  className="w-full px-3 py-2 border border-[#2C2C2E] rounded-lg focus:ring-2 focus:ring-white focus:border-transparent bg-[#1F1F1F] text-white"
                 >
                   <option value="asset">Asset</option>
                   <option value="liability">Liability</option>
@@ -186,14 +186,14 @@ export const AccountManager: React.FC<AccountManagerProps> = ({ onAccountsUpdate
                     setShowAddForm(false);
                     setFormData({ name: '', category: 'asset' });
                   }}
-                  className="flex-1 px-4 py-2 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition-colors"
+                  className="flex-1 px-4 py-2 border border-[#2C2C2E] text-gray-300 rounded-lg hover:bg-[#2C2C2E] transition-colors"
                 >
                   Cancel
                 </button>
                 <button
                   type="submit"
                   disabled={isSubmitting}
-                  className="flex-1 bg-indigo-600 text-white px-4 py-2 rounded-lg hover:bg-indigo-700 transition-colors disabled:opacity-50"
+                  className="flex-1 bg-white text-black px-4 py-2 rounded-lg hover:bg-gray-200 transition-colors disabled:opacity-50"
                 >
                   {isSubmitting ? 'Adding...' : 'Add Account'}
                 </button>

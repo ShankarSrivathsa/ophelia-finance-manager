@@ -42,14 +42,14 @@ export const DataManagement: React.FC<DataManagementProps> = ({
   };
 
   return (
-    <div className="bg-white/55 backdrop-blur-sm rounded-xl shadow-lg p-6">
-      <h2 className="text-xl font-semibold text-gray-800 mb-6">Data Management</h2>
+    <div className="bg-[#1F1F1F] backdrop-blur-sm rounded-xl shadow-lg p-6 border border-[#2C2C2E]">
+      <h2 className="text-xl font-semibold text-white mb-6">Data Management</h2>
       
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
         <button
           onClick={handleExport}
           disabled={transactions.length === 0}
-          className="flex items-center justify-center gap-2 px-4 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 disabled:bg-gray-300 disabled:cursor-not-allowed transition-colors"
+          className="flex items-center justify-center gap-2 px-4 py-3 bg-white text-black rounded-lg hover:bg-gray-200 disabled:bg-gray-600 disabled:text-gray-400 disabled:cursor-not-allowed transition-colors"
         >
           <Download className="w-4 h-4" />
           Export Data
@@ -65,7 +65,7 @@ export const DataManagement: React.FC<DataManagementProps> = ({
           />
           <button
             onClick={() => fileInputRef.current?.click()}
-            className="w-full flex items-center justify-center gap-2 px-4 py-3 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors"
+            className="w-full flex items-center justify-center gap-2 px-4 py-3 bg-white text-black rounded-lg hover:bg-gray-200 transition-colors"
           >
             <Upload className="w-4 h-4" />
             Import Data
@@ -75,17 +75,17 @@ export const DataManagement: React.FC<DataManagementProps> = ({
         <button
           onClick={handleClear}
           disabled={transactions.length === 0}
-          className="flex items-center justify-center gap-2 px-4 py-3 bg-red-600 text-white rounded-lg hover:bg-red-700 disabled:bg-gray-300 disabled:cursor-not-allowed transition-colors"
+          className="flex items-center justify-center gap-2 px-4 py-3 bg-red-600 text-white rounded-lg hover:bg-red-700 disabled:bg-gray-600 disabled:text-gray-400 disabled:cursor-not-allowed transition-colors"
         >
           <Trash2 className="w-4 h-4" />
           Clear All
         </button>
       </div>
 
-      <div className="mt-4 text-sm text-gray-600">
-        <p><strong>Export:</strong> Download your transactions as a JSON file for backup</p>
-        <p><strong>Import:</strong> Upload a previously exported JSON file to restore data</p>
-        <p><strong>Clear:</strong> Remove all transactions from local storage</p>
+      <div className="mt-4 text-sm text-gray-400">
+        <p><strong className="text-white">Export:</strong> Download your transactions as a JSON file for backup</p>
+        <p><strong className="text-white">Import:</strong> Upload a previously exported JSON file to restore data</p>
+        <p><strong className="text-white">Clear:</strong> Remove all transactions from local storage</p>
       </div>
     </div>
   );
