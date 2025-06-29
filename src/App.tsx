@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Calculator, BarChart3, FileText, Scale, Database, TrendingUp, Target, Building2, PlusCircle, PiggyBank, Brain, Zap, Crown } from 'lucide-react';
+import { Calculator, BarChart3, FileText, Scale, Database, TrendingUp, Target, Building2, PlusCircle, PiggyBank, Brain, Crown } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 import { Transaction } from './types/accounting';
 import { UserProfile } from './types/finance';
@@ -19,7 +19,6 @@ import { BudgetManager } from './components/BudgetManager';
 import { AnalyticsDashboard } from './components/AnalyticsDashboard';
 import { AccountManager } from './components/AccountManager';
 import { AIFinancialAdvisor } from './components/AIFinancialAdvisor';
-import { SmartBudgetOptimizer } from './components/SmartBudgetOptimizer';
 import { AutomatedReports } from './components/AutomatedReports';
 import { OnboardingVideo } from './components/OnboardingVideo';
 import { BillingPage } from './components/BillingPage';
@@ -31,7 +30,7 @@ import { offlineService } from './services/offlineService';
 import { supabase } from './lib/supabase';
 import './i18n';
 
-type ActiveTab = 'expenses' | 'income' | 'savings' | 'transactions' | 'budgets' | 'analytics' | 'accounts' | 'journal' | 'ledger' | 'profitloss' | 'trial' | 'data' | 'ai-advisor' | 'budget-optimizer' | 'reports' | 'billing';
+type ActiveTab = 'expenses' | 'income' | 'savings' | 'transactions' | 'budgets' | 'analytics' | 'accounts' | 'journal' | 'ledger' | 'profitloss' | 'trial' | 'data' | 'ai-advisor' | 'reports' | 'billing';
 
 function AppContent() {
   const { t } = useTranslation();
@@ -290,7 +289,6 @@ function AppContent() {
 
     // Add Pro features - show for all users but indicate Pro status
     baseTabs.push(
-      { id: 'budget-optimizer', label: t('navigation.smartBudget'), icon: Zap },
       { id: 'reports', label: t('navigation.aiReports'), icon: FileText }
     );
 
@@ -394,7 +392,7 @@ function AppContent() {
           <div className="flex flex-wrap justify-center gap-2 p-2 bg-[#1F1F1F] backdrop-blur-sm rounded-xl shadow-lg border border-[#2C2C2E]">
             {tabs.map((tab) => {
               const Icon = tab.icon;
-              const isProFeature = ['budget-optimizer', 'reports'].includes(tab.id);
+              const isProFeature = ['reports'].includes(tab.id);
               
               return (
                 <button
@@ -454,30 +452,6 @@ function AppContent() {
 
           {activeTab === 'ai-advisor' && (
             <AIFinancialAdvisor onAdviceGenerated={handleDataUpdate} />
-          )}
-
-          {activeTab === 'budget-optimizer' && (
-            isProUser ? (
-              <SmartBudgetOptimizer 
-                currentMonth={currentMonth} 
-                onOptimizationComplete={handleDataUpdate} 
-              />
-            ) : (
-              <div className="bg-[#1F1F1F] backdrop-blur-sm rounded-xl shadow-lg p-8 text-center border border-[#2C2C2E]">
-                <Zap className="w-16 h-16 text-gray-600 mx-auto mb-4" />
-                <h3 className="text-lg font-semibold text-white mb-2">Pro Feature</h3>
-                <p className="text-gray-300 mb-4">
-                  Upgrade to Pro to access smart budget optimization powered by AI.
-                </p>
-                <button
-                  onClick={() => setActiveTab('billing')}
-                  className="bg-gradient-to-r from-white to-gray-200 text-black px-6 py-3 rounded-lg hover:from-gray-200 hover:to-white transition-all duration-200 flex items-center gap-2 mx-auto"
-                >
-                  <Crown className="w-5 h-5" />
-                  Upgrade to Pro
-                </button>
-              </div>
-            )
           )}
 
           {activeTab === 'reports' && (
