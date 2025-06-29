@@ -6,7 +6,7 @@ import { Language } from '../types/language';
 import { lingoService } from '../services/lingoService';
 
 export const LanguageSelector: React.FC = () => {
-  const { i18n } = useTranslation();
+  const { i18n, t } = useTranslation();
   const [isOpen, setIsOpen] = useState(false);
   const [dropdownPosition, setDropdownPosition] = useState({ top: 0, left: 0 });
   const [currentLang, setCurrentLang] = useState(i18n.language);
@@ -31,8 +31,6 @@ export const LanguageSelector: React.FC = () => {
 
   const changeLanguage = async (languageCode: string) => {
     try {
-      console.log('Changing language from', i18n.language, 'to', languageCode);
-      
       // Change the language
       await i18n.changeLanguage(languageCode);
       
@@ -42,6 +40,9 @@ export const LanguageSelector: React.FC = () => {
       
       // Force update localStorage
       localStorage.setItem('i18nextLng', languageCode);
+      
+      // Trigger a page reload to ensure all components update
+      window.location.reload();
     } catch (error) {
       console.error('Error changing language:', error);
     }
@@ -121,7 +122,12 @@ export const LanguageSelector: React.FC = () => {
 
   // Get current language info
   const currentLanguage = languages.find(lang => lang.code === currentLang) || 
-    { code: currentLang, name: 'Unknown', nativeName: 'Unknown', flag: '🌐' };
+    { code: currentLang, name: 'English', nativeName: 'English', flag: '🌐' };
+
+  // Get language code display (e.g., "EN" for English)
+  const getLanguageCode = (code: string) => {
+    return code.slice(0, 2).toUpperCase();
+  };
 
   const dropdown = isOpen ? createPortal(
     <div 
@@ -203,8 +209,8 @@ export const LanguageSelector: React.FC = () => {
         title={`Current language: ${currentLanguage.name}`}
       >
         <Globe className="w-4 h-4" />
-        <span className="text-sm">
-          {currentLanguage.flag}
+        <span className="text-sm font-medium">
+          {getLanguageCode(currentLang)}
         </span>
       </button>
       {dropdown}
