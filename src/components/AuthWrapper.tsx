@@ -51,15 +51,18 @@ export const AuthWrapper: React.FC<AuthWrapperProps> = ({ children }) => {
 
   if (error) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-gray-50">
-        <div className="max-w-md w-full bg-white rounded-lg shadow-md p-6">
+      <div 
+        className="min-h-screen flex items-center justify-center"
+        style={{ backgroundColor: '#121212' }}
+      >
+        <div className="max-w-md w-full bg-[#1F1F1F] rounded-lg shadow-md p-6 border border-[#2C2C2E]">
           <div className="text-center">
-            <div className="text-red-500 text-xl mb-4">⚠️</div>
-            <h2 className="text-lg font-semibold text-gray-900 mb-2">Connection Error</h2>
-            <p className="text-gray-600 mb-4">{error}</p>
+            <div className="text-red-400 text-xl mb-4">⚠️</div>
+            <h2 className="text-lg font-semibold text-white mb-2">Connection Error</h2>
+            <p className="text-gray-300 mb-4">{error}</p>
             <button
               onClick={() => window.location.reload()}
-              className="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 transition-colors"
+              className="bg-white text-black px-4 py-2 rounded-md hover:bg-gray-200 transition-colors"
             >
               Retry
             </button>

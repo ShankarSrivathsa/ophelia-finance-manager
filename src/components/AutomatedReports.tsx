@@ -186,9 +186,9 @@ ${report.recommendations.map((rec, index) => `${index + 1}. ${rec}`).join('\n')}
 
   const getTrendIcon = (trend: string) => {
     switch (trend) {
-      case 'up': return <TrendingUp className="w-4 h-4 text-green-600" />;
-      case 'down': return <TrendingDown className="w-4 h-4 text-red-600" />;
-      default: return <BarChart3 className="w-4 h-4 text-gray-600" />;
+      case 'up': return <TrendingUp className="w-4 h-4 text-green-400" />;
+      case 'down': return <TrendingDown className="w-4 h-4 text-red-400" />;
+      default: return <BarChart3 className="w-4 h-4 text-gray-400" />;
     }
   };
 
@@ -210,13 +210,13 @@ ${report.recommendations.map((rec, index) => `${index + 1}. ${rec}`).join('\n')}
       {/* Header */}
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-3">
-          <div className="w-10 h-10 bg-green-100 rounded-lg flex items-center justify-center">
-            <FileText className="w-5 h-5 text-green-600" />
+          <div className="w-10 h-10 bg-white rounded-lg flex items-center justify-center">
+            <FileText className="w-5 h-5 text-black" />
           </div>
           <div>
-            <h2 className="text-xl font-semibold text-gray-800">AI-Generated Reports</h2>
+            <h2 className="text-xl font-semibold text-white">AI-Generated Reports</h2>
             {isConfigured && (
-              <p className="text-sm text-gray-500">Powered by {providerName.charAt(0).toUpperCase() + providerName.slice(1)} AI</p>
+              <p className="text-sm text-gray-400">Powered by {providerName.charAt(0).toUpperCase() + providerName.slice(1)} AI</p>
             )}
           </div>
         </div>
@@ -224,7 +224,7 @@ ${report.recommendations.map((rec, index) => `${index + 1}. ${rec}`).join('\n')}
           {report && (
             <button
               onClick={downloadReport}
-              className="bg-gray-600 text-white px-4 py-2 rounded-lg hover:bg-gray-700 transition-colors flex items-center gap-2"
+              className="bg-white text-black px-4 py-2 rounded-lg hover:bg-gray-200 transition-colors flex items-center gap-2"
             >
               <Download className="w-4 h-4" />
               Download
@@ -233,7 +233,7 @@ ${report.recommendations.map((rec, index) => `${index + 1}. ${rec}`).join('\n')}
           <button
             onClick={generateReport}
             disabled={loading || !isConfigured}
-            className="bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700 transition-colors flex items-center gap-2 disabled:opacity-50"
+            className="bg-white text-black px-4 py-2 rounded-lg hover:bg-gray-200 transition-colors flex items-center gap-2 disabled:opacity-50"
           >
             {loading ? (
               <Loader2 className="w-4 h-4 animate-spin" />
@@ -247,25 +247,25 @@ ${report.recommendations.map((rec, index) => `${index + 1}. ${rec}`).join('\n')}
 
       {/* Configuration Warning */}
       {!isConfigured && (
-        <div className="bg-yellow-50/55 border border-yellow-200 rounded-xl p-6">
+        <div className="bg-yellow-900/50 border border-yellow-700 rounded-xl p-6">
           <div className="flex items-start gap-3">
-            <Key className="w-6 h-6 text-yellow-600 flex-shrink-0 mt-0.5" />
+            <Key className="w-6 h-6 text-yellow-400 flex-shrink-0 mt-0.5" />
             <div>
-              <h3 className="text-lg font-semibold text-yellow-800 mb-2">AI Service Configuration Required</h3>
-              <p className="text-yellow-700 mb-4">
+              <h3 className="text-lg font-semibold text-white mb-2">AI Service Configuration Required</h3>
+              <p className="text-gray-300 mb-4">
                 To generate AI-powered reports, you need to configure an AI API key. Add one of the following to your environment variables:
               </p>
-              <ul className="list-disc list-inside text-yellow-700 space-y-1 mb-4">
-                <li><code className="bg-yellow-100 px-2 py-1 rounded">VITE_GEMINI_API_KEY</code> - Google AI Studio (Recommended)</li>
-                <li><code className="bg-yellow-100 px-2 py-1 rounded">VITE_OPENAI_API_KEY</code> - OpenAI GPT</li>
-                <li><code className="bg-yellow-100 px-2 py-1 rounded">VITE_ANTHROPIC_API_KEY</code> - Anthropic Claude</li>
+              <ul className="list-disc list-inside text-gray-300 space-y-1 mb-4">
+                <li><code className="bg-yellow-900/50 px-2 py-1 rounded text-yellow-300">VITE_GEMINI_API_KEY</code> - Google AI Studio (Recommended)</li>
+                <li><code className="bg-yellow-900/50 px-2 py-1 rounded text-yellow-300">VITE_OPENAI_API_KEY</code> - OpenAI GPT</li>
+                <li><code className="bg-yellow-900/50 px-2 py-1 rounded text-yellow-300">VITE_ANTHROPIC_API_KEY</code> - Anthropic Claude</li>
               </ul>
               <div className="flex gap-3">
                 <a
                   href="https://makersuite.google.com/app/apikey"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 text-yellow-700 hover:text-yellow-800 font-medium"
+                  className="inline-flex items-center gap-2 text-yellow-300 hover:text-white font-medium"
                 >
                   <ExternalLink className="w-4 h-4" />
                   Get Gemini API Key (Free)
@@ -277,15 +277,15 @@ ${report.recommendations.map((rec, index) => `${index + 1}. ${rec}`).join('\n')}
       )}
 
       {/* Report Configuration */}
-      <div className="bg-white/55 backdrop-blur-sm rounded-xl shadow-lg p-6">
-        <h3 className="text-lg font-semibold text-gray-800 mb-4">Report Configuration</h3>
+      <div className="bg-[#1F1F1F] backdrop-blur-sm rounded-xl shadow-lg p-6 border border-[#2C2C2E]">
+        <h3 className="text-lg font-semibold text-white mb-4">Report Configuration</h3>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-2">Report Type</label>
+            <label className="block text-sm font-medium text-white mb-2">Report Type</label>
             <select
               value={reportType}
               onChange={(e) => setReportType(e.target.value as any)}
-              className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent bg-white/55"
+              className="w-full px-3 py-2 border border-[#2C2C2E] rounded-lg focus:ring-2 focus:ring-white focus:border-transparent bg-[#1F1F1F] text-white"
               disabled={!isConfigured}
             >
               <option value="monthly_summary">Monthly Summary</option>
@@ -295,22 +295,22 @@ ${report.recommendations.map((rec, index) => `${index + 1}. ${rec}`).join('\n')}
             </select>
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-2">Start Date</label>
+            <label className="block text-sm font-medium text-white mb-2">Start Date</label>
             <input
               type="date"
               value={dateRange.startDate}
               onChange={(e) => setDateRange(prev => ({ ...prev, startDate: e.target.value }))}
-              className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent bg-white/55"
+              className="w-full px-3 py-2 border border-[#2C2C2E] rounded-lg focus:ring-2 focus:ring-white focus:border-transparent bg-[#1F1F1F] text-white"
               disabled={!isConfigured}
             />
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-2">End Date</label>
+            <label className="block text-sm font-medium text-white mb-2">End Date</label>
             <input
               type="date"
               value={dateRange.endDate}
               onChange={(e) => setDateRange(prev => ({ ...prev, endDate: e.target.value }))}
-              className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent bg-white/55"
+              className="w-full px-3 py-2 border border-[#2C2C2E] rounded-lg focus:ring-2 focus:ring-white focus:border-transparent bg-[#1F1F1F] text-white"
               disabled={!isConfigured}
             />
           </div>
@@ -319,7 +319,7 @@ ${report.recommendations.map((rec, index) => `${index + 1}. ${rec}`).join('\n')}
 
       {/* Error Message */}
       {error && (
-        <div className="bg-red-50/55 border border-red-200 text-red-700 px-4 py-3 rounded-lg">
+        <div className="bg-red-900/50 border border-red-700 text-red-300 px-4 py-3 rounded-lg">
           {error}
         </div>
       )}
@@ -328,29 +328,29 @@ ${report.recommendations.map((rec, index) => `${index + 1}. ${rec}`).join('\n')}
       {report && (
         <div className="space-y-6">
           {/* Report Header */}
-          <div className="bg-white/55 backdrop-blur-sm rounded-xl shadow-lg p-6">
+          <div className="bg-[#1F1F1F] backdrop-blur-sm rounded-xl shadow-lg p-6 border border-[#2C2C2E]">
             <div className="flex items-center justify-between mb-4">
-              <h3 className="text-xl font-bold text-gray-800">{report.reportTitle}</h3>
-              <span className="text-sm text-gray-500">
+              <h3 className="text-xl font-bold text-white">{report.reportTitle}</h3>
+              <span className="text-sm text-gray-400">
                 {dateRange.startDate} to {dateRange.endDate}
               </span>
             </div>
-            <p className="text-gray-700 leading-relaxed">{report.summary}</p>
+            <p className="text-white leading-relaxed">{report.summary}</p>
           </div>
 
           {/* Key Metrics */}
           {report.keyMetrics && report.keyMetrics.length > 0 && (
-            <div className="bg-white/55 backdrop-blur-sm rounded-xl shadow-lg p-6">
-              <h3 className="text-lg font-semibold text-gray-800 mb-4">Key Performance Metrics</h3>
+            <div className="bg-[#1F1F1F] backdrop-blur-sm rounded-xl shadow-lg p-6 border border-[#2C2C2E]">
+              <h3 className="text-lg font-semibold text-white mb-4">Key Performance Metrics</h3>
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                 {report.keyMetrics.map((metric, index) => (
-                  <div key={index} className="bg-gray-50/55 p-4 rounded-lg">
+                  <div key={index} className="bg-[#2C2C2E] p-4 rounded-lg">
                     <div className="flex items-center justify-between mb-2">
-                      <span className="text-sm font-medium text-gray-600">{metric.name}</span>
+                      <span className="text-sm font-medium text-gray-300">{metric.name}</span>
                       {getTrendIcon(metric.trend)}
                     </div>
-                    <div className="text-xl font-bold text-gray-800">{metric.value}</div>
-                    <div className="text-xs text-gray-500 mt-1">{metric.significance}</div>
+                    <div className="text-xl font-bold text-white">{metric.value}</div>
+                    <div className="text-xs text-gray-400 mt-1">{metric.significance}</div>
                   </div>
                 ))}
               </div>
@@ -361,14 +361,14 @@ ${report.recommendations.map((rec, index) => `${index + 1}. ${rec}`).join('\n')}
           {report.sections && report.sections.length > 0 && (
             <div className="space-y-4">
               {report.sections.map((section, index) => (
-                <div key={index} className="bg-white/55 backdrop-blur-sm rounded-xl shadow-lg p-6">
-                  <h3 className="text-lg font-semibold text-gray-800 mb-4">{section.title}</h3>
+                <div key={index} className="bg-[#1F1F1F] backdrop-blur-sm rounded-xl shadow-lg p-6 border border-[#2C2C2E]">
+                  <h3 className="text-lg font-semibold text-white mb-4">{section.title}</h3>
                   <div className="prose prose-gray max-w-none">
-                    <p className="text-gray-700 leading-relaxed whitespace-pre-line">{section.content}</p>
+                    <p className="text-white leading-relaxed whitespace-pre-line">{section.content}</p>
                   </div>
                   {section.data && (
-                    <div className="mt-4 bg-gray-50/55 p-4 rounded-lg">
-                      <pre className="text-xs text-gray-600 overflow-x-auto">
+                    <div className="mt-4 bg-[#2C2C2E] p-4 rounded-lg">
+                      <pre className="text-xs text-gray-300 overflow-x-auto">
                         {JSON.stringify(section.data, null, 2)}
                       </pre>
                     </div>
@@ -380,15 +380,15 @@ ${report.recommendations.map((rec, index) => `${index + 1}. ${rec}`).join('\n')}
 
           {/* AI Recommendations */}
           {report.recommendations && report.recommendations.length > 0 && (
-            <div className="bg-white/55 backdrop-blur-sm rounded-xl shadow-lg p-6">
-              <h3 className="text-lg font-semibold text-gray-800 mb-4">AI-Powered Recommendations</h3>
+            <div className="bg-[#1F1F1F] backdrop-blur-sm rounded-xl shadow-lg p-6 border border-[#2C2C2E]">
+              <h3 className="text-lg font-semibold text-white mb-4">AI-Powered Recommendations</h3>
               <div className="space-y-3">
                 {report.recommendations.map((recommendation, index) => (
-                  <div key={index} className="flex items-start gap-3 p-3 bg-blue-50/55 rounded-lg">
-                    <div className="w-6 h-6 bg-blue-100 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
-                      <span className="text-xs font-medium text-blue-600">{index + 1}</span>
+                  <div key={index} className="flex items-start gap-3 p-3 bg-blue-900/50 rounded-lg border border-blue-700">
+                    <div className="w-6 h-6 bg-blue-800 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
+                      <span className="text-xs font-medium text-white">{index + 1}</span>
                     </div>
-                    <p className="text-gray-700">{recommendation}</p>
+                    <p className="text-white">{recommendation}</p>
                   </div>
                 ))}
               </div>
@@ -399,13 +399,13 @@ ${report.recommendations.map((rec, index) => `${index + 1}. ${rec}`).join('\n')}
 
       {/* Getting Started Message */}
       {!report && !loading && isConfigured && (
-        <div className="bg-white/55 backdrop-blur-sm rounded-xl shadow-lg p-8 text-center">
-          <FileText className="w-16 h-16 text-green-600 mx-auto mb-4" />
-          <h3 className="text-lg font-semibold text-gray-800 mb-2">AI-Generated Financial Reports</h3>
-          <p className="text-gray-600 mb-4">
+        <div className="bg-[#1F1F1F] backdrop-blur-sm rounded-xl shadow-lg p-8 text-center border border-[#2C2C2E]">
+          <FileText className="w-16 h-16 text-white mx-auto mb-4" />
+          <h3 className="text-lg font-semibold text-white mb-2">AI-Generated Financial Reports</h3>
+          <p className="text-white mb-4">
             Generate comprehensive financial reports with AI-powered insights and recommendations.
           </p>
-          <p className="text-sm text-gray-500">
+          <p className="text-sm text-gray-300">
             Configure your report settings and click "Generate Report" to get started.
           </p>
         </div>
