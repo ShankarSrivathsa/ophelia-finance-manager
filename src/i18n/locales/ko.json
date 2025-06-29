@@ -1,0 +1,50 @@
+{
+  "app": {
+    "title": "머니 매니저",
+    "subtitle": "스마트 저축 추적 기능이 있는 간단한 재무 관리",
+    "loading": "데이터를 불러오는 중...",
+    "signOut": "로그아웃"
+  },
+  "auth": {
+    "signIn": "로그인",
+    "signUp": "회원가입",
+    "email": "이메일",
+    "password": "비밀번호",
+    "enterEmail": "이메일을 입력하세요",
+    "enterPassword": "비밀번호를 입력하세요",
+    "alreadyHaveAccount": "이미 계정이 있으신가요? 로그인하세요",
+    "noAccount": "계정이 없으신가요? 회원가입하세요",
+    "secureData": "귀하의 데이터는 안전하게 저장되고 모든 기기에서 동기화됩니다"
+  },
+  "navigation": {
+    "expenses": "지출",
+    "income": "수입",
+    "savings": "저축",
+    "budgets": "예산",
+    "analytics": "분석",
+    "accounts": "계정",
+    "transactions": "거래",
+    "journal": "분개장",
+    "ledger": "원장",
+    "profitLoss": "손익계산서",
+    "trialBalance": "시산표",
+    "data": "데이터",
+    "aiAdvisor": "AI 어드바이저",
+    "smartBudget": "스마트 예산",
+    "aiReports": "AI 보고서"
+  },
+  "common": {
+    "cancel": "취소",
+    "save": "저장",
+    "delete": "삭제",
+    "edit": "편집",
+    "add": "추가",
+    "update": "업데이트",
+    "loading": "로딩 중...",
+    "error": "오류",
+    "success": "성공",
+    "confirm": "확실합니까?",
+    "yes": "예",
+    "no": "아니오"
+  }
+}
