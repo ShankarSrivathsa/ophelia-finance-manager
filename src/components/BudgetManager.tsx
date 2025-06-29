@@ -180,10 +180,10 @@ export const BudgetManager: React.FC<BudgetManagerProps> = ({ currentMonth, onBu
 
   const getStatusColor = (status: string) => {
     switch (status) {
-      case 'under': return 'text-green-600 bg-green-50';
-      case 'on-track': return 'text-yellow-600 bg-yellow-50';
-      case 'over': return 'text-red-600 bg-red-50';
-      default: return 'text-gray-600 bg-gray-50';
+      case 'under': return 'text-green-400 bg-green-900/50 border-green-700';
+      case 'on-track': return 'text-yellow-400 bg-yellow-900/50 border-yellow-700';
+      case 'over': return 'text-red-400 bg-red-900/50 border-red-700';
+      default: return 'text-gray-300 bg-[#2C2C2E] border-[#2C2C2E]';
     }
   };
 
@@ -201,14 +201,14 @@ export const BudgetManager: React.FC<BudgetManagerProps> = ({ currentMonth, onBu
       {/* Header */}
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-3">
-          <div className="w-10 h-10 bg-blue-100 rounded-lg flex items-center justify-center">
-            <Target className="w-5 h-5 text-blue-600" />
+          <div className="w-10 h-10 bg-white rounded-lg flex items-center justify-center">
+            <Target className="w-5 h-5 text-black" />
           </div>
-          <h2 className="text-xl font-semibold text-gray-800">Budget Manager</h2>
+          <h2 className="text-xl font-semibold text-white">Budget Manager</h2>
         </div>
         <button
           onClick={() => setShowAddForm(true)}
-          className="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors flex items-center gap-2"
+          className="bg-white text-black px-4 py-2 rounded-lg hover:bg-gray-200 transition-colors flex items-center gap-2"
         >
           <Plus className="w-4 h-4" />
           Add Budget
@@ -219,10 +219,10 @@ export const BudgetManager: React.FC<BudgetManagerProps> = ({ currentMonth, onBu
       {budgetAnalysis.length > 0 && (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
           {budgetAnalysis.map((analysis) => (
-            <div key={analysis.category} className="bg-white/55 backdrop-blur-sm rounded-lg shadow-md p-4">
+            <div key={analysis.category} className="bg-[#1F1F1F] backdrop-blur-sm rounded-lg shadow-md p-4 border border-[#2C2C2E]">
               <div className="flex items-center justify-between mb-3">
-                <h3 className="font-medium text-gray-800">{analysis.category}</h3>
-                <span className={`px-2 py-1 rounded-full text-xs font-medium flex items-center gap-1 ${getStatusColor(analysis.status)}`}>
+                <h3 className="font-medium text-white">{analysis.category}</h3>
+                <span className={`px-2 py-1 rounded-full text-xs font-medium flex items-center gap-1 border ${getStatusColor(analysis.status)}`}>
                   {getStatusIcon(analysis.status)}
                   {analysis.status === 'under' ? 'Under Budget' : 
                    analysis.status === 'on-track' ? 'On Track' : 'Over Budget'}
@@ -231,16 +231,16 @@ export const BudgetManager: React.FC<BudgetManagerProps> = ({ currentMonth, onBu
               
               <div className="space-y-2">
                 <div className="flex justify-between text-sm">
-                  <span className="text-gray-600">Budgeted:</span>
-                  <span className="font-medium">{formatCurrency(analysis.budgeted)}</span>
+                  <span className="text-gray-300">Budgeted:</span>
+                  <span className="font-medium text-white">{formatCurrency(analysis.budgeted)}</span>
                 </div>
                 <div className="flex justify-between text-sm">
-                  <span className="text-gray-600">Spent:</span>
-                  <span className="font-medium">{formatCurrency(analysis.spent)}</span>
+                  <span className="text-gray-300">Spent:</span>
+                  <span className="font-medium text-white">{formatCurrency(analysis.spent)}</span>
                 </div>
                 <div className="flex justify-between text-sm">
-                  <span className="text-gray-600">Remaining:</span>
-                  <span className={`font-medium ${analysis.remaining >= 0 ? 'text-green-600' : 'text-red-600'}`}>
+                  <span className="text-gray-300">Remaining:</span>
+                  <span className={`font-medium ${analysis.remaining >= 0 ? 'text-green-400' : 'text-red-400'}`}>
                     {formatCurrency(analysis.remaining)}
                   </span>
                 </div>
@@ -248,7 +248,7 @@ export const BudgetManager: React.FC<BudgetManagerProps> = ({ currentMonth, onBu
 
               {/* Progress Bar */}
               <div className="mt-3">
-                <div className="w-full bg-gray-200 rounded-full h-2">
+                <div className="w-full bg-[#2C2C2E] rounded-full h-2">
                   <div 
                     className={`h-2 rounded-full transition-all duration-300 ${
                       analysis.percentage > 100 ? 'bg-red-500' :
@@ -257,7 +257,7 @@ export const BudgetManager: React.FC<BudgetManagerProps> = ({ currentMonth, onBu
                     style={{ width: `${Math.min(analysis.percentage, 100)}%` }}
                   />
                 </div>
-                <div className="text-xs text-gray-500 mt-1">
+                <div className="text-xs text-gray-400 mt-1">
                   {analysis.percentage.toFixed(1)}% of budget used
                 </div>
               </div>
@@ -267,21 +267,21 @@ export const BudgetManager: React.FC<BudgetManagerProps> = ({ currentMonth, onBu
       )}
 
       {/* Budget List */}
-      <div className="bg-white/55 backdrop-blur-sm rounded-xl shadow-lg p-6">
-        <h3 className="text-lg font-semibold text-gray-800 mb-4">Monthly Budgets</h3>
+      <div className="bg-[#1F1F1F] backdrop-blur-sm rounded-xl shadow-lg p-6 border border-[#2C2C2E]">
+        <h3 className="text-lg font-semibold text-white mb-4">Monthly Budgets</h3>
         
         {budgets.length === 0 ? (
-          <p className="text-gray-500 text-center py-8">No budgets set for this month. Add your first budget to get started!</p>
+          <p className="text-gray-400 text-center py-8">No budgets set for this month. Add your first budget to get started!</p>
         ) : (
           <div className="space-y-3">
             {budgets.map((budget) => (
-              <div key={budget.id} className="flex items-center justify-between p-3 bg-gray-50/55 rounded-lg">
+              <div key={budget.id} className="flex items-center justify-between p-3 bg-[#2C2C2E] rounded-lg">
                 <div>
-                  <div className="font-medium text-gray-800">{budget.category}</div>
-                  <div className="text-sm text-gray-500">Monthly budget</div>
+                  <div className="font-medium text-white">{budget.category}</div>
+                  <div className="text-sm text-gray-400">Monthly budget</div>
                 </div>
                 <div className="flex items-center gap-3">
-                  <div className="text-lg font-semibold text-blue-600">
+                  <div className="text-lg font-semibold text-white">
                     {formatCurrency(budget.amount)}
                   </div>
                   <div className="flex gap-1">
@@ -291,13 +291,13 @@ export const BudgetManager: React.FC<BudgetManagerProps> = ({ currentMonth, onBu
                         setFormData({ category: budget.category, amount: budget.amount.toString() });
                         setShowAddForm(true);
                       }}
-                      className="p-1 text-gray-400 hover:text-blue-600 transition-colors"
+                      className="p-1 text-gray-400 hover:text-white transition-colors"
                     >
                       <Edit3 className="w-4 h-4" />
                     </button>
                     <button
                       onClick={() => handleDelete(budget.id)}
-                      className="p-1 text-gray-400 hover:text-red-600 transition-colors"
+                      className="p-1 text-gray-400 hover:text-red-400 transition-colors"
                     >
                       <Trash2 className="w-4 h-4" />
                     </button>
@@ -312,19 +312,19 @@ export const BudgetManager: React.FC<BudgetManagerProps> = ({ currentMonth, onBu
       {/* Add/Edit Budget Modal */}
       {showAddForm && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50">
-          <div className="bg-white/95 backdrop-blur-sm rounded-xl shadow-lg p-6 w-full max-w-md">
-            <h3 className="text-lg font-semibold text-gray-800 mb-4">
+          <div className="bg-[#1F1F1F] backdrop-blur-sm rounded-xl shadow-lg p-6 w-full max-w-md border border-[#2C2C2E]">
+            <h3 className="text-lg font-semibold text-white mb-4">
               {editingBudget ? 'Edit Budget' : 'Add New Budget'}
             </h3>
             
             <form onSubmit={handleSubmit} className="space-y-4">
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">Category</label>
+                <label className="block text-sm font-medium text-white mb-2">Category</label>
                 <select
                   value={formData.category}
                   onChange={(e) => setFormData(prev => ({ ...prev, category: e.target.value }))}
                   disabled={!!editingBudget}
-                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent disabled:bg-gray-100 bg-white/55"
+                  className="w-full px-3 py-2 border border-[#2C2C2E] rounded-lg focus:ring-2 focus:ring-white focus:border-transparent disabled:bg-[#2C2C2E] bg-[#1F1F1F] text-white"
                 >
                   {BUDGET_CATEGORIES.map(category => (
                     <option key={category} value={category}>{category}</option>
@@ -333,7 +333,7 @@ export const BudgetManager: React.FC<BudgetManagerProps> = ({ currentMonth, onBu
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">Monthly Amount</label>
+                <label className="block text-sm font-medium text-white mb-2">Monthly Amount</label>
                 <input
                   type="number"
                   step="0.01"
@@ -341,7 +341,7 @@ export const BudgetManager: React.FC<BudgetManagerProps> = ({ currentMonth, onBu
                   value={formData.amount}
                   onChange={(e) => setFormData(prev => ({ ...prev, amount: e.target.value }))}
                   placeholder="0.00"
-                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white/55"
+                  className="w-full px-3 py-2 border border-[#2C2C2E] rounded-lg focus:ring-2 focus:ring-white focus:border-transparent bg-[#1F1F1F] text-white"
                   required
                 />
               </div>
@@ -354,14 +354,14 @@ export const BudgetManager: React.FC<BudgetManagerProps> = ({ currentMonth, onBu
                     setEditingBudget(null);
                     setFormData({ category: 'Food & Dining', amount: '' });
                   }}
-                  className="flex-1 px-4 py-2 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition-colors"
+                  className="flex-1 px-4 py-2 border border-[#2C2C2E] text-gray-300 rounded-lg hover:bg-[#2C2C2E] transition-colors"
                 >
                   Cancel
                 </button>
                 <button
                   type="submit"
                   disabled={isSubmitting}
-                  className="flex-1 bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors disabled:opacity-50"
+                  className="flex-1 bg-white text-black px-4 py-2 rounded-lg hover:bg-gray-200 transition-colors disabled:opacity-50"
                 >
                   {isSubmitting ? 'Saving...' : editingBudget ? 'Update' : 'Add Budget'}
                 </button>

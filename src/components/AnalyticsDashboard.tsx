@@ -326,9 +326,9 @@ export const AnalyticsDashboard: React.FC<AnalyticsDashboardProps> = ({ currentM
 
   if (loading) {
     return (
-      <div className="bg-white/55 backdrop-blur-sm rounded-xl shadow-lg p-6">
+      <div className="bg-[#1F1F1F] backdrop-blur-sm rounded-xl shadow-lg p-6 border border-[#2C2C2E]">
         <div className="flex items-center justify-center py-12">
-          <div className="w-8 h-8 border-4 border-blue-200 border-t-blue-600 rounded-full animate-spin"></div>
+          <div className="w-8 h-8 border-4 border-[#2C2C2E] border-t-white rounded-full animate-spin"></div>
         </div>
       </div>
     );
@@ -338,56 +338,56 @@ export const AnalyticsDashboard: React.FC<AnalyticsDashboardProps> = ({ currentM
     <div className="space-y-6">
       {/* Header */}
       <div className="flex items-center gap-3">
-        <div className="w-10 h-10 bg-purple-100 rounded-lg flex items-center justify-center">
-          <BarChart className="w-5 h-5 text-purple-600" />
+        <div className="w-10 h-10 bg-white rounded-lg flex items-center justify-center">
+          <BarChart className="w-5 h-5 text-black" />
         </div>
-        <h2 className="text-xl font-semibold text-gray-800">Analytics & Reports</h2>
+        <h2 className="text-xl font-semibold text-white">Analytics & Reports</h2>
       </div>
 
       {/* Summary Cards */}
       <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
-        <div className="bg-white/55 backdrop-blur-sm rounded-xl shadow-lg p-6">
+        <div className="bg-[#1F1F1F] backdrop-blur-sm rounded-xl shadow-lg p-6 border border-[#2C2C2E]">
           <div className="flex items-center gap-3 mb-2">
-            <TrendingUp className="w-8 h-8 text-green-600" />
+            <TrendingUp className="w-8 h-8 text-green-400" />
             <div>
-              <h3 className="text-sm font-medium text-gray-600">Total Income</h3>
-              <p className="text-2xl font-bold text-gray-800">{formatCurrency(totalIncome)}</p>
+              <h3 className="text-sm font-medium text-gray-300">Total Income</h3>
+              <p className="text-2xl font-bold text-white">{formatCurrency(totalIncome)}</p>
             </div>
           </div>
         </div>
 
-        <div className="bg-white/55 backdrop-blur-sm rounded-xl shadow-lg p-6">
+        <div className="bg-[#1F1F1F] backdrop-blur-sm rounded-xl shadow-lg p-6 border border-[#2C2C2E]">
           <div className="flex items-center gap-3 mb-2">
-            <DollarSign className="w-8 h-8 text-blue-600" />
+            <DollarSign className="w-8 h-8 text-blue-400" />
             <div>
-              <h3 className="text-sm font-medium text-gray-600">Total Expenses</h3>
-              <p className="text-2xl font-bold text-gray-800">{formatCurrency(totalExpenses)}</p>
+              <h3 className="text-sm font-medium text-gray-300">Total Expenses</h3>
+              <p className="text-2xl font-bold text-white">{formatCurrency(totalExpenses)}</p>
             </div>
           </div>
         </div>
 
-        <div className="bg-white/55 backdrop-blur-sm rounded-xl shadow-lg p-6">
+        <div className="bg-[#1F1F1F] backdrop-blur-sm rounded-xl shadow-lg p-6 border border-[#2C2C2E]">
           <div className="flex items-center gap-3 mb-2">
             {netIncome >= 0 ? (
-              <TrendingUp className="w-8 h-8 text-green-600" />
+              <TrendingUp className="w-8 h-8 text-green-400" />
             ) : (
-              <TrendingDown className="w-8 h-8 text-red-600" />
+              <TrendingDown className="w-8 h-8 text-red-400" />
             )}
             <div>
-              <h3 className="text-sm font-medium text-gray-600">Net Income</h3>
-              <p className={`text-2xl font-bold ${netIncome >= 0 ? 'text-green-600' : 'text-red-600'}`}>
+              <h3 className="text-sm font-medium text-gray-300">Net Income</h3>
+              <p className={`text-2xl font-bold ${netIncome >= 0 ? 'text-green-400' : 'text-red-400'}`}>
                 {formatCurrency(netIncome)}
               </p>
             </div>
           </div>
         </div>
 
-        <div className="bg-white/55 backdrop-blur-sm rounded-xl shadow-lg p-6">
+        <div className="bg-[#1F1F1F] backdrop-blur-sm rounded-xl shadow-lg p-6 border border-[#2C2C2E]">
           <div className="flex items-center gap-3 mb-2">
-            <Target className="w-8 h-8 text-purple-600" />
+            <Target className="w-8 h-8 text-purple-400" />
             <div>
-              <h3 className="text-sm font-medium text-gray-600">Total Budget</h3>
-              <p className="text-2xl font-bold text-gray-800">{formatCurrency(totalBudget)}</p>
+              <h3 className="text-sm font-medium text-gray-300">Total Budget</h3>
+              <p className="text-2xl font-bold text-white">{formatCurrency(totalBudget)}</p>
             </div>
           </div>
         </div>
@@ -397,14 +397,18 @@ export const AnalyticsDashboard: React.FC<AnalyticsDashboardProps> = ({ currentM
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         {/* Budget vs Actual */}
         {budgetComparisonData.length > 0 && (
-          <div className="bg-white/55 backdrop-blur-sm rounded-xl shadow-lg p-6">
-            <h3 className="text-lg font-semibold text-gray-800 mb-4">Budget vs Actual</h3>
+          <div className="bg-[#1F1F1F] backdrop-blur-sm rounded-xl shadow-lg p-6 border border-[#2C2C2E]">
+            <h3 className="text-lg font-semibold text-white mb-4">Budget vs Actual</h3>
             <ResponsiveContainer width="100%" height={300}>
               <BarChart data={budgetComparisonData}>
-                <CartesianGrid strokeDasharray="3 3" />
-                <XAxis dataKey="category" tick={{ fontSize: 12 }} />
-                <YAxis tick={{ fontSize: 12 }} />
-                <Tooltip formatter={(value) => formatCurrency(Number(value))} />
+                <CartesianGrid strokeDasharray="3 3" stroke="#2C2C2E" />
+                <XAxis dataKey="category" tick={{ fontSize: 12, fill: '#9CA3AF' }} />
+                <YAxis tick={{ fontSize: 12, fill: '#9CA3AF' }} />
+                <Tooltip 
+                  formatter={(value) => formatCurrency(Number(value))}
+                  contentStyle={{ backgroundColor: '#1F1F1F', border: '1px solid #2C2C2E', borderRadius: '8px' }}
+                  labelStyle={{ color: '#FFFFFF' }}
+                />
                 <Bar dataKey="budgeted" fill="#3B82F6" name="Budgeted" />
                 <Bar dataKey="spent" fill="#EF4444" name="Spent" />
               </BarChart>
@@ -414,8 +418,8 @@ export const AnalyticsDashboard: React.FC<AnalyticsDashboardProps> = ({ currentM
 
         {/* Category Breakdown */}
         {pieData.length > 0 && (
-          <div className="bg-white/55 backdrop-blur-sm rounded-xl shadow-lg p-6">
-            <h3 className="text-lg font-semibold text-gray-800 mb-4">Spending by Category</h3>
+          <div className="bg-[#1F1F1F] backdrop-blur-sm rounded-xl shadow-lg p-6 border border-[#2C2C2E]">
+            <h3 className="text-lg font-semibold text-white mb-4">Spending by Category</h3>
             <ResponsiveContainer width="100%" height={300}>
               <PieChart>
                 <Pie
@@ -432,7 +436,11 @@ export const AnalyticsDashboard: React.FC<AnalyticsDashboardProps> = ({ currentM
                     <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
                   ))}
                 </Pie>
-                <Tooltip formatter={(value) => formatCurrency(Number(value))} />
+                <Tooltip 
+                  formatter={(value) => formatCurrency(Number(value))}
+                  contentStyle={{ backgroundColor: '#1F1F1F', border: '1px solid #2C2C2E', borderRadius: '8px' }}
+                  labelStyle={{ color: '#FFFFFF' }}
+                />
               </PieChart>
             </ResponsiveContainer>
           </div>
@@ -441,14 +449,18 @@ export const AnalyticsDashboard: React.FC<AnalyticsDashboardProps> = ({ currentM
 
       {/* Monthly Trends */}
       {monthlyTrends.length > 0 && (
-        <div className="bg-white/55 backdrop-blur-sm rounded-xl shadow-lg p-6">
-          <h3 className="text-lg font-semibold text-gray-800 mb-4">Monthly Financial Trends</h3>
+        <div className="bg-[#1F1F1F] backdrop-blur-sm rounded-xl shadow-lg p-6 border border-[#2C2C2E]">
+          <h3 className="text-lg font-semibold text-white mb-4">Monthly Financial Trends</h3>
           <ResponsiveContainer width="100%" height={300}>
             <LineChart data={monthlyTrends}>
-              <CartesianGrid strokeDasharray="3 3" />
-              <XAxis dataKey="month" />
-              <YAxis tick={{ fontSize: 12 }} />
-              <Tooltip formatter={(value) => formatCurrency(Number(value))} />
+              <CartesianGrid strokeDasharray="3 3" stroke="#2C2C2E" />
+              <XAxis dataKey="month" tick={{ fontSize: 12, fill: '#9CA3AF' }} />
+              <YAxis tick={{ fontSize: 12, fill: '#9CA3AF' }} />
+              <Tooltip 
+                formatter={(value) => formatCurrency(Number(value))}
+                contentStyle={{ backgroundColor: '#1F1F1F', border: '1px solid #2C2C2E', borderRadius: '8px' }}
+                labelStyle={{ color: '#FFFFFF' }}
+              />
               <Line type="monotone" dataKey="income" stroke="#10B981" strokeWidth={2} name="Income" />
               <Line type="monotone" dataKey="expenses" stroke="#EF4444" strokeWidth={2} name="Expenses" />
               <Line type="monotone" dataKey="netIncome" stroke="#3B82F6" strokeWidth={2} name="Net Income" />
@@ -460,19 +472,19 @@ export const AnalyticsDashboard: React.FC<AnalyticsDashboardProps> = ({ currentM
       {/* Top Categories & Insights */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         {/* Top Spending Categories */}
-        <div className="bg-white/55 backdrop-blur-sm rounded-xl shadow-lg p-6">
-          <h3 className="text-lg font-semibold text-gray-800 mb-4">Top Spending Categories</h3>
+        <div className="bg-[#1F1F1F] backdrop-blur-sm rounded-xl shadow-lg p-6 border border-[#2C2C2E]">
+          <h3 className="text-lg font-semibold text-white mb-4">Top Spending Categories</h3>
           {topCategories.length > 0 ? (
             <div className="space-y-3">
               {topCategories.map((category, index) => (
-                <div key={category.name} className="flex items-center justify-between p-3 bg-gray-50/55 rounded-lg">
+                <div key={category.name} className="flex items-center justify-between p-3 bg-[#2C2C2E] rounded-lg">
                   <div className="flex items-center gap-3">
                     <div className={`w-3 h-3 rounded-full`} style={{ backgroundColor: COLORS[index] }} />
-                    <span className="font-medium text-gray-800">{category.name}</span>
+                    <span className="font-medium text-white">{category.name}</span>
                   </div>
                   <div className="text-right">
-                    <div className="font-semibold text-gray-800">{formatCurrency(category.value)}</div>
-                    <div className="text-sm text-gray-500">
+                    <div className="font-semibold text-white">{formatCurrency(category.value)}</div>
+                    <div className="text-sm text-gray-400">
                       {totalExpenses > 0 ? `${((category.value / totalExpenses) * 100).toFixed(1)}%` : '0%'}
                     </div>
                   </div>
@@ -480,34 +492,34 @@ export const AnalyticsDashboard: React.FC<AnalyticsDashboardProps> = ({ currentM
               ))}
             </div>
           ) : (
-            <p className="text-gray-500 text-center py-8">No expenses recorded yet</p>
+            <p className="text-gray-400 text-center py-8">No expenses recorded yet</p>
           )}
         </div>
 
         {/* Smart Insights */}
-        <div className="bg-white/55 backdrop-blur-sm rounded-xl shadow-lg p-6">
-          <h3 className="text-lg font-semibold text-gray-800 mb-4">Smart Insights</h3>
+        <div className="bg-[#1F1F1F] backdrop-blur-sm rounded-xl shadow-lg p-6 border border-[#2C2C2E]">
+          <h3 className="text-lg font-semibold text-white mb-4">Smart Insights</h3>
           {insights.length > 0 ? (
             <div className="space-y-3">
               {insights.map((insight, index) => (
                 <div key={index} className={`p-3 rounded-lg border-l-4 ${
-                  insight.type === 'increase' ? 'bg-red-50/55 border-red-400' :
-                  insight.type === 'decrease' ? 'bg-green-50/55 border-green-400' :
-                  insight.type === 'warning' ? 'bg-yellow-50/55 border-yellow-400' :
-                  'bg-blue-50/55 border-blue-400'
+                  insight.type === 'increase' ? 'bg-red-900/50 border-red-400' :
+                  insight.type === 'decrease' ? 'bg-green-900/50 border-green-400' :
+                  insight.type === 'warning' ? 'bg-yellow-900/50 border-yellow-400' :
+                  'bg-blue-900/50 border-blue-400'
                 }`}>
                   <div className="flex items-start gap-2">
-                    {insight.type === 'increase' && <TrendingUp className="w-4 h-4 text-red-600 mt-0.5" />}
-                    {insight.type === 'decrease' && <TrendingDown className="w-4 h-4 text-green-600 mt-0.5" />}
-                    {insight.type === 'warning' && <AlertTriangle className="w-4 h-4 text-yellow-600 mt-0.5" />}
-                    {insight.type === 'achievement' && <Target className="w-4 h-4 text-blue-600 mt-0.5" />}
-                    <p className="text-sm text-gray-700">{insight.message}</p>
+                    {insight.type === 'increase' && <TrendingUp className="w-4 h-4 text-red-400 mt-0.5" />}
+                    {insight.type === 'decrease' && <TrendingDown className="w-4 h-4 text-green-400 mt-0.5" />}
+                    {insight.type === 'warning' && <AlertTriangle className="w-4 h-4 text-yellow-400 mt-0.5" />}
+                    {insight.type === 'achievement' && <Target className="w-4 h-4 text-blue-400 mt-0.5" />}
+                    <p className="text-sm text-gray-300">{insight.message}</p>
                   </div>
                 </div>
               ))}
             </div>
           ) : (
-            <p className="text-gray-500 text-center py-8">No insights available yet. Add more data to see smart insights!</p>
+            <p className="text-gray-400 text-center py-8">No insights available yet. Add more data to see smart insights!</p>
           )}
         </div>
       </div>

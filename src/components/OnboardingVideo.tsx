@@ -75,15 +75,15 @@ export const OnboardingVideo: React.FC<OnboardingVideoProps> = ({ onComplete }) 
 
   return (
     <div className="fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center z-50">
-      <div className="bg-white/95 backdrop-blur-sm rounded-xl shadow-2xl max-w-4xl w-full mx-4 overflow-hidden">
+      <div className="bg-[#1F1F1F] backdrop-blur-sm rounded-xl shadow-2xl max-w-4xl w-full mx-4 overflow-hidden border border-[#2C2C2E]">
         {/* Header */}
-        <div className="flex items-center justify-between p-4 border-b border-gray-200">
-          <h2 className="text-xl font-semibold text-gray-800">
+        <div className="flex items-center justify-between p-4 border-b border-[#2C2C2E]">
+          <h2 className="text-xl font-semibold text-white">
             Why Managing Your Expenses Matters
           </h2>
           <button
             onClick={handleSkip}
-            className="p-2 text-gray-400 hover:text-gray-600 transition-colors"
+            className="p-2 text-gray-400 hover:text-white transition-colors"
           >
             <X className="w-5 h-5" />
           </button>
@@ -205,8 +205,8 @@ export const OnboardingVideo: React.FC<OnboardingVideoProps> = ({ onComplete }) 
         </div>
 
         {/* Footer */}
-        <div className="p-4 bg-gray-50 flex items-center justify-between">
-          <div className="text-sm text-gray-600">
+        <div className="p-4 bg-[#2C2C2E] flex items-center justify-between">
+          <div className="text-sm text-gray-300">
             <p className="font-medium">What you'll learn:</p>
             <ul className="mt-1 space-y-1">
               <li>• How expense tracking leads to financial freedom</li>
@@ -218,13 +218,13 @@ export const OnboardingVideo: React.FC<OnboardingVideoProps> = ({ onComplete }) 
           <div className="flex gap-3">
             <button
               onClick={handleSkip}
-              className="px-4 py-2 text-gray-600 hover:text-gray-800 transition-colors"
+              className="px-4 py-2 text-gray-300 hover:text-white transition-colors"
             >
               Skip for now
             </button>
             <button
               onClick={handleVideoEnd}
-              className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
+              className="px-4 py-2 bg-white text-black rounded-lg hover:bg-gray-200 transition-colors"
             >
               Continue to App
             </button>

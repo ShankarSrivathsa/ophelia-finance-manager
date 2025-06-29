@@ -109,18 +109,18 @@ export const IncomeTracker: React.FC<IncomeTrackerProps> = ({ onIncomeAdded }) =
   return (
     <div className="space-y-6">
       {/* Add Income Form */}
-      <div className="bg-white/55 backdrop-blur-sm rounded-xl shadow-lg p-6">
+      <div className="bg-[#1F1F1F] backdrop-blur-sm rounded-xl shadow-lg p-6 border border-[#2C2C2E]">
         <div className="flex items-center gap-3 mb-6">
-          <div className="w-10 h-10 bg-green-100 rounded-lg flex items-center justify-center">
-            <TrendingUp className="w-5 h-5 text-green-600" />
+          <div className="w-10 h-10 bg-white rounded-lg flex items-center justify-center">
+            <TrendingUp className="w-5 h-5 text-black" />
           </div>
-          <h2 className="text-xl font-semibold text-gray-800">Add Income</h2>
+          <h2 className="text-xl font-semibold text-white">Add Income</h2>
         </div>
 
         <form onSubmit={handleSubmit} className="space-y-4">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">
+              <label className="block text-sm font-medium text-white mb-2">
                 <DollarSign className="w-4 h-4 inline mr-1" />
                 Amount
               </label>
@@ -131,13 +131,13 @@ export const IncomeTracker: React.FC<IncomeTrackerProps> = ({ onIncomeAdded }) =
                 value={formData.amount}
                 onChange={(e) => setFormData(prev => ({ ...prev, amount: e.target.value }))}
                 placeholder="0.00"
-                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent bg-white/55"
+                className="w-full px-3 py-2 border border-[#2C2C2E] rounded-lg focus:ring-2 focus:ring-white focus:border-transparent bg-[#1F1F1F] text-white"
                 required
               />
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">
+              <label className="block text-sm font-medium text-white mb-2">
                 <Calendar className="w-4 h-4 inline mr-1" />
                 Date
               </label>
@@ -145,21 +145,21 @@ export const IncomeTracker: React.FC<IncomeTrackerProps> = ({ onIncomeAdded }) =
                 type="date"
                 value={formData.date}
                 onChange={(e) => setFormData(prev => ({ ...prev, date: e.target.value }))}
-                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent bg-white/55"
+                className="w-full px-3 py-2 border border-[#2C2C2E] rounded-lg focus:ring-2 focus:ring-white focus:border-transparent bg-[#1F1F1F] text-white"
                 required
               />
             </div>
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-2">
+            <label className="block text-sm font-medium text-white mb-2">
               <Tag className="w-4 h-4 inline mr-1" />
               Category
             </label>
             <select
               value={formData.category}
               onChange={(e) => setFormData(prev => ({ ...prev, category: e.target.value }))}
-              className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent bg-white/55"
+              className="w-full px-3 py-2 border border-[#2C2C2E] rounded-lg focus:ring-2 focus:ring-white focus:border-transparent bg-[#1F1F1F] text-white"
             >
               {INCOME_CATEGORIES.map(category => (
                 <option key={category} value={category}>{category}</option>
@@ -168,7 +168,7 @@ export const IncomeTracker: React.FC<IncomeTrackerProps> = ({ onIncomeAdded }) =
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-2">
+            <label className="block text-sm font-medium text-white mb-2">
               <FileText className="w-4 h-4 inline mr-1" />
               Description
             </label>
@@ -177,19 +177,19 @@ export const IncomeTracker: React.FC<IncomeTrackerProps> = ({ onIncomeAdded }) =
               value={formData.description}
               onChange={(e) => setFormData(prev => ({ ...prev, description: e.target.value }))}
               placeholder="Source of income"
-              className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent bg-white/55"
+              className="w-full px-3 py-2 border border-[#2C2C2E] rounded-lg focus:ring-2 focus:ring-white focus:border-transparent bg-[#1F1F1F] text-white"
               required
             />
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-2">Notes (Optional)</label>
+            <label className="block text-sm font-medium text-white mb-2">Notes (Optional)</label>
             <textarea
               value={formData.notes}
               onChange={(e) => setFormData(prev => ({ ...prev, notes: e.target.value }))}
               placeholder="Any additional notes..."
               rows={2}
-              className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent bg-white/55"
+              className="w-full px-3 py-2 border border-[#2C2C2E] rounded-lg focus:ring-2 focus:ring-white focus:border-transparent bg-[#1F1F1F] text-white"
             />
           </div>
 
@@ -199,9 +199,9 @@ export const IncomeTracker: React.FC<IncomeTrackerProps> = ({ onIncomeAdded }) =
               id="recurring"
               checked={formData.is_recurring}
               onChange={(e) => setFormData(prev => ({ ...prev, is_recurring: e.target.checked }))}
-              className="w-4 h-4 text-green-600 border-gray-300 rounded focus:ring-green-500"
+              className="w-4 h-4 text-white border-[#2C2C2E] rounded focus:ring-white"
             />
-            <label htmlFor="recurring" className="text-sm text-gray-700 flex items-center gap-1">
+            <label htmlFor="recurring" className="text-sm text-white flex items-center gap-1">
               <Repeat className="w-4 h-4" />
               This is recurring income
             </label>
@@ -210,10 +210,10 @@ export const IncomeTracker: React.FC<IncomeTrackerProps> = ({ onIncomeAdded }) =
           <button
             type="submit"
             disabled={isSubmitting}
-            className="w-full bg-green-600 text-white py-3 px-4 rounded-lg hover:bg-green-700 focus:ring-2 focus:ring-green-500 focus:ring-offset-2 transition-colors flex items-center justify-center gap-2 font-medium disabled:opacity-50"
+            className="w-full bg-white text-black py-3 px-4 rounded-lg hover:bg-gray-200 focus:ring-2 focus:ring-white focus:ring-offset-2 transition-colors flex items-center justify-center gap-2 font-medium disabled:opacity-50"
           >
             {isSubmitting ? (
-              <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin" />
+              <div className="w-5 h-5 border-2 border-black border-t-transparent rounded-full animate-spin" />
             ) : (
               <>
                 <Plus className="w-5 h-5" />
@@ -226,19 +226,19 @@ export const IncomeTracker: React.FC<IncomeTrackerProps> = ({ onIncomeAdded }) =
 
       {/* Recent Income */}
       {recentIncome.length > 0 && (
-        <div className="bg-white/55 backdrop-blur-sm rounded-xl shadow-lg p-6">
-          <h3 className="text-lg font-semibold text-gray-800 mb-4">Recent Income</h3>
+        <div className="bg-[#1F1F1F] backdrop-blur-sm rounded-xl shadow-lg p-6 border border-[#2C2C2E]">
+          <h3 className="text-lg font-semibold text-white mb-4">Recent Income</h3>
           <div className="space-y-3">
             {recentIncome.map((income) => (
-              <div key={income.id} className="flex items-center justify-between p-3 bg-gray-50/55 rounded-lg">
+              <div key={income.id} className="flex items-center justify-between p-3 bg-[#2C2C2E] rounded-lg">
                 <div>
-                  <div className="font-medium text-gray-800">{income.description}</div>
-                  <div className="text-sm text-gray-500">
+                  <div className="font-medium text-white">{income.description}</div>
+                  <div className="text-sm text-gray-300">
                     {income.category} • {formatDate(income.date)}
-                    {income.is_recurring && <span className="ml-2 text-green-600">🔄</span>}
+                    {income.is_recurring && <span className="ml-2 text-green-400">🔄</span>}
                   </div>
                 </div>
-                <div className="text-lg font-semibold text-green-600">
+                <div className="text-lg font-semibold text-green-400">
                   +{formatCurrency(income.amount)}
                 </div>
               </div>
