@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Calculator, BarChart3, FileText, Scale, Database, TrendingUp, Target, Building2, PlusCircle, PiggyBank, Brain, Crown } from 'lucide-react';
+import { Calculator, BarChart3, FileText, Scale, Database, TrendingUp, Target, Building2, PlusCircle, PiggyBank, Brain } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 import { Transaction } from './types/accounting';
 import { UserProfile, PersonaQuizSuggestions } from './types/finance';
@@ -22,7 +22,6 @@ import { AccountManager } from './components/AccountManager';
 import { AIFinancialAdvisor } from './components/AIFinancialAdvisor';
 import { AutomatedReports } from './components/AutomatedReports';
 import { OnboardingVideo } from './components/OnboardingVideo';
-import { BillingPage } from './components/BillingPage';
 import { generateLedgerAccounts, generateTrialBalance, generateProfitLoss, getLastDayOfMonth } from './utils/accounting';
 import { saveTransaction, loadTransactions, clearAllTransactions } from './services/supabaseStorage';
 import { getUserProfile } from './services/financeService';
@@ -31,7 +30,7 @@ import { offlineService } from './services/offlineService';
 import { supabase } from './lib/supabase';
 import './i18n';
 
-type ActiveTab = 'expenses' | 'income' | 'savings' | 'transactions' | 'budgets' | 'analytics' | 'accounts' | 'journal' | 'ledger' | 'profitloss' | 'trial' | 'data' | 'ai-advisor' | 'reports' | 'billing';
+type ActiveTab = 'expenses' | 'income' | 'savings' | 'transactions' | 'budgets' | 'analytics' | 'accounts' | 'journal' | 'ledger' | 'profitloss' | 'trial' | 'data' | 'ai-advisor' | 'reports';
 
 function AppContent() {
   const { t } = useTranslation();
@@ -44,7 +43,6 @@ function AppContent() {
   const [showOnboardingVideo, setShowOnboardingVideo] = useState(false);
   const [currentMonth, setCurrentMonth] = useState(new Date().toISOString().slice(0, 7));
   const [netIncome, setNetIncome] = useState(0);
-  const [isProUser, setIsProUser] = useState(false);
   const [showPersonaSuggestions, setShowPersonaSuggestions] = useState(false);
   const [personaSuggestions, setPersonaSuggestions] = useState<PersonaQuizSuggestions | null>(null);
 
@@ -54,10 +52,6 @@ function AppContent() {
         const { data: { user } } = await supabase.auth.getUser();
         if (user) {
           setUserEmail(user.email || '');
-          
-          // Check Pro status from localStorage
-          const proStatus = localStorage.getItem('user_pro_status');
-          setIsProUser(proStatus === 'true');
           
           // Load user profile
           const profile = await getUserProfile();
@@ -96,33 +90,6 @@ function AppContent() {
 
     initializeApp();
   }, [currentMonth]);
-
-  // Listen for billing navigation event
-  useEffect(() => {
-    const handleSetActiveTab = (event: CustomEvent) => {
-      setActiveTab(event.detail);
-    };
-
-    window.addEventListener('set-active-tab', handleSetActiveTab as EventListener);
-    
-    return () => {
-      window.removeEventListener('set-active-tab', handleSetActiveTab as EventListener);
-    };
-  }, []);
-
-  // Listen for Pro status changes
-  useEffect(() => {
-    const handleStorageChange = () => {
-      const proStatus = localStorage.getItem('user_pro_status');
-      setIsProUser(proStatus === 'true');
-    };
-
-    window.addEventListener('storage', handleStorageChange);
-    
-    return () => {
-      window.removeEventListener('storage', handleStorageChange);
-    };
-  }, []);
 
   const calculateNetIncome = async () => {
     try {
@@ -187,10 +154,6 @@ function AppContent() {
         setActiveTab('budgets');
       }
     }
-  };
-
-  const handleProStatusChange = (isPro: boolean) => {
-    setIsProUser(isPro);
   };
 
   const handleAddTransaction = async (transactionData: Omit<Transaction, 'id'>) => {
@@ -280,17 +243,6 @@ function AppContent() {
     return <PersonaSuggestionsModal suggestions={personaSuggestions} onContinue={handleClosePersonaSuggestions} />;
   }
 
-  // Show billing page as a separate full-screen page
-  if (activeTab === 'billing') {
-    return (
-      <BillingPage 
-        userEmail={userEmail} 
-        onBack={() => setActiveTab('expenses')} 
-        onProStatusChange={handleProStatusChange}
-      />
-    );
-  }
-
   const ledgerAccounts = generateLedgerAccounts(transactions);
   const trialBalanceItems = generateTrialBalance(ledgerAccounts);
   const { items: profitLossItems, netIncome: accountingNetIncome } = generateProfitLoss(ledgerAccounts);
@@ -305,11 +257,9 @@ function AppContent() {
       { id: 'accounts', label: t('navigation.accounts'), icon: Building2 }
     ];
 
-    // Add AI Advisor to all users (now free)
-    baseTabs.push({ id: 'ai-advisor', label: t('navigation.aiAdvisor'), icon: Brain });
-
-    // Add Pro features - show for all users but indicate Pro status
+    // Add AI features - now free for everyone
     baseTabs.push(
+      { id: 'ai-advisor', label: t('navigation.aiAdvisor'), icon: Brain },
       { id: 'reports', label: t('navigation.aiReports'), icon: FileText }
     );
 
@@ -365,12 +315,10 @@ function AppContent() {
           <div className="inline-block bg-[#1F1F1F] backdrop-blur-sm rounded-xl p-6 shadow-lg mb-6 border border-[#2C2C2E]">
             <h1 className="text-4xl font-bold text-white mb-2">{t('app.title')}</h1>
             <p className="text-lg text-gray-300">{getWelcomeMessage()}</p>
-            {isProUser && (
-              <div className="mt-2 flex items-center justify-center gap-2">
-                <Crown className="w-4 h-4 text-yellow-500" />
-                <span className="text-sm font-medium text-yellow-400">Pro Member</span>
-              </div>
-            )}
+            <div className="mt-2 flex items-center justify-center gap-2">
+              <Brain className="w-4 h-4 text-blue-400" />
+              <span className="text-sm font-medium text-blue-300">AI Features Included</span>
+            </div>
           </div>
           
           {/* User Profile - Separate from header */}
@@ -413,7 +361,6 @@ function AppContent() {
           <div className="flex flex-wrap justify-center gap-2 p-2 bg-[#1F1F1F] backdrop-blur-sm rounded-xl shadow-lg border border-[#2C2C2E]">
             {tabs.map((tab) => {
               const Icon = tab.icon;
-              const isProFeature = ['reports'].includes(tab.id);
               
               return (
                 <button
@@ -427,13 +374,9 @@ function AppContent() {
                 >
                   <Icon className="w-4 h-4" />
                   <span className="hidden sm:inline">{tab.label}</span>
-                  {isProFeature && (
-                    <span className={`absolute -top-1 -right-1 w-3 h-3 rounded-full flex items-center justify-center ${
-                      isProUser ? 'bg-gradient-to-r from-yellow-400 to-orange-500' : 'bg-gray-600'
-                    }`}>
-                      <span className="text-[8px] text-white font-bold">
-                        {isProUser ? '✦' : '🔒'}
-                      </span>
+                  {(tab.id === 'ai-advisor' || tab.id === 'reports') && (
+                    <span className="absolute -top-1 -right-1 w-3 h-3 rounded-full flex items-center justify-center bg-gradient-to-r from-blue-400 to-purple-500">
+                      <span className="text-[8px] text-white font-bold">✦</span>
                     </span>
                   )}
                 </button>
@@ -476,24 +419,7 @@ function AppContent() {
           )}
 
           {activeTab === 'reports' && (
-            isProUser ? (
-              <AutomatedReports currentMonth={currentMonth} />
-            ) : (
-              <div className="bg-[#1F1F1F] backdrop-blur-sm rounded-xl shadow-lg p-8 text-center border border-[#2C2C2E]">
-                <FileText className="w-16 h-16 text-gray-600 mx-auto mb-4" />
-                <h3 className="text-lg font-semibold text-white mb-2">Pro Feature</h3>
-                <p className="text-gray-300 mb-4">
-                  Upgrade to Pro to access AI-generated financial reports and insights.
-                </p>
-                <button
-                  onClick={() => setActiveTab('billing')}
-                  className="bg-gradient-to-r from-white to-gray-200 text-black px-6 py-3 rounded-lg hover:from-gray-200 hover:to-white transition-all duration-200 flex items-center gap-2 mx-auto"
-                >
-                  <Crown className="w-5 h-5" />
-                  Upgrade to Pro
-                </button>
-              </div>
-            )
+            <AutomatedReports currentMonth={currentMonth} />
           )}
           
           {activeTab === 'transactions' && (

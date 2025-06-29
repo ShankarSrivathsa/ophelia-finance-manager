@@ -1,5 +1,5 @@
 import React from 'react';
-import { LogOut, User, CreditCard } from 'lucide-react';
+import { LogOut, User } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 import { supabase } from '../lib/supabase';
 import { LanguageSelector } from './LanguageSelector';
@@ -15,12 +15,6 @@ export const UserProfile: React.FC<UserProfileProps> = ({ userEmail }) => {
     await supabase.auth.signOut();
   };
 
-  const handleBillingClick = () => {
-    // Trigger navigation to billing tab in parent component
-    const event = new CustomEvent('set-active-tab', { detail: 'billing' });
-    window.dispatchEvent(event);
-  };
-
   return (
     <div className="bg-[#1F1F1F] backdrop-blur-sm rounded-lg p-4 shadow-lg border border-[#2C2C2E]">
       {/* User Info & Controls */}
@@ -31,14 +25,6 @@ export const UserProfile: React.FC<UserProfileProps> = ({ userEmail }) => {
         </div>
         
         <div className="flex items-center gap-3 text-sm">
-          <button
-            onClick={handleBillingClick}
-            className="flex items-center gap-1 text-gray-300 hover:text-white transition-colors font-medium"
-          >
-            <CreditCard className="w-4 h-4" />
-            Billing
-          </button>
-          
           <LanguageSelector />
           
           <button
