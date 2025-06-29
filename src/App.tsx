@@ -242,16 +242,11 @@ function AppContent() {
     return (
       <div 
         className="min-h-screen flex items-center justify-center"
-        style={{
-          backgroundImage: 'url(/bg.jpg)',
-          backgroundSize: 'cover',
-          backgroundPosition: 'center',
-          backgroundRepeat: 'no-repeat'
-        }}
+        style={{ backgroundColor: '#F7F5F2' }}
       >
-        <div className="text-center bg-white/55 backdrop-blur-sm rounded-xl p-8 shadow-lg">
-          <div className="w-12 h-12 border-4 border-blue-200 border-t-blue-600 rounded-full animate-spin mx-auto mb-4"></div>
-          <p className="text-gray-600">{t('app.loading')}</p>
+        <div className="text-center bg-white/90 backdrop-blur-sm rounded-xl p-8 shadow-lg border border-[#DDE5D5]">
+          <div className="w-12 h-12 border-4 border-[#DDE5D5] border-t-[#52796F] rounded-full animate-spin mx-auto mb-4"></div>
+          <p className="text-[#333333]">{t('app.loading')}</p>
         </div>
       </div>
     );
@@ -332,12 +327,7 @@ function AppContent() {
   return (
     <div 
       className="min-h-screen"
-      style={{
-        backgroundImage: 'url(/bg.jpg)',
-        backgroundSize: 'cover',
-        backgroundPosition: 'center',
-        backgroundRepeat: 'no-repeat'
-      }}
+      style={{ backgroundColor: '#F7F5F2' }}
     >
       <div className="container mx-auto px-4 py-8">
         {/* Header with Bolt Logo */}
@@ -353,13 +343,13 @@ function AppContent() {
           </div>
           
           {/* Main Header Content */}
-          <div className="inline-block bg-white/55 backdrop-blur-sm rounded-xl p-6 shadow-lg mb-6">
-            <h1 className="text-4xl font-bold text-gray-800 mb-2">{t('app.title')}</h1>
-            <p className="text-lg text-gray-600">{getWelcomeMessage()}</p>
+          <div className="inline-block bg-white/90 backdrop-blur-sm rounded-xl p-6 shadow-lg mb-6 border border-[#DDE5D5]">
+            <h1 className="text-4xl font-bold text-[#333333] mb-2">{t('app.title')}</h1>
+            <p className="text-lg text-[#52796F]">{getWelcomeMessage()}</p>
             {isProUser && (
               <div className="mt-2 flex items-center justify-center gap-2">
-                <Crown className="w-4 h-4 text-yellow-600" />
-                <span className="text-sm font-medium text-yellow-700">Pro Member</span>
+                <Crown className="w-4 h-4 text-[#84A98C]" />
+                <span className="text-sm font-medium text-[#52796F]">Pro Member</span>
               </div>
             )}
           </div>
@@ -375,13 +365,13 @@ function AppContent() {
               type="month"
               value={currentMonth}
               onChange={(e) => setCurrentMonth(e.target.value)}
-              className="px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white/55"
+              className="px-3 py-2 border border-[#DDE5D5] rounded-lg focus:ring-2 focus:ring-[#52796F] focus:border-transparent bg-white/90 text-[#333333]"
             />
           </div>
           
           {/* Net Income Display - Separate from header */}
-          <div className="inline-flex items-center gap-4 text-sm text-gray-500 bg-white/55 backdrop-blur-sm rounded-lg px-4 py-2 shadow-lg">
-            <span className={netIncome >= 0 ? 'text-green-600' : 'text-red-600'}>
+          <div className="inline-flex items-center gap-4 text-sm text-[#52796F] bg-white/90 backdrop-blur-sm rounded-lg px-4 py-2 shadow-lg border border-[#DDE5D5]">
+            <span className={netIncome >= 0 ? 'text-[#52796F]' : 'text-red-600'}>
               Net {netIncome >= 0 ? 'Income' : 'Loss'}: ${Math.abs(netIncome).toFixed(2)}
             </span>
             {transactions.length > 0 && (
@@ -401,7 +391,7 @@ function AppContent() {
 
         {/* Navigation */}
         <div className="mb-8">
-          <div className="flex flex-wrap justify-center gap-2 p-2 bg-white/55 backdrop-blur-sm rounded-xl shadow-lg">
+          <div className="flex flex-wrap justify-center gap-2 p-2 bg-white/90 backdrop-blur-sm rounded-xl shadow-lg border border-[#DDE5D5]">
             {tabs.map((tab) => {
               const Icon = tab.icon;
               const isProFeature = ['budget-optimizer', 'reports'].includes(tab.id);
@@ -412,15 +402,15 @@ function AppContent() {
                   onClick={() => setActiveTab(tab.id as ActiveTab)}
                   className={`flex items-center gap-2 px-4 py-2 rounded-lg font-medium transition-colors relative ${
                     activeTab === tab.id
-                      ? 'bg-blue-600 text-white shadow-md'
-                      : 'text-gray-600 hover:bg-gray-100/55'
+                      ? 'bg-[#52796F] text-white shadow-md'
+                      : 'text-[#333333] hover:bg-[#DDE5D5]/50'
                   }`}
                 >
                   <Icon className="w-4 h-4" />
                   <span className="hidden sm:inline">{tab.label}</span>
                   {isProFeature && (
                     <span className={`absolute -top-1 -right-1 w-3 h-3 rounded-full flex items-center justify-center ${
-                      isProUser ? 'bg-gradient-to-r from-yellow-400 to-orange-500' : 'bg-gray-400'
+                      isProUser ? 'bg-gradient-to-r from-[#84A98C] to-[#52796F]' : 'bg-gray-400'
                     }`}>
                       <span className="text-[8px] text-white font-bold">
                         {isProUser ? '✦' : '🔒'}
@@ -473,15 +463,15 @@ function AppContent() {
                 onOptimizationComplete={handleDataUpdate} 
               />
             ) : (
-              <div className="bg-white/55 backdrop-blur-sm rounded-xl shadow-lg p-8 text-center">
-                <Zap className="w-16 h-16 text-gray-400 mx-auto mb-4" />
-                <h3 className="text-lg font-semibold text-gray-800 mb-2">Pro Feature</h3>
-                <p className="text-gray-600 mb-4">
+              <div className="bg-white/90 backdrop-blur-sm rounded-xl shadow-lg p-8 text-center border border-[#DDE5D5]">
+                <Zap className="w-16 h-16 text-[#CAD2C5] mx-auto mb-4" />
+                <h3 className="text-lg font-semibold text-[#333333] mb-2">Pro Feature</h3>
+                <p className="text-[#52796F] mb-4">
                   Upgrade to Pro to access smart budget optimization powered by AI.
                 </p>
                 <button
                   onClick={() => setActiveTab('billing')}
-                  className="bg-gradient-to-r from-blue-600 to-purple-600 text-white px-6 py-3 rounded-lg hover:from-blue-700 hover:to-purple-700 transition-all duration-200 flex items-center gap-2 mx-auto"
+                  className="bg-gradient-to-r from-[#84A98C] to-[#52796F] text-white px-6 py-3 rounded-lg hover:from-[#52796F] hover:to-[#84A98C] transition-all duration-200 flex items-center gap-2 mx-auto"
                 >
                   <Crown className="w-5 h-5" />
                   Upgrade to Pro
@@ -494,15 +484,15 @@ function AppContent() {
             isProUser ? (
               <AutomatedReports currentMonth={currentMonth} />
             ) : (
-              <div className="bg-white/55 backdrop-blur-sm rounded-xl shadow-lg p-8 text-center">
-                <FileText className="w-16 h-16 text-gray-400 mx-auto mb-4" />
-                <h3 className="text-lg font-semibold text-gray-800 mb-2">Pro Feature</h3>
-                <p className="text-gray-600 mb-4">
+              <div className="bg-white/90 backdrop-blur-sm rounded-xl shadow-lg p-8 text-center border border-[#DDE5D5]">
+                <FileText className="w-16 h-16 text-[#CAD2C5] mx-auto mb-4" />
+                <h3 className="text-lg font-semibold text-[#333333] mb-2">Pro Feature</h3>
+                <p className="text-[#52796F] mb-4">
                   Upgrade to Pro to access AI-generated financial reports and insights.
                 </p>
                 <button
                   onClick={() => setActiveTab('billing')}
-                  className="bg-gradient-to-r from-blue-600 to-purple-600 text-white px-6 py-3 rounded-lg hover:from-blue-700 hover:to-purple-700 transition-all duration-200 flex items-center gap-2 mx-auto"
+                  className="bg-gradient-to-r from-[#84A98C] to-[#52796F] text-white px-6 py-3 rounded-lg hover:from-[#52796F] hover:to-[#84A98C] transition-all duration-200 flex items-center gap-2 mx-auto"
                 >
                   <Crown className="w-5 h-5" />
                   Upgrade to Pro
@@ -542,8 +532,8 @@ function AppContent() {
 
         {/* Footer */}
         <div className="text-center mt-12">
-          <div className="bg-white/55 backdrop-blur-sm rounded-lg p-4 shadow-lg">
-            <p className="text-gray-500 text-sm">Your data is securely stored and synced across all your devices.</p>
+          <div className="bg-white/90 backdrop-blur-sm rounded-lg p-4 shadow-lg border border-[#DDE5D5]">
+            <p className="text-[#52796F] text-sm">Your data is securely stored and synced across all your devices.</p>
           </div>
         </div>
       </div>

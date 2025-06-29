@@ -109,18 +109,18 @@ export const ExpenseTracker: React.FC<ExpenseTrackerProps> = ({ onExpenseAdded }
   return (
     <div className="space-y-6">
       {/* Add Expense Form */}
-      <div className="bg-white/55 backdrop-blur-sm rounded-xl shadow-lg p-6">
+      <div className="bg-white/90 backdrop-blur-sm rounded-xl shadow-lg p-6 border border-[#DDE5D5]">
         <div className="flex items-center gap-3 mb-6">
-          <div className="w-10 h-10 bg-green-100 rounded-lg flex items-center justify-center">
-            <DollarSign className="w-5 h-5 text-green-600" />
+          <div className="w-10 h-10 bg-[#84A98C] rounded-lg flex items-center justify-center">
+            <DollarSign className="w-5 h-5 text-white" />
           </div>
-          <h2 className="text-xl font-semibold text-gray-800">Add Daily Expense</h2>
+          <h2 className="text-xl font-semibold text-[#333333]">Add Daily Expense</h2>
         </div>
 
         <form onSubmit={handleSubmit} className="space-y-4">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">
+              <label className="block text-sm font-medium text-[#333333] mb-2">
                 <DollarSign className="w-4 h-4 inline mr-1" />
                 Amount
               </label>
@@ -131,13 +131,13 @@ export const ExpenseTracker: React.FC<ExpenseTrackerProps> = ({ onExpenseAdded }
                 value={formData.amount}
                 onChange={(e) => setFormData(prev => ({ ...prev, amount: e.target.value }))}
                 placeholder="0.00"
-                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent bg-white/55"
+                className="w-full px-3 py-2 border border-[#DDE5D5] rounded-lg focus:ring-2 focus:ring-[#52796F] focus:border-transparent bg-white/90 text-[#333333]"
                 required
               />
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">
+              <label className="block text-sm font-medium text-[#333333] mb-2">
                 <Calendar className="w-4 h-4 inline mr-1" />
                 Date
               </label>
@@ -145,21 +145,21 @@ export const ExpenseTracker: React.FC<ExpenseTrackerProps> = ({ onExpenseAdded }
                 type="date"
                 value={formData.date}
                 onChange={(e) => setFormData(prev => ({ ...prev, date: e.target.value }))}
-                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent bg-white/55"
+                className="w-full px-3 py-2 border border-[#DDE5D5] rounded-lg focus:ring-2 focus:ring-[#52796F] focus:border-transparent bg-white/90 text-[#333333]"
                 required
               />
             </div>
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-2">
+            <label className="block text-sm font-medium text-[#333333] mb-2">
               <Tag className="w-4 h-4 inline mr-1" />
               Category
             </label>
             <select
               value={formData.category}
               onChange={(e) => setFormData(prev => ({ ...prev, category: e.target.value }))}
-              className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent bg-white/55"
+              className="w-full px-3 py-2 border border-[#DDE5D5] rounded-lg focus:ring-2 focus:ring-[#52796F] focus:border-transparent bg-white/90 text-[#333333]"
             >
               {EXPENSE_CATEGORIES.map(category => (
                 <option key={category} value={category}>{category}</option>
@@ -168,7 +168,7 @@ export const ExpenseTracker: React.FC<ExpenseTrackerProps> = ({ onExpenseAdded }
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-2">
+            <label className="block text-sm font-medium text-[#333333] mb-2">
               <FileText className="w-4 h-4 inline mr-1" />
               Description
             </label>
@@ -177,19 +177,19 @@ export const ExpenseTracker: React.FC<ExpenseTrackerProps> = ({ onExpenseAdded }
               value={formData.description}
               onChange={(e) => setFormData(prev => ({ ...prev, description: e.target.value }))}
               placeholder="What did you spend on?"
-              className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent bg-white/55"
+              className="w-full px-3 py-2 border border-[#DDE5D5] rounded-lg focus:ring-2 focus:ring-[#52796F] focus:border-transparent bg-white/90 text-[#333333]"
               required
             />
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-2">Notes (Optional)</label>
+            <label className="block text-sm font-medium text-[#333333] mb-2">Notes (Optional)</label>
             <textarea
               value={formData.notes}
               onChange={(e) => setFormData(prev => ({ ...prev, notes: e.target.value }))}
               placeholder="Any additional notes..."
               rows={2}
-              className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent bg-white/55"
+              className="w-full px-3 py-2 border border-[#DDE5D5] rounded-lg focus:ring-2 focus:ring-[#52796F] focus:border-transparent bg-white/90 text-[#333333]"
             />
           </div>
 
@@ -199,9 +199,9 @@ export const ExpenseTracker: React.FC<ExpenseTrackerProps> = ({ onExpenseAdded }
               id="recurring"
               checked={formData.is_recurring}
               onChange={(e) => setFormData(prev => ({ ...prev, is_recurring: e.target.checked }))}
-              className="w-4 h-4 text-green-600 border-gray-300 rounded focus:ring-green-500"
+              className="w-4 h-4 text-[#52796F] border-[#DDE5D5] rounded focus:ring-[#52796F]"
             />
-            <label htmlFor="recurring" className="text-sm text-gray-700 flex items-center gap-1">
+            <label htmlFor="recurring" className="text-sm text-[#333333] flex items-center gap-1">
               <Repeat className="w-4 h-4" />
               This is a recurring expense
             </label>
@@ -210,7 +210,7 @@ export const ExpenseTracker: React.FC<ExpenseTrackerProps> = ({ onExpenseAdded }
           <button
             type="submit"
             disabled={isSubmitting}
-            className="w-full bg-green-600 text-white py-3 px-4 rounded-lg hover:bg-green-700 focus:ring-2 focus:ring-green-500 focus:ring-offset-2 transition-colors flex items-center justify-center gap-2 font-medium disabled:opacity-50"
+            className="w-full bg-[#52796F] text-white py-3 px-4 rounded-lg hover:bg-[#84A98C] focus:ring-2 focus:ring-[#52796F] focus:ring-offset-2 transition-colors flex items-center justify-center gap-2 font-medium disabled:opacity-50"
           >
             {isSubmitting ? (
               <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin" />
@@ -226,16 +226,16 @@ export const ExpenseTracker: React.FC<ExpenseTrackerProps> = ({ onExpenseAdded }
 
       {/* Recent Expenses */}
       {recentExpenses.length > 0 && (
-        <div className="bg-white/55 backdrop-blur-sm rounded-xl shadow-lg p-6">
-          <h3 className="text-lg font-semibold text-gray-800 mb-4">Recent Expenses</h3>
+        <div className="bg-white/90 backdrop-blur-sm rounded-xl shadow-lg p-6 border border-[#DDE5D5]">
+          <h3 className="text-lg font-semibold text-[#333333] mb-4">Recent Expenses</h3>
           <div className="space-y-3">
             {recentExpenses.map((expense) => (
-              <div key={expense.id} className="flex items-center justify-between p-3 bg-gray-50/55 rounded-lg">
+              <div key={expense.id} className="flex items-center justify-between p-3 bg-[#DDE5D5]/30 rounded-lg">
                 <div>
-                  <div className="font-medium text-gray-800">{expense.description}</div>
-                  <div className="text-sm text-gray-500">
+                  <div className="font-medium text-[#333333]">{expense.description}</div>
+                  <div className="text-sm text-[#52796F]">
                     {expense.category} • {formatDate(expense.date)}
-                    {expense.is_recurring && <span className="ml-2 text-blue-600">🔄</span>}
+                    {expense.is_recurring && <span className="ml-2 text-[#84A98C]">🔄</span>}
                   </div>
                 </div>
                 <div className="text-lg font-semibold text-red-600">

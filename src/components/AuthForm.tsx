@@ -88,22 +88,17 @@ export const AuthForm: React.FC = () => {
   return (
     <div 
       className="min-h-screen flex items-center justify-center px-4"
-      style={{
-        backgroundImage: 'url(/bg.jpg)',
-        backgroundSize: 'cover',
-        backgroundPosition: 'center',
-        backgroundRepeat: 'no-repeat'
-      }}
+      style={{ backgroundColor: '#F7F5F2' }}
     >
-      <div className="max-w-md w-full bg-white/55 backdrop-blur-sm rounded-xl shadow-lg p-8">
+      <div className="max-w-md w-full bg-white/90 backdrop-blur-sm rounded-xl shadow-lg p-8 border border-[#DDE5D5]">
         <div className="text-center mb-8">
-          <h1 className="text-3xl font-bold text-gray-800 mb-2">Money Manager</h1>
-          <p className="text-gray-600">Simple accounting for everyone</p>
+          <h1 className="text-3xl font-bold text-[#333333] mb-2">Money Manager</h1>
+          <p className="text-[#52796F]">Simple accounting for everyone</p>
         </div>
 
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-2">
+            <label className="block text-sm font-medium text-[#333333] mb-2">
               <Mail className="w-4 h-4 inline mr-2" />
               Email
             </label>
@@ -112,13 +107,13 @@ export const AuthForm: React.FC = () => {
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               required
-              className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white/55"
+              className="w-full px-3 py-2 border border-[#DDE5D5] rounded-lg focus:ring-2 focus:ring-[#52796F] focus:border-transparent bg-white/90 text-[#333333]"
               placeholder="Enter your email"
             />
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-2">
+            <label className="block text-sm font-medium text-[#333333] mb-2">
               <Lock className="w-4 h-4 inline mr-2" />
               Password
             </label>
@@ -128,20 +123,20 @@ export const AuthForm: React.FC = () => {
               onChange={(e) => setPassword(e.target.value)}
               required
               minLength={6}
-              className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white/55"
+              className="w-full px-3 py-2 border border-[#DDE5D5] rounded-lg focus:ring-2 focus:ring-[#52796F] focus:border-transparent bg-white/90 text-[#333333]"
               placeholder="Enter your password (min. 6 characters)"
             />
           </div>
 
           {error && (
-            <div className="bg-red-50/55 border border-red-200 text-red-700 px-4 py-3 rounded-lg flex items-start gap-2">
+            <div className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-lg flex items-start gap-2">
               <AlertCircle className="w-5 h-5 flex-shrink-0 mt-0.5" />
               <span className="text-sm">{error}</span>
             </div>
           )}
 
           {success && (
-            <div className="bg-green-50/55 border border-green-200 text-green-700 px-4 py-3 rounded-lg">
+            <div className="bg-[#DDE5D5]/30 border border-[#84A98C] text-[#52796F] px-4 py-3 rounded-lg">
               <span className="text-sm">{success}</span>
             </div>
           )}
@@ -149,7 +144,7 @@ export const AuthForm: React.FC = () => {
           <button
             type="submit"
             disabled={loading}
-            className="w-full bg-blue-600 text-white py-3 px-4 rounded-lg hover:bg-blue-700 focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-colors flex items-center justify-center gap-2 font-medium disabled:opacity-50"
+            className="w-full bg-[#52796F] text-white py-3 px-4 rounded-lg hover:bg-[#84A98C] focus:ring-2 focus:ring-[#52796F] focus:ring-offset-2 transition-colors flex items-center justify-center gap-2 font-medium disabled:opacity-50"
           >
             {loading ? (
               <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin" />
@@ -165,17 +160,17 @@ export const AuthForm: React.FC = () => {
         <div className="mt-6 text-center">
           <button
             onClick={handleModeSwitch}
-            className="text-blue-600 hover:text-blue-700 font-medium"
+            className="text-[#52796F] hover:text-[#84A98C] font-medium"
           >
             {isSignUp ? 'Already have an account? Sign in' : "Don't have an account? Sign up"}
           </button>
         </div>
 
-        <div className="mt-6 text-center text-sm text-gray-500">
+        <div className="mt-6 text-center text-sm text-[#52796F]">
           <p>Your data is securely stored and synced across devices</p>
           {!isSignUp && (
             <p className="mt-2">
-              <span className="text-gray-400">Tip:</span> Make sure you've created an account first
+              <span className="text-[#CAD2C5]">Tip:</span> Make sure you've created an account first
             </p>
           )}
         </div>
