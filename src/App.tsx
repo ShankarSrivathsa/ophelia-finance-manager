@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Calculator, BarChart3, FileText, Scale, Database, TrendingUp, Target, Building2, PlusCircle, PiggyBank, Brain, Crown } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 import { Transaction } from './types/accounting';
-import { UserProfile } from './types/finance';
+import { UserProfile, PersonaQuizSuggestions } from './types/finance';
 import { TransactionForm } from './components/TransactionForm';
 import { JournalEntries } from './components/JournalEntries';
 import { LedgerAccounts } from './components/LedgerAccounts';
@@ -12,6 +12,7 @@ import { DataManagement } from './components/DataManagement';
 import { AuthWrapper } from './components/AuthWrapper';
 import { UserProfile as UserProfileComponent } from './components/UserProfile';
 import { PersonaQuiz } from './components/PersonaQuiz';
+import { PersonaSuggestionsModal } from './components/PersonaSuggestionsModal';
 import { ExpenseTracker } from './components/ExpenseTracker';
 import { IncomeTracker } from './components/IncomeTracker';
 import { SavingsTracker } from './components/SavingsTracker';
@@ -44,6 +45,8 @@ function AppContent() {
   const [currentMonth, setCurrentMonth] = useState(new Date().toISOString().slice(0, 7));
   const [netIncome, setNetIncome] = useState(0);
   const [isProUser, setIsProUser] = useState(false);
+  const [showPersonaSuggestions, setShowPersonaSuggestions] = useState(false);
+  const [personaSuggestions, setPersonaSuggestions] = useState<PersonaQuizSuggestions | null>(null);
 
   useEffect(() => {
     const initializeApp = async () => {
@@ -158,17 +161,31 @@ function AppContent() {
     setShowQuiz(true);
   };
 
-  const handleQuizComplete = async (persona: string) => {
+  const handleQuizComplete = async (persona: string, suggestions: PersonaQuizSuggestions) => {
     setShowQuiz(false);
+    setPersonaSuggestions(suggestions);
+    setShowPersonaSuggestions(true);
+    
     const profile = await getUserProfile();
     setUserProfile(profile);
-    // Set default tab based on persona
-    if (persona === 'student' || persona === 'homemaker') {
-      setActiveTab('expenses');
-    } else if (persona === 'business' || persona === 'freelancer') {
-      setActiveTab('transactions');
+  };
+
+  const handleClosePersonaSuggestions = () => {
+    setShowPersonaSuggestions(false);
+    
+    // Navigate to the suggested tab if available
+    if (personaSuggestions && personaSuggestions.suggestion.suggestedTab) {
+      setActiveTab(personaSuggestions.suggestion.suggestedTab as ActiveTab);
     } else {
-      setActiveTab('budgets');
+      // Default tab based on persona
+      const persona = userProfile?.persona;
+      if (persona === 'student' || persona === 'homemaker') {
+        setActiveTab('expenses');
+      } else if (persona === 'business' || persona === 'freelancer') {
+        setActiveTab('transactions');
+      } else {
+        setActiveTab('budgets');
+      }
     }
   };
 
@@ -257,6 +274,10 @@ function AppContent() {
 
   if (showQuiz) {
     return <PersonaQuiz onComplete={handleQuizComplete} />;
+  }
+
+  if (showPersonaSuggestions && personaSuggestions) {
+    return <PersonaSuggestionsModal suggestions={personaSuggestions} onContinue={handleClosePersonaSuggestions} />;
   }
 
   // Show billing page as a separate full-screen page

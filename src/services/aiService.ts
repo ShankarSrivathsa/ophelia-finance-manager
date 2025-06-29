@@ -1,4 +1,5 @@
 import { formatCurrency } from '../utils/accounting';
+import { PersonaQuizSuggestions, PersonaSuggestion } from '../types/finance';
 
 interface AIServiceConfig {
   provider: 'gemini' | 'openai' | 'anthropic';
@@ -270,6 +271,18 @@ class AIService {
     return this.getFallbackReport(financialData, reportType);
   }
 
+  async getPersonaQuizSuggestions(persona: string, quizAnswers: string[]): Promise<PersonaQuizSuggestions> {
+    const prompt = this.buildPersonaQuizSuggestionsPrompt(persona, quizAnswers);
+    
+    try {
+      const response = await this.callAI(prompt);
+      return this.parsePersonaQuizSuggestionsResponse(response, persona);
+    } catch (error) {
+      console.error('Persona quiz suggestions generation failed:', error);
+      return this.getFallbackPersonaQuizSuggestions(persona);
+    }
+  }
+
   private buildAdvicePrompt(data: FinancialData, requestType: string): string {
     const netIncome = data.monthlyIncome - data.monthlyExpenses;
     const savingsRate = data.monthlyIncome > 0 ? ((netIncome / data.monthlyIncome) * 100) : 0;
@@ -319,6 +332,33 @@ Focus on actionable, specific advice based on their persona and current financia
 `;
   }
 
+  private buildPersonaQuizSuggestionsPrompt(persona: string, quizAnswers: string[]): string {
+    return `
+As a financial advisor, I need you to provide personalized suggestions for a user who just completed a financial persona quiz.
+
+USER PROFILE:
+- Determined Persona: ${persona}
+- Quiz Answers: ${quizAnswers.join(', ')}
+
+Based on this information, please provide:
+1. A personalized suggestion for their next steps
+2. A recommended tab to navigate to (choose from: expenses, income, savings, budgets, analytics, accounts, ai-advisor)
+3. An inspiring financial quote that would resonate with this persona
+
+Please provide your response in this exact JSON format:
+{
+  "mainSuggestion": "A 2-3 sentence personalized suggestion based on their persona",
+  "suggestedTab": "one of: expenses, income, savings, budgets, analytics, accounts, ai-advisor",
+  "financialQuote": {
+    "text": "The quote text",
+    "author": "Author name"
+  }
+}
+
+Make the suggestion specific to their financial persona and needs. The quote should be motivational and relevant to their financial journey.
+`;
+  }
+
   private parseAdviceResponse(response: string): AIAdviceResponse {
     try {
       // Clean the response and extract JSON
@@ -361,6 +401,38 @@ Focus on actionable, specific advice based on their persona and current financia
         recommendations: [],
         insights: []
       };
+    }
+  }
+
+  private parsePersonaQuizSuggestionsResponse(response: string, persona: string): PersonaQuizSuggestions {
+    try {
+      // Clean the response and extract JSON
+      let cleanResponse = response.trim();
+      
+      // Remove markdown code blocks if present
+      cleanResponse = cleanResponse.replace(/```json\n?/g, '').replace(/```\n?/g, '');
+      
+      // Find JSON object
+      const jsonMatch = cleanResponse.match(/\{[\s\S]*\}/);
+      if (jsonMatch) {
+        const parsed = JSON.parse(jsonMatch[0]);
+        
+        // Validate structure and return
+        return {
+          persona,
+          suggestion: {
+            mainSuggestion: parsed.mainSuggestion || this.getDefaultSuggestion(persona),
+            suggestedTab: parsed.suggestedTab || this.getDefaultTab(persona),
+            financialQuote: parsed.financialQuote || this.getDefaultQuote()
+          }
+        };
+      }
+      
+      // Fallback to default suggestions
+      return this.getFallbackPersonaQuizSuggestions(persona);
+    } catch (error) {
+      console.error('Failed to parse persona quiz suggestions response:', error);
+      return this.getFallbackPersonaQuizSuggestions(persona);
     }
   }
 
@@ -471,6 +543,68 @@ Focus on actionable, specific advice based on their persona and current financia
         'Set up automatic savings to build your emergency fund'
       ]
     };
+  }
+
+  private getFallbackPersonaQuizSuggestions(persona: string): PersonaQuizSuggestions {
+    return {
+      persona,
+      suggestion: {
+        mainSuggestion: this.getDefaultSuggestion(persona),
+        suggestedTab: this.getDefaultTab(persona),
+        financialQuote: this.getDefaultQuote()
+      }
+    };
+  }
+
+  private getDefaultSuggestion(persona: string): string {
+    switch (persona) {
+      case 'student':
+        return "As a student, focus on tracking your expenses and building good financial habits early. Start by categorizing your spending to identify areas where you can cut back and save.";
+      case 'freelancer':
+        return "With irregular income as a freelancer, prioritize building an emergency fund and tracking your business expenses. Set aside a percentage of each payment for taxes and savings.";
+      case 'salaried':
+        return "With a steady income, you're in a great position to build wealth. Focus on budgeting, automating your savings, and investing for long-term goals like retirement.";
+      case 'business':
+        return "As a business owner, separating personal and business finances is crucial. Track your business expenses carefully and set up a structured accounting system.";
+      case 'homemaker':
+        return "Managing household finances requires careful budgeting and planning. Focus on tracking family expenses and creating a budget that works for everyone in your household.";
+      case 'retiree':
+        return "In retirement, preserving your savings while maintaining your lifestyle is key. Focus on tracking expenses carefully and adjusting your budget to ensure your savings last.";
+      default:
+        return "Start by tracking your daily expenses and setting up a budget. Understanding where your money goes is the first step toward financial freedom.";
+    }
+  }
+
+  private getDefaultTab(persona: string): string {
+    switch (persona) {
+      case 'student':
+      case 'homemaker':
+        return 'expenses';
+      case 'freelancer':
+      case 'business':
+        return 'income';
+      case 'salaried':
+        return 'savings';
+      case 'retiree':
+        return 'budgets';
+      default:
+        return 'expenses';
+    }
+  }
+
+  private getDefaultQuote(): { text: string; author: string } {
+    const quotes = [
+      { text: "Do not save what is left after spending, but spend what is left after saving.", author: "Warren Buffett" },
+      { text: "A budget is telling your money where to go instead of wondering where it went.", author: "Dave Ramsey" },
+      { text: "The habit of saving is itself an education; it fosters every virtue, teaches self-denial, cultivates the sense of order, trains to forethought.", author: "T.T. Munger" },
+      { text: "Financial peace isn't the acquisition of stuff. It's learning to live on less than you make, so you can give money back and have money to invest.", author: "Dave Ramsey" },
+      { text: "Money is only a tool. It will take you wherever you wish, but it will not replace you as the driver.", author: "Ayn Rand" },
+      { text: "The price of anything is the amount of life you exchange for it.", author: "Henry David Thoreau" },
+      { text: "It's not how much money you make, but how much money you keep, how hard it works for you, and how many generations you keep it for.", author: "Robert Kiyosaki" },
+      { text: "Never spend your money before you have earned it.", author: "Thomas Jefferson" }
+    ];
+    
+    return quotes[Math.floor(Math.random() * quotes.length)];
   }
 
   isConfigured(): boolean {

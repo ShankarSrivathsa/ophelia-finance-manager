@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
-import { ChevronRight, User, CheckCircle } from 'lucide-react';
-import { QuizQuestion, QuizOption } from '../types/finance';
+import { ChevronRight, User, CheckCircle, Brain } from 'lucide-react';
+import { QuizQuestion, QuizOption, PersonaQuizSuggestions } from '../types/finance';
 import { supabase } from '../lib/supabase';
+import { aiService } from '../services/aiService';
 
 interface PersonaQuizProps {
-  onComplete: (persona: string) => void;
+  onComplete: (persona: string, suggestions: PersonaQuizSuggestions) => void;
 }
 
 const QUIZ_QUESTIONS: QuizQuestion[] = [
@@ -72,6 +73,7 @@ export const PersonaQuiz: React.FC<PersonaQuizProps> = ({ onComplete }) => {
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [answers, setAnswers] = useState<string[]>([]);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [generatingSuggestions, setGeneratingSuggestions] = useState(false);
 
   const handleAnswer = (optionValue: string) => {
     const newAnswers = [...answers, optionValue];
@@ -126,11 +128,15 @@ export const PersonaQuiz: React.FC<PersonaQuizProps> = ({ onComplete }) => {
             quiz_completed: true
           });
         
-        onComplete(persona);
+        // Generate AI suggestions based on persona and quiz answers
+        setGeneratingSuggestions(true);
+        const suggestions = await aiService.getPersonaQuizSuggestions(persona, userAnswers);
+        setGeneratingSuggestions(false);
+        
+        onComplete(persona, suggestions);
       }
     } catch (error) {
       console.error('Error saving quiz results:', error);
-    } finally {
       setIsSubmitting(false);
     }
   };
@@ -145,10 +151,22 @@ export const PersonaQuiz: React.FC<PersonaQuizProps> = ({ onComplete }) => {
       >
         <div className="bg-[#1F1F1F] backdrop-blur-sm rounded-xl shadow-lg p-8 max-w-md w-full text-center border border-[#2C2C2E]">
           <div className="w-16 h-16 bg-[#2C2C2E] rounded-full flex items-center justify-center mx-auto mb-4">
-            <CheckCircle className="w-8 h-8 text-white animate-pulse" />
+            {generatingSuggestions ? (
+              <Brain className="w-8 h-8 text-white animate-pulse" />
+            ) : (
+              <CheckCircle className="w-8 h-8 text-white animate-pulse" />
+            )}
           </div>
-          <h2 className="text-xl font-semibold text-white mb-2">Setting up your profile...</h2>
-          <p className="text-gray-300">We're personalizing your experience based on your answers.</p>
+          <h2 className="text-xl font-semibold text-white mb-2">
+            {generatingSuggestions 
+              ? "Generating personalized suggestions..." 
+              : "Setting up your profile..."}
+          </h2>
+          <p className="text-gray-300">
+            {generatingSuggestions 
+              ? "Our AI is analyzing your answers to provide tailored financial guidance." 
+              : "We're personalizing your experience based on your answers."}
+          </p>
         </div>
       </div>
     );

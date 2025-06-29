@@ -122,3 +122,17 @@ export interface SpendingInsight {
   category?: string;
   percentage?: number;
 }
+
+export interface PersonaSuggestion {
+  mainSuggestion: string;
+  suggestedTab: string;
+  financialQuote: {
+    text: string;
+    author: string;
+  };
+}
+
+export interface PersonaQuizSuggestions {
+  persona: string;
+  suggestion: PersonaSuggestion;
+}
