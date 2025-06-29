@@ -82,7 +82,7 @@ export const BillingPage: React.FC<BillingPageProps> = ({ userEmail, onBack, onP
     <div 
       className="min-h-screen"
       style={{
-        backgroundImage: 'url(/image copy copy.png)',
+        backgroundImage: 'url(/image.png)',
         backgroundSize: 'cover',
         backgroundPosition: 'center',
         backgroundRepeat: 'no-repeat'
