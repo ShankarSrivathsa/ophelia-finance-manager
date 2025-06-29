@@ -22,10 +22,10 @@ export const UserProfile: React.FC<UserProfileProps> = ({ userEmail }) => {
   };
 
   return (
-    <div className="bg-white/90 backdrop-blur-sm rounded-lg p-4 shadow-lg border border-[#DDE5D5]">
+    <div className="bg-[#1F1F1F] backdrop-blur-sm rounded-lg p-4 shadow-lg border border-[#2C2C2E]">
       {/* User Info & Controls */}
       <div className="flex items-center justify-between gap-4">
-        <div className="flex items-center gap-2 text-sm text-[#52796F]">
+        <div className="flex items-center gap-2 text-sm text-gray-300">
           <User className="w-4 h-4" />
           <span>{userEmail}</span>
         </div>
@@ -33,7 +33,7 @@ export const UserProfile: React.FC<UserProfileProps> = ({ userEmail }) => {
         <div className="flex items-center gap-3 text-sm">
           <button
             onClick={handleBillingClick}
-            className="flex items-center gap-1 text-[#52796F] hover:text-[#84A98C] transition-colors font-medium"
+            className="flex items-center gap-1 text-gray-300 hover:text-white transition-colors font-medium"
           >
             <CreditCard className="w-4 h-4" />
             Billing
@@ -43,7 +43,7 @@ export const UserProfile: React.FC<UserProfileProps> = ({ userEmail }) => {
           
           <button
             onClick={handleSignOut}
-            className="flex items-center gap-1 px-3 py-1 text-red-600 hover:bg-red-50 rounded-lg transition-colors"
+            className="flex items-center gap-1 px-3 py-1 text-red-400 hover:bg-red-900/50 rounded-lg transition-colors"
           >
             <LogOut className="w-4 h-4" />
             {t('app.signOut')}

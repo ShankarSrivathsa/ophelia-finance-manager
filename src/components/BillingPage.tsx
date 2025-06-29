@@ -81,33 +81,33 @@ export const BillingPage: React.FC<BillingPageProps> = ({ userEmail, onBack, onP
   return (
     <div 
       className="min-h-screen"
-      style={{ backgroundColor: '#F7F5F2' }}
+      style={{ backgroundColor: '#121212' }}
     >
       <div className="container mx-auto px-4 py-8">
         {/* Header */}
         <div className="mb-8">
           <button
             onClick={onBack}
-            className="flex items-center gap-2 text-[#52796F] hover:text-[#84A98C] transition-colors mb-4"
+            className="flex items-center gap-2 text-gray-300 hover:text-white transition-colors mb-4"
           >
             <ArrowLeft className="w-4 h-4" />
             Back to Dashboard
           </button>
           
-          <div className="bg-white/90 backdrop-blur-sm rounded-xl p-6 shadow-lg border border-[#DDE5D5]">
+          <div className="bg-[#1F1F1F] backdrop-blur-sm rounded-xl p-6 shadow-lg border border-[#2C2C2E]">
             <div className="flex items-center gap-3 mb-4">
-              <CreditCard className="w-8 h-8 text-[#52796F]" />
+              <CreditCard className="w-8 h-8 text-white" />
               <div>
-                <h1 className="text-3xl font-bold text-[#333333]">Billing & Subscription</h1>
-                <p className="text-[#52796F]">Manage your subscription and billing preferences</p>
+                <h1 className="text-3xl font-bold text-white">Billing & Subscription</h1>
+                <p className="text-gray-300">Manage your subscription and billing preferences</p>
               </div>
             </div>
             
-            <div className="flex items-center gap-4 text-sm text-[#52796F]">
+            <div className="flex items-center gap-4 text-sm text-gray-300">
               <span>Account: {userEmail}</span>
               <span>•</span>
-              <span className={`flex items-center gap-1 ${isProUser ? 'text-[#84A98C]' : 'text-[#52796F]'}`}>
-                {isProUser ? <Crown className="w-4 h-4" /> : <div className="w-4 h-4 bg-[#CAD2C5] rounded-full" />}
+              <span className={`flex items-center gap-1 ${isProUser ? 'text-yellow-400' : 'text-gray-300'}`}>
+                {isProUser ? <Crown className="w-4 h-4" /> : <div className="w-4 h-4 bg-gray-600 rounded-full" />}
                 {isProUser ? 'Pro Plan' : 'Free Plan'}
               </span>
             </div>
@@ -117,18 +117,18 @@ export const BillingPage: React.FC<BillingPageProps> = ({ userEmail, onBack, onP
         {/* Current Plan Status */}
         {isProUser && (
           <div className="mb-8">
-            <div className="bg-gradient-to-r from-[#DDE5D5] to-[#CAD2C5] border border-[#84A98C] rounded-xl p-6 shadow-lg">
+            <div className="bg-gradient-to-r from-yellow-900/50 to-orange-900/50 border border-yellow-700 rounded-xl p-6 shadow-lg">
               <div className="flex items-center justify-between">
                 <div className="flex items-center gap-3">
-                  <Crown className="w-6 h-6 text-[#52796F]" />
+                  <Crown className="w-6 h-6 text-yellow-400" />
                   <div>
-                    <h3 className="text-lg font-semibold text-[#333333]">Pro Plan Active</h3>
-                    <p className="text-[#52796F]">You have access to all premium features</p>
+                    <h3 className="text-lg font-semibold text-white">Pro Plan Active</h3>
+                    <p className="text-gray-300">You have access to all premium features</p>
                   </div>
                 </div>
                 <button
                   onClick={handleManageSubscription}
-                  className="bg-[#52796F] text-white px-4 py-2 rounded-lg hover:bg-[#84A98C] transition-colors"
+                  className="bg-white text-black px-4 py-2 rounded-lg hover:bg-gray-200 transition-colors"
                 >
                   Manage Subscription
                 </button>
@@ -140,26 +140,26 @@ export const BillingPage: React.FC<BillingPageProps> = ({ userEmail, onBack, onP
         {/* Pricing Plans */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 max-w-6xl mx-auto">
           {/* Free Plan */}
-          <div className="bg-white/90 backdrop-blur-sm rounded-xl shadow-lg overflow-hidden border border-[#DDE5D5]">
-            <div className="p-6 border-b border-[#DDE5D5]">
+          <div className="bg-[#1F1F1F] backdrop-blur-sm rounded-xl shadow-lg overflow-hidden border border-[#2C2C2E]">
+            <div className="p-6 border-b border-[#2C2C2E]">
               <div className="flex items-center gap-3 mb-4">
-                <div className="w-12 h-12 bg-[#DDE5D5] rounded-lg flex items-center justify-center">
-                  <Star className="w-6 h-6 text-[#52796F]" />
+                <div className="w-12 h-12 bg-[#2C2C2E] rounded-lg flex items-center justify-center">
+                  <Star className="w-6 h-6 text-white" />
                 </div>
                 <div>
-                  <h3 className="text-2xl font-bold text-[#333333]">Free Plan</h3>
-                  <p className="text-[#52796F]">Perfect for getting started</p>
+                  <h3 className="text-2xl font-bold text-white">Free Plan</h3>
+                  <p className="text-gray-300">Perfect for getting started</p>
                 </div>
               </div>
               
               <div className="mb-4">
-                <span className="text-4xl font-bold text-[#333333]">$0</span>
-                <span className="text-[#52796F] ml-2">forever</span>
+                <span className="text-4xl font-bold text-white">$0</span>
+                <span className="text-gray-300 ml-2">forever</span>
               </div>
               
               {!isProUser && (
-                <div className="bg-[#DDE5D5]/30 border border-[#84A98C] rounded-lg p-3">
-                  <div className="flex items-center gap-2 text-[#52796F]">
+                <div className="bg-green-900/50 border border-green-700 rounded-lg p-3">
+                  <div className="flex items-center gap-2 text-green-300">
                     <Check className="w-4 h-4" />
                     <span className="font-medium">Current Plan</span>
                   </div>
@@ -168,15 +168,15 @@ export const BillingPage: React.FC<BillingPageProps> = ({ userEmail, onBack, onP
             </div>
             
             <div className="p-6">
-              <h4 className="font-semibold text-[#333333] mb-4">What's included:</h4>
+              <h4 className="font-semibold text-white mb-4">What's included:</h4>
               <ul className="space-y-3">
                 {freeFeatures.map((feature, index) => (
                   <li key={index} className="flex items-center gap-3">
-                    <Check className="w-4 h-4 text-[#52796F] flex-shrink-0" />
-                    <span className={`text-[#333333] ${feature === 'AI Financial Advisor' ? 'font-medium' : ''}`}>
+                    <Check className="w-4 h-4 text-white flex-shrink-0" />
+                    <span className={`text-gray-300 ${feature === 'AI Financial Advisor' ? 'font-medium' : ''}`}>
                       {feature}
                       {feature === 'AI Financial Advisor' && (
-                        <span className="ml-2 text-xs bg-gradient-to-r from-[#84A98C] to-[#52796F] text-white px-2 py-0.5 rounded-full">
+                        <span className="ml-2 text-xs bg-gradient-to-r from-white to-gray-300 text-black px-2 py-0.5 rounded-full">
                           AI
                         </span>
                       )}
@@ -188,31 +188,31 @@ export const BillingPage: React.FC<BillingPageProps> = ({ userEmail, onBack, onP
           </div>
 
           {/* Pro Plan */}
-          <div className="bg-white/90 backdrop-blur-sm rounded-xl shadow-lg overflow-hidden border-2 border-[#52796F] relative">
+          <div className="bg-[#1F1F1F] backdrop-blur-sm rounded-xl shadow-lg overflow-hidden border-2 border-white relative">
             {/* Popular Badge */}
-            <div className="absolute top-0 right-0 bg-gradient-to-r from-[#84A98C] to-[#52796F] text-white px-4 py-1 rounded-bl-lg">
+            <div className="absolute top-0 right-0 bg-gradient-to-r from-white to-gray-300 text-black px-4 py-1 rounded-bl-lg">
               <span className="text-sm font-medium">Most Popular</span>
             </div>
             
-            <div className="p-6 border-b border-[#DDE5D5]">
+            <div className="p-6 border-b border-[#2C2C2E]">
               <div className="flex items-center gap-3 mb-4">
-                <div className="w-12 h-12 bg-gradient-to-r from-[#DDE5D5] to-[#CAD2C5] rounded-lg flex items-center justify-center">
-                  <Crown className="w-6 h-6 text-[#52796F]" />
+                <div className="w-12 h-12 bg-gradient-to-r from-white to-gray-300 rounded-lg flex items-center justify-center">
+                  <Crown className="w-6 h-6 text-black" />
                 </div>
                 <div>
-                  <h3 className="text-2xl font-bold text-[#333333]">Pro Plan</h3>
-                  <p className="text-[#52796F]">Advanced features & AI insights</p>
+                  <h3 className="text-2xl font-bold text-white">Pro Plan</h3>
+                  <p className="text-gray-300">Advanced features & AI insights</p>
                 </div>
               </div>
               
               <div className="mb-4">
-                <span className="text-4xl font-bold text-[#333333]">$9.99</span>
-                <span className="text-[#52796F] ml-2">per month</span>
+                <span className="text-4xl font-bold text-white">$9.99</span>
+                <span className="text-gray-300 ml-2">per month</span>
               </div>
               
               {isProUser ? (
-                <div className="bg-[#DDE5D5]/30 border border-[#84A98C] rounded-lg p-3">
-                  <div className="flex items-center gap-2 text-[#52796F]">
+                <div className="bg-green-900/50 border border-green-700 rounded-lg p-3">
+                  <div className="flex items-center gap-2 text-green-300">
                     <Check className="w-4 h-4" />
                     <span className="font-medium">Current Plan</span>
                   </div>
@@ -221,11 +221,11 @@ export const BillingPage: React.FC<BillingPageProps> = ({ userEmail, onBack, onP
                 <button
                   onClick={handleUpgrade}
                   disabled={loading}
-                  className="w-full bg-gradient-to-r from-[#84A98C] to-[#52796F] text-white py-3 px-4 rounded-lg hover:from-[#52796F] hover:to-[#84A98C] transition-all duration-200 flex items-center justify-center gap-2 font-medium disabled:opacity-50"
+                  className="w-full bg-gradient-to-r from-white to-gray-300 text-black py-3 px-4 rounded-lg hover:from-gray-200 hover:to-white transition-all duration-200 flex items-center justify-center gap-2 font-medium disabled:opacity-50"
                 >
                   {loading ? (
                     <>
-                      <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin" />
+                      <div className="w-5 h-5 border-2 border-black border-t-transparent rounded-full animate-spin" />
                       <span>Upgrading...</span>
                     </>
                   ) : (
@@ -239,15 +239,15 @@ export const BillingPage: React.FC<BillingPageProps> = ({ userEmail, onBack, onP
             </div>
             
             <div className="p-6">
-              <h4 className="font-semibold text-[#333333] mb-4">Everything in Free, plus:</h4>
+              <h4 className="font-semibold text-white mb-4">Everything in Free, plus:</h4>
               <ul className="space-y-3">
                 {proFeatures.map((feature, index) => (
                   <li key={index} className="flex items-center gap-3">
-                    <Check className="w-4 h-4 text-[#52796F] flex-shrink-0" />
-                    <span className={`${index === 0 ? 'text-[#52796F]' : 'text-[#333333]'} ${index > 0 && index <= 2 ? 'font-medium' : ''}`}>
+                    <Check className="w-4 h-4 text-white flex-shrink-0" />
+                    <span className={`${index === 0 ? 'text-gray-400' : 'text-gray-300'} ${index > 0 && index <= 2 ? 'font-medium' : ''}`}>
                       {feature}
                       {index > 0 && index <= 2 && (
-                        <span className="ml-2 text-xs bg-gradient-to-r from-[#84A98C] to-[#52796F] text-white px-2 py-0.5 rounded-full">
+                        <span className="ml-2 text-xs bg-gradient-to-r from-white to-gray-300 text-black px-2 py-0.5 rounded-full">
                           AI
                         </span>
                       )}
@@ -262,28 +262,28 @@ export const BillingPage: React.FC<BillingPageProps> = ({ userEmail, onBack, onP
         {/* Success Message for Pro Users */}
         {isProUser && (
           <div className="mt-8 max-w-4xl mx-auto">
-            <div className="bg-gradient-to-r from-[#DDE5D5] to-[#CAD2C5] border border-[#84A98C] rounded-xl p-6 shadow-lg">
+            <div className="bg-gradient-to-r from-green-900/50 to-blue-900/50 border border-green-700 rounded-xl p-6 shadow-lg">
               <div className="flex items-center gap-3 mb-4">
-                <div className="w-12 h-12 bg-[#84A98C] rounded-full flex items-center justify-center">
+                <div className="w-12 h-12 bg-green-600 rounded-full flex items-center justify-center">
                   <Crown className="w-6 h-6 text-white" />
                 </div>
                 <div>
-                  <h3 className="text-lg font-semibold text-[#333333]">Welcome to Pro!</h3>
-                  <p className="text-[#52796F]">You now have access to all premium features including advanced AI-powered insights.</p>
+                  <h3 className="text-lg font-semibold text-white">Welcome to Pro!</h3>
+                  <p className="text-gray-300">You now have access to all premium features including advanced AI-powered insights.</p>
                 </div>
               </div>
               <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-4">
-                <div className="bg-white/50 p-3 rounded-lg border border-[#DDE5D5]">
-                  <div className="font-medium text-[#333333]">⚡ Smart Budget Optimizer</div>
-                  <div className="text-sm text-[#52796F]">Optimize your spending automatically</div>
+                <div className="bg-[#1F1F1F] p-3 rounded-lg border border-[#2C2C2E]">
+                  <div className="font-medium text-white">⚡ Smart Budget Optimizer</div>
+                  <div className="text-sm text-gray-300">Optimize your spending automatically</div>
                 </div>
-                <div className="bg-white/50 p-3 rounded-lg border border-[#DDE5D5]">
-                  <div className="font-medium text-[#333333]">📊 AI Reports</div>
-                  <div className="text-sm text-[#52796F]">Generate detailed financial reports</div>
+                <div className="bg-[#1F1F1F] p-3 rounded-lg border border-[#2C2C2E]">
+                  <div className="font-medium text-white">📊 AI Reports</div>
+                  <div className="text-sm text-gray-300">Generate detailed financial reports</div>
                 </div>
-                <div className="bg-white/50 p-3 rounded-lg border border-[#DDE5D5]">
-                  <div className="font-medium text-[#333333]">🎯 Premium Insights</div>
-                  <div className="text-sm text-[#52796F]">Advanced analytics and recommendations</div>
+                <div className="bg-[#1F1F1F] p-3 rounded-lg border border-[#2C2C2E]">
+                  <div className="font-medium text-white">🎯 Premium Insights</div>
+                  <div className="text-sm text-gray-300">Advanced analytics and recommendations</div>
                 </div>
               </div>
             </div>
@@ -292,28 +292,28 @@ export const BillingPage: React.FC<BillingPageProps> = ({ userEmail, onBack, onP
 
         {/* FAQ Section */}
         <div className="mt-12 max-w-4xl mx-auto">
-          <div className="bg-white/90 backdrop-blur-sm rounded-xl shadow-lg p-6 border border-[#DDE5D5]">
-            <h3 className="text-xl font-semibold text-[#333333] mb-6">Frequently Asked Questions</h3>
+          <div className="bg-[#1F1F1F] backdrop-blur-sm rounded-xl shadow-lg p-6 border border-[#2C2C2E]">
+            <h3 className="text-xl font-semibold text-white mb-6">Frequently Asked Questions</h3>
             
             <div className="space-y-6">
               <div>
-                <h4 className="font-medium text-[#333333] mb-2">Can I cancel my subscription anytime?</h4>
-                <p className="text-[#52796F]">Yes, you can cancel your Pro subscription at any time. You'll continue to have access to Pro features until the end of your billing period.</p>
+                <h4 className="font-medium text-white mb-2">Can I cancel my subscription anytime?</h4>
+                <p className="text-gray-300">Yes, you can cancel your Pro subscription at any time. You'll continue to have access to Pro features until the end of your billing period.</p>
               </div>
               
               <div>
-                <h4 className="font-medium text-[#333333] mb-2">What happens to my data if I downgrade?</h4>
-                <p className="text-[#52796F]">Your data is always safe. If you downgrade, you'll lose access to Pro features but all your financial data remains intact.</p>
+                <h4 className="font-medium text-white mb-2">What happens to my data if I downgrade?</h4>
+                <p className="text-gray-300">Your data is always safe. If you downgrade, you'll lose access to Pro features but all your financial data remains intact.</p>
               </div>
               
               <div>
-                <h4 className="font-medium text-[#333333] mb-2">Is there a free trial for Pro features?</h4>
-                <p className="text-[#52796F]">We offer a 7-day free trial for new Pro subscribers. You can try all premium features risk-free.</p>
+                <h4 className="font-medium text-white mb-2">Is there a free trial for Pro features?</h4>
+                <p className="text-gray-300">We offer a 7-day free trial for new Pro subscribers. You can try all premium features risk-free.</p>
               </div>
               
               <div>
-                <h4 className="font-medium text-[#333333] mb-2">How does the AI advisor work?</h4>
-                <p className="text-[#52796F]">Our AI analyzes your spending patterns, income, and goals to provide personalized financial advice. The basic AI advisor is free, while Pro users get advanced optimization features.</p>
+                <h4 className="font-medium text-white mb-2">How does the AI advisor work?</h4>
+                <p className="text-gray-300">Our AI analyzes your spending patterns, income, and goals to provide personalized financial advice. The basic AI advisor is free, while Pro users get advanced optimization features.</p>
               </div>
             </div>
           </div>
@@ -321,10 +321,10 @@ export const BillingPage: React.FC<BillingPageProps> = ({ userEmail, onBack, onP
 
         {/* Footer */}
         <div className="text-center mt-8">
-          <div className="bg-white/90 backdrop-blur-sm rounded-lg p-4 shadow-lg border border-[#DDE5D5]">
-            <p className="text-[#52796F] text-sm">
+          <div className="bg-[#1F1F1F] backdrop-blur-sm rounded-lg p-4 shadow-lg border border-[#2C2C2E]">
+            <p className="text-gray-400 text-sm">
               Need help? Contact our support team at{' '}
-              <a href="mailto:support@moneymanager.com" className="text-[#84A98C] hover:text-[#52796F]">
+              <a href="mailto:support@moneymanager.com" className="text-white hover:text-gray-300">
                 support@moneymanager.com
               </a>
             </p>

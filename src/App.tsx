@@ -242,11 +242,11 @@ function AppContent() {
     return (
       <div 
         className="min-h-screen flex items-center justify-center"
-        style={{ backgroundColor: '#F7F5F2' }}
+        style={{ backgroundColor: '#121212' }}
       >
-        <div className="text-center bg-white/90 backdrop-blur-sm rounded-xl p-8 shadow-lg border border-[#DDE5D5]">
-          <div className="w-12 h-12 border-4 border-[#DDE5D5] border-t-[#52796F] rounded-full animate-spin mx-auto mb-4"></div>
-          <p className="text-[#333333]">{t('app.loading')}</p>
+        <div className="text-center bg-[#1F1F1F] backdrop-blur-sm rounded-xl p-8 shadow-lg border border-[#2C2C2E]">
+          <div className="w-12 h-12 border-4 border-[#2C2C2E] border-t-white rounded-full animate-spin mx-auto mb-4"></div>
+          <p className="text-gray-300">{t('app.loading')}</p>
         </div>
       </div>
     );
@@ -327,7 +327,7 @@ function AppContent() {
   return (
     <div 
       className="min-h-screen"
-      style={{ backgroundColor: '#F7F5F2' }}
+      style={{ backgroundColor: '#121212' }}
     >
       <div className="container mx-auto px-4 py-8">
         {/* Header with Bolt Logo */}
@@ -343,13 +343,13 @@ function AppContent() {
           </div>
           
           {/* Main Header Content */}
-          <div className="inline-block bg-white/90 backdrop-blur-sm rounded-xl p-6 shadow-lg mb-6 border border-[#DDE5D5]">
-            <h1 className="text-4xl font-bold text-[#333333] mb-2">{t('app.title')}</h1>
-            <p className="text-lg text-[#52796F]">{getWelcomeMessage()}</p>
+          <div className="inline-block bg-[#1F1F1F] backdrop-blur-sm rounded-xl p-6 shadow-lg mb-6 border border-[#2C2C2E]">
+            <h1 className="text-4xl font-bold text-white mb-2">{t('app.title')}</h1>
+            <p className="text-lg text-gray-300">{getWelcomeMessage()}</p>
             {isProUser && (
               <div className="mt-2 flex items-center justify-center gap-2">
-                <Crown className="w-4 h-4 text-[#84A98C]" />
-                <span className="text-sm font-medium text-[#52796F]">Pro Member</span>
+                <Crown className="w-4 h-4 text-yellow-500" />
+                <span className="text-sm font-medium text-yellow-400">Pro Member</span>
               </div>
             )}
           </div>
@@ -365,13 +365,13 @@ function AppContent() {
               type="month"
               value={currentMonth}
               onChange={(e) => setCurrentMonth(e.target.value)}
-              className="px-3 py-2 border border-[#DDE5D5] rounded-lg focus:ring-2 focus:ring-[#52796F] focus:border-transparent bg-white/90 text-[#333333]"
+              className="px-3 py-2 border border-[#2C2C2E] rounded-lg focus:ring-2 focus:ring-white focus:border-transparent bg-[#1F1F1F] text-white"
             />
           </div>
           
           {/* Net Income Display - Separate from header */}
-          <div className="inline-flex items-center gap-4 text-sm text-[#52796F] bg-white/90 backdrop-blur-sm rounded-lg px-4 py-2 shadow-lg border border-[#DDE5D5]">
-            <span className={netIncome >= 0 ? 'text-[#52796F]' : 'text-red-600'}>
+          <div className="inline-flex items-center gap-4 text-sm text-gray-300 bg-[#1F1F1F] backdrop-blur-sm rounded-lg px-4 py-2 shadow-lg border border-[#2C2C2E]">
+            <span className={netIncome >= 0 ? 'text-green-400' : 'text-red-400'}>
               Net {netIncome >= 0 ? 'Income' : 'Loss'}: ${Math.abs(netIncome).toFixed(2)}
             </span>
             {transactions.length > 0 && (
@@ -383,7 +383,7 @@ function AppContent() {
             {!offlineService.isOnline() && (
               <>
                 <span>•</span>
-                <span className="text-orange-600">📱 Offline Mode</span>
+                <span className="text-orange-400">📱 Offline Mode</span>
               </>
             )}
           </div>
@@ -391,7 +391,7 @@ function AppContent() {
 
         {/* Navigation */}
         <div className="mb-8">
-          <div className="flex flex-wrap justify-center gap-2 p-2 bg-white/90 backdrop-blur-sm rounded-xl shadow-lg border border-[#DDE5D5]">
+          <div className="flex flex-wrap justify-center gap-2 p-2 bg-[#1F1F1F] backdrop-blur-sm rounded-xl shadow-lg border border-[#2C2C2E]">
             {tabs.map((tab) => {
               const Icon = tab.icon;
               const isProFeature = ['budget-optimizer', 'reports'].includes(tab.id);
@@ -402,15 +402,15 @@ function AppContent() {
                   onClick={() => setActiveTab(tab.id as ActiveTab)}
                   className={`flex items-center gap-2 px-4 py-2 rounded-lg font-medium transition-colors relative ${
                     activeTab === tab.id
-                      ? 'bg-[#52796F] text-white shadow-md'
-                      : 'text-[#333333] hover:bg-[#DDE5D5]/50'
+                      ? 'bg-white text-black shadow-md'
+                      : 'text-gray-300 hover:bg-[#2C2C2E]'
                   }`}
                 >
                   <Icon className="w-4 h-4" />
                   <span className="hidden sm:inline">{tab.label}</span>
                   {isProFeature && (
                     <span className={`absolute -top-1 -right-1 w-3 h-3 rounded-full flex items-center justify-center ${
-                      isProUser ? 'bg-gradient-to-r from-[#84A98C] to-[#52796F]' : 'bg-gray-400'
+                      isProUser ? 'bg-gradient-to-r from-yellow-400 to-orange-500' : 'bg-gray-600'
                     }`}>
                       <span className="text-[8px] text-white font-bold">
                         {isProUser ? '✦' : '🔒'}
@@ -463,15 +463,15 @@ function AppContent() {
                 onOptimizationComplete={handleDataUpdate} 
               />
             ) : (
-              <div className="bg-white/90 backdrop-blur-sm rounded-xl shadow-lg p-8 text-center border border-[#DDE5D5]">
-                <Zap className="w-16 h-16 text-[#CAD2C5] mx-auto mb-4" />
-                <h3 className="text-lg font-semibold text-[#333333] mb-2">Pro Feature</h3>
-                <p className="text-[#52796F] mb-4">
+              <div className="bg-[#1F1F1F] backdrop-blur-sm rounded-xl shadow-lg p-8 text-center border border-[#2C2C2E]">
+                <Zap className="w-16 h-16 text-gray-600 mx-auto mb-4" />
+                <h3 className="text-lg font-semibold text-white mb-2">Pro Feature</h3>
+                <p className="text-gray-300 mb-4">
                   Upgrade to Pro to access smart budget optimization powered by AI.
                 </p>
                 <button
                   onClick={() => setActiveTab('billing')}
-                  className="bg-gradient-to-r from-[#84A98C] to-[#52796F] text-white px-6 py-3 rounded-lg hover:from-[#52796F] hover:to-[#84A98C] transition-all duration-200 flex items-center gap-2 mx-auto"
+                  className="bg-gradient-to-r from-white to-gray-200 text-black px-6 py-3 rounded-lg hover:from-gray-200 hover:to-white transition-all duration-200 flex items-center gap-2 mx-auto"
                 >
                   <Crown className="w-5 h-5" />
                   Upgrade to Pro
@@ -484,15 +484,15 @@ function AppContent() {
             isProUser ? (
               <AutomatedReports currentMonth={currentMonth} />
             ) : (
-              <div className="bg-white/90 backdrop-blur-sm rounded-xl shadow-lg p-8 text-center border border-[#DDE5D5]">
-                <FileText className="w-16 h-16 text-[#CAD2C5] mx-auto mb-4" />
-                <h3 className="text-lg font-semibold text-[#333333] mb-2">Pro Feature</h3>
-                <p className="text-[#52796F] mb-4">
+              <div className="bg-[#1F1F1F] backdrop-blur-sm rounded-xl shadow-lg p-8 text-center border border-[#2C2C2E]">
+                <FileText className="w-16 h-16 text-gray-600 mx-auto mb-4" />
+                <h3 className="text-lg font-semibold text-white mb-2">Pro Feature</h3>
+                <p className="text-gray-300 mb-4">
                   Upgrade to Pro to access AI-generated financial reports and insights.
                 </p>
                 <button
                   onClick={() => setActiveTab('billing')}
-                  className="bg-gradient-to-r from-[#84A98C] to-[#52796F] text-white px-6 py-3 rounded-lg hover:from-[#52796F] hover:to-[#84A98C] transition-all duration-200 flex items-center gap-2 mx-auto"
+                  className="bg-gradient-to-r from-white to-gray-200 text-black px-6 py-3 rounded-lg hover:from-gray-200 hover:to-white transition-all duration-200 flex items-center gap-2 mx-auto"
                 >
                   <Crown className="w-5 h-5" />
                   Upgrade to Pro
@@ -532,8 +532,8 @@ function AppContent() {
 
         {/* Footer */}
         <div className="text-center mt-12">
-          <div className="bg-white/90 backdrop-blur-sm rounded-lg p-4 shadow-lg border border-[#DDE5D5]">
-            <p className="text-[#52796F] text-sm">Your data is securely stored and synced across all your devices.</p>
+          <div className="bg-[#1F1F1F] backdrop-blur-sm rounded-lg p-4 shadow-lg border border-[#2C2C2E]">
+            <p className="text-gray-400 text-sm">Your data is securely stored and synced across all your devices.</p>
           </div>
         </div>
       </div>

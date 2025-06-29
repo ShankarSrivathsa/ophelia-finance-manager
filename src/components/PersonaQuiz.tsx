@@ -141,14 +141,14 @@ export const PersonaQuiz: React.FC<PersonaQuizProps> = ({ onComplete }) => {
     return (
       <div 
         className="min-h-screen flex items-center justify-center px-4"
-        style={{ backgroundColor: '#F7F5F2' }}
+        style={{ backgroundColor: '#121212' }}
       >
-        <div className="bg-white/90 backdrop-blur-sm rounded-xl shadow-lg p-8 max-w-md w-full text-center border border-[#DDE5D5]">
-          <div className="w-16 h-16 bg-[#DDE5D5] rounded-full flex items-center justify-center mx-auto mb-4">
-            <CheckCircle className="w-8 h-8 text-[#52796F] animate-pulse" />
+        <div className="bg-[#1F1F1F] backdrop-blur-sm rounded-xl shadow-lg p-8 max-w-md w-full text-center border border-[#2C2C2E]">
+          <div className="w-16 h-16 bg-[#2C2C2E] rounded-full flex items-center justify-center mx-auto mb-4">
+            <CheckCircle className="w-8 h-8 text-white animate-pulse" />
           </div>
-          <h2 className="text-xl font-semibold text-[#333333] mb-2">Setting up your profile...</h2>
-          <p className="text-[#52796F]">We're personalizing your experience based on your answers.</p>
+          <h2 className="text-xl font-semibold text-white mb-2">Setting up your profile...</h2>
+          <p className="text-gray-300">We're personalizing your experience based on your answers.</p>
         </div>
       </div>
     );
@@ -159,27 +159,27 @@ export const PersonaQuiz: React.FC<PersonaQuizProps> = ({ onComplete }) => {
   return (
     <div 
       className="min-h-screen flex items-center justify-center px-4"
-      style={{ backgroundColor: '#F7F5F2' }}
+      style={{ backgroundColor: '#121212' }}
     >
-      <div className="bg-white/90 backdrop-blur-sm rounded-xl shadow-lg p-8 max-w-2xl w-full border border-[#DDE5D5]">
+      <div className="bg-[#1F1F1F] backdrop-blur-sm rounded-xl shadow-lg p-8 max-w-2xl w-full border border-[#2C2C2E]">
         {/* Header */}
         <div className="text-center mb-8">
-          <div className="w-16 h-16 bg-[#DDE5D5] rounded-full flex items-center justify-center mx-auto mb-4">
-            <User className="w-8 h-8 text-[#52796F]" />
+          <div className="w-16 h-16 bg-[#2C2C2E] rounded-full flex items-center justify-center mx-auto mb-4">
+            <User className="w-8 h-8 text-white" />
           </div>
-          <h1 className="text-2xl font-bold text-[#333333] mb-2">Let's personalize your experience</h1>
-          <p className="text-[#52796F]">Answer a few questions to get started with your financial journey</p>
+          <h1 className="text-2xl font-bold text-white mb-2">Let's personalize your experience</h1>
+          <p className="text-gray-300">Answer a few questions to get started with your financial journey</p>
         </div>
 
         {/* Progress Bar */}
         <div className="mb-8">
-          <div className="flex justify-between text-sm text-[#52796F] mb-2">
+          <div className="flex justify-between text-sm text-gray-300 mb-2">
             <span>Question {currentQuestion + 1} of {QUIZ_QUESTIONS.length}</span>
             <span>{Math.round(progress)}% complete</span>
           </div>
-          <div className="w-full bg-[#DDE5D5] rounded-full h-2">
+          <div className="w-full bg-[#2C2C2E] rounded-full h-2">
             <div 
-              className="bg-[#52796F] h-2 rounded-full transition-all duration-300"
+              className="bg-white h-2 rounded-full transition-all duration-300"
               style={{ width: `${progress}%` }}
             />
           </div>
@@ -187,18 +187,18 @@ export const PersonaQuiz: React.FC<PersonaQuizProps> = ({ onComplete }) => {
 
         {/* Question */}
         <div className="mb-8">
-          <h2 className="text-xl font-semibold text-[#333333] mb-6">{question.question}</h2>
+          <h2 className="text-xl font-semibold text-white mb-6">{question.question}</h2>
           
           <div className="space-y-3">
             {question.options.map((option) => (
               <button
                 key={option.value}
                 onClick={() => handleAnswer(option.value)}
-                className="w-full p-4 text-left border border-[#DDE5D5] rounded-lg hover:border-[#52796F] hover:bg-[#DDE5D5]/30 transition-colors group bg-white/90 backdrop-blur-sm"
+                className="w-full p-4 text-left border border-[#2C2C2E] rounded-lg hover:border-white hover:bg-[#2C2C2E] transition-colors group bg-[#1F1F1F] backdrop-blur-sm"
               >
                 <div className="flex items-center justify-between">
-                  <span className="text-[#333333] group-hover:text-[#52796F]">{option.label}</span>
-                  <ChevronRight className="w-5 h-5 text-[#CAD2C5] group-hover:text-[#52796F]" />
+                  <span className="text-gray-300 group-hover:text-white">{option.label}</span>
+                  <ChevronRight className="w-5 h-5 text-gray-500 group-hover:text-white" />
                 </div>
               </button>
             ))}
@@ -212,7 +212,7 @@ export const PersonaQuiz: React.FC<PersonaQuizProps> = ({ onComplete }) => {
               setCurrentQuestion(currentQuestion - 1);
               setAnswers(answers.slice(0, -1));
             }}
-            className="text-[#52796F] hover:text-[#84A98C] transition-colors"
+            className="text-gray-300 hover:text-white transition-colors"
           >
             ← Back to previous question
           </button>
