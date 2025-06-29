@@ -92,8 +92,9 @@ export const AuthForm: React.FC = () => {
     >
       <div className="max-w-md w-full bg-[#1F1F1F] backdrop-blur-sm rounded-xl shadow-lg p-8 border border-[#2C2C2E]">
         <div className="text-center mb-8">
-          <h1 className="text-3xl font-bold text-white mb-2">Money Manager</h1>
-          <p className="text-gray-300">Simple accounting for everyone</p>
+          <h1 className="text-4xl font-bold text-white mb-2">Ophelia</h1>
+          <h2 className="text-xl font-medium text-gray-200 mb-2">Money Manager</h2>
+          <p className="text-gray-300">Track your expenses and build healthy savings habits</p>
         </div>
 
         <form onSubmit={handleSubmit} className="space-y-4">
