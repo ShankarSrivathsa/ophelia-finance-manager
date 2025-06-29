@@ -15,6 +15,7 @@ import it from './locales/it.json';
 import ru from './locales/ru.json';
 import ko from './locales/ko.json';
 
+// Add language translations
 const resources = {
   en: { translation: en },
   es: { translation: es },
@@ -35,7 +36,7 @@ i18n
   .init({
     resources,
     fallbackLng: 'en',
-    debug: false,
+    debug: process.env.NODE_ENV === 'development',
     interpolation: {
       escapeValue: false
     },
@@ -49,15 +50,21 @@ i18n
     }
   });
 
-// Force reload when language changes to ensure all components update
+// Log the current language on initialization
+console.log('i18n initialized with language:', i18n.language);
+
+// Override the changeLanguage method to ensure proper reloading
 const originalChangeLanguage = i18n.changeLanguage;
 i18n.changeLanguage = async (lng?: string, callback?: ((err: any, t: any) => void) | undefined) => {
   console.log('Changing language to:', lng);
+  
+  // Call the original method
   const result = await originalChangeLanguage.call(i18n, lng, callback);
   
-  // Store in localStorage to ensure persistence
+  // Ensure localStorage is updated
   if (lng) {
     localStorage.setItem('i18nextLng', lng);
+    console.log('Updated localStorage with language:', lng);
   }
   
   return result;

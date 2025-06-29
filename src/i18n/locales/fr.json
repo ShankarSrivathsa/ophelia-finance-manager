@@ -33,6 +33,28 @@
     "smartBudget": "Budget Intelligent",
     "aiReports": "Rapports IA"
   },
+  "language": {
+    "current": "Langue actuelle",
+    "search": "Rechercher des langues...",
+    "loading": "Chargement des langues...",
+    "noResults": "Aucune langue trouvée"
+  },
+  "expenses": {
+    "title": "Ajouter une Dépense Quotidienne",
+    "amount": "Montant",
+    "date": "Date",
+    "category": "Catégorie",
+    "description": "Description",
+    "notes": "Notes (Optionnel)",
+    "recurring": "C'est une dépense récurrente",
+    "addExpense": "Ajouter une Dépense",
+    "recentExpenses": "Dépenses Récentes",
+    "placeholder": {
+      "amount": "0.00",
+      "description": "Sur quoi avez-vous dépensé?",
+      "notes": "Notes supplémentaires..."
+    }
+  },
   "common": {
     "cancel": "Annuler",
     "save": "Sauvegarder",

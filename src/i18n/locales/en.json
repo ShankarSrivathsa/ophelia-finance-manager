@@ -33,6 +33,12 @@
     "smartBudget": "Smart Budget",
     "aiReports": "AI Reports"
   },
+  "language": {
+    "current": "Current language",
+    "search": "Search languages...",
+    "loading": "Loading languages...",
+    "noResults": "No languages found"
+  },
   "billing": {
     "title": "Billing & Subscription",
     "currentPlan": "Current Plan",

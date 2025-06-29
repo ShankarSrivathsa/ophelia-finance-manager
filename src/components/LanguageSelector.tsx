@@ -6,7 +6,7 @@ import { Language } from '../types/language';
 import { lingoService } from '../services/lingoService';
 
 export const LanguageSelector: React.FC = () => {
-  const { i18n } = useTranslation();
+  const { i18n, t } = useTranslation();
   const [isOpen, setIsOpen] = useState(false);
   const [dropdownPosition, setDropdownPosition] = useState({ top: 0, left: 0 });
   const [currentLang, setCurrentLang] = useState(i18n.language.split('-')[0]);
@@ -32,17 +32,19 @@ export const LanguageSelector: React.FC = () => {
 
   const changeLanguage = async (languageCode: string) => {
     try {
-      console.log('Changing language to:', languageCode);
+      console.log('Changing language from', i18n.language, 'to', languageCode);
       
       // Update local state first for immediate UI feedback
       setCurrentLang(languageCode);
       setIsOpen(false);
       
-      // Force update localStorage
+      // Force update localStorage to ensure persistence
       localStorage.setItem('i18nextLng', languageCode);
       
       // Change the language in i18next
       await i18n.changeLanguage(languageCode);
+      
+      console.log('Language changed successfully, reloading page');
       
       // Reload the page to ensure all components update properly
       window.location.reload();
@@ -138,12 +140,13 @@ export const LanguageSelector: React.FC = () => {
   useEffect(() => {
     // Extract the language code without region (e.g., 'en' from 'en-US')
     const langCode = i18n.language.split('-')[0];
+    console.log('i18n language changed to:', i18n.language, 'setting currentLang to:', langCode);
     setCurrentLang(langCode);
   }, [i18n.language]);
 
   // Get current language info
   const currentLanguage = languages.find(lang => lang.code === currentLang) || 
-    { code: currentLang, name: 'English', nativeName: 'English', flag: '🌐' };
+    { code: currentLang, name: currentLang === 'en' ? 'English' : currentLang, nativeName: currentLang === 'en' ? 'English' : currentLang, flag: '🌐' };
 
   // Get language code display (e.g., "EN" for English)
   const getLanguageCode = (code: string) => {
@@ -172,7 +175,7 @@ export const LanguageSelector: React.FC = () => {
             type="text"
             value={searchQuery}
             onChange={handleSearch}
-            placeholder="Search languages..."
+            placeholder={t('language.search', 'Search languages...')}
             className="w-full pl-10 pr-10 py-2 bg-[#2C2C2E] border-none rounded-lg text-white focus:ring-1 focus:ring-white focus:outline-none"
           />
           {searchQuery && (
@@ -191,11 +194,11 @@ export const LanguageSelector: React.FC = () => {
         {loading ? (
           <div className="p-4 text-center text-gray-400">
             <div className="w-5 h-5 border-2 border-[#2C2C2E] border-t-white rounded-full animate-spin mx-auto mb-2"></div>
-            Loading languages...
+            {t('language.loading', 'Loading languages...')}
           </div>
         ) : filteredLanguages.length === 0 ? (
           <div className="p-4 text-center text-gray-400">
-            No languages found
+            {t('language.noResults', 'No languages found')}
           </div>
         ) : (
           filteredLanguages.map((language) => (
@@ -228,7 +231,7 @@ export const LanguageSelector: React.FC = () => {
         ref={buttonRef}
         onClick={handleToggle}
         className="flex items-center gap-2 px-3 py-2 text-gray-300 hover:bg-[#2C2C2E] rounded-lg transition-colors"
-        title={`Current language: ${currentLanguage.name}`}
+        title={`${t('language.current', 'Current language')}: ${currentLanguage.name}`}
       >
         <Globe className="w-4 h-4" />
         <span className="text-sm font-medium">

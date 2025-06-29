@@ -33,6 +33,12 @@
     "smartBudget": "Presupuesto Inteligente",
     "aiReports": "Informes IA"
   },
+  "language": {
+    "current": "Idioma actual",
+    "search": "Buscar idiomas...",
+    "loading": "Cargando idiomas...",
+    "noResults": "No se encontraron idiomas"
+  },
   "billing": {
     "title": "Facturación y Suscripción",
     "currentPlan": "Plan Actual",
@@ -61,6 +67,33 @@
       "description": "¿En qué gastaste?",
       "notes": "Notas adicionales..."
     }
+  },
+  "income": {
+    "title": "Agregar Ingreso",
+    "addIncome": "Agregar Ingreso",
+    "recentIncome": "Ingresos Recientes",
+    "recurring": "Este es un ingreso recurrente",
+    "placeholder": {
+      "description": "Fuente de ingreso"
+    }
+  },
+  "savings": {
+    "title": "Seguimiento de Ahorros",
+    "addGoal": "Agregar Meta",
+    "addTransaction": "Agregar Transacción",
+    "totalSaved": "Total Ahorrado",
+    "monthlyAverage": "Promedio Mensual",
+    "savingsRate": "Tasa de Ahorro",
+    "savingsGoals": "Metas de Ahorro",
+    "recentTransactions": "Transacciones de Ahorro Recientes",
+    "noGoals": "Aún no hay metas de ahorro. ¡Crea tu primera meta para comenzar a ahorrar!",
+    "goalName": "Nombre de la Meta",
+    "targetAmount": "Cantidad Objetivo",
+    "targetDate": "Fecha Objetivo",
+    "progress": "Progreso",
+    "remaining": "Restante",
+    "daysLeft": "días restantes",
+    "daysOverdue": "días de retraso"
   },
   "common": {
     "cancel": "Cancelar",

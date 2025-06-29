@@ -2,7 +2,6 @@ import { Language } from '../types/language';
 
 class LingoService {
   private apiKey: string;
-  private baseUrl = 'https://api.lingohub.com/v1';
   private cachedLanguages: Language[] | null = null;
 
   constructor() {
@@ -16,8 +15,8 @@ class LingoService {
     }
 
     try {
-      // For demo purposes, we'll use a static list of languages
-      // In a real app, you would fetch this from the Lingo API
+      // In a real implementation, we would fetch languages from the Lingo API
+      // For now, we'll use a static list that matches our available translations
       const languages: Language[] = [
         { code: 'en', name: 'English', nativeName: 'English', flag: '🇺🇸' },
         { code: 'es', name: 'Spanish', nativeName: 'Español', flag: '🇪🇸' },
@@ -39,20 +38,6 @@ class LingoService {
       console.error('Error fetching languages:', error);
       return this.getFallbackLanguages();
     }
-  }
-
-  async searchLanguages(query: string): Promise<Language[]> {
-    const languages = await this.getLanguages();
-    
-    if (!query) return languages;
-    
-    const lowerQuery = query.toLowerCase();
-    
-    return languages.filter(lang => 
-      lang.name.toLowerCase().includes(lowerQuery) || 
-      lang.nativeName.toLowerCase().includes(lowerQuery) ||
-      lang.code.toLowerCase().includes(lowerQuery)
-    );
   }
 
   private getFallbackLanguages(): Language[] {
