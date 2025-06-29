@@ -1,8 +1,3 @@
-export interface PicaHQConfig {
-  apiKey: string;
-  baseUrl: string;
-}
-
 export interface FinancialAdviceRequest {
   userId: string;
   userProfile: {
@@ -99,10 +94,4 @@ export interface AutomatedReportResponse {
     significance: string;
   }>;
   recommendations: string[];
-}
-
-export interface PicaHQError {
-  code: string;
-  message: string;
-  details?: any;
 }

@@ -1,11 +1,11 @@
-import { serve } from 'https://deno.land/std@0.168.0/http/server.ts'
-import { createClient } from 'npm:@supabase/supabase-js@2'
+import { serve } from "npm:@deno/std@0.168.0/http/server.ts";
+import { createClient } from "npm:@supabase/supabase-js@2";
 
 const corsHeaders = {
-  'Access-Control-Allow-Origin': '*',
-  'Access-Control-Allow-Headers': 'authorization, x-client-info, apikey, content-type',
-  'Access-Control-Allow-Methods': 'POST, OPTIONS',
-}
+  "Access-Control-Allow-Origin": "*",
+  "Access-Control-Allow-Headers": "authorization, x-client-info, apikey, content-type",
+  "Access-Control-Allow-Methods": "POST, OPTIONS",
+};
 
 interface BudgetAdjustmentRequest {
   userId: string;
@@ -28,104 +28,112 @@ interface BudgetAdjustmentRequest {
 }
 
 serve(async (req) => {
-  if (req.method === 'OPTIONS') {
-    return new Response(null, { headers: corsHeaders })
+  if (req.method === "OPTIONS") {
+    return new Response(null, { headers: corsHeaders });
   }
 
   try {
     const supabaseClient = createClient(
-      Deno.env.get('SUPABASE_URL') ?? '',
-      Deno.env.get('SUPABASE_ANON_KEY') ?? '',
+      Deno.env.get("SUPABASE_URL") ?? "",
+      Deno.env.get("SUPABASE_ANON_KEY") ?? "",
       {
         global: {
-          headers: { Authorization: req.headers.get('Authorization')! },
+          headers: { Authorization: req.headers.get("Authorization")! },
         },
       }
-    )
+    );
 
-    const { data: { user } } = await supabaseClient.auth.getUser()
+    const { data: { user } } = await supabaseClient.auth.getUser();
     if (!user) {
-      throw new Error('Unauthorized')
+      throw new Error("Unauthorized");
     }
 
-    const requestData: BudgetAdjustmentRequest = await req.json()
+    const requestData: BudgetAdjustmentRequest = await req.json();
 
-    // Prepare data for PicaHQ AI Agent
-    const picahqPayload = {
-      user_id: requestData.userId,
-      budget_analysis: {
-        current_budgets: requestData.currentBudgets,
-        spending_patterns: requestData.spendingPatterns,
-        financial_goals: requestData.financialGoals,
-        total_budgeted: requestData.currentBudgets.reduce((sum, b) => sum + b.budgeted, 0),
-        total_spent: requestData.currentBudgets.reduce((sum, b) => sum + b.spent, 0),
-        categories_over_budget: requestData.currentBudgets.filter(b => b.spent > b.budgeted).length
-      },
-      optimization_goals: [
-        'reduce_overspending',
-        'align_with_financial_goals',
-        'improve_savings_rate',
-        'balance_categories'
-      ]
+    // Generate budget adjustments
+    const adjustments = [];
+    let totalSavings = 0;
+
+    // Find categories where spending exceeds budget
+    for (const budget of requestData.currentBudgets) {
+      if (budget.spent > budget.budgeted) {
+        // Suggest increasing budget to match spending with a 10% buffer
+        const suggestedAmount = Math.ceil(budget.spent * 1.1);
+        adjustments.push({
+          category: budget.category,
+          currentAmount: budget.budgeted,
+          suggestedAmount,
+          reasoning: `Your spending in ${budget.category} consistently exceeds your budget. Increasing to a more realistic amount will help you maintain your budget.`,
+          confidence: 0.85
+        });
+        
+        // This is technically a negative saving (increased budget)
+        totalSavings -= (suggestedAmount - budget.budgeted);
+      } 
+      // Find categories where spending is significantly under budget
+      else if (budget.spent < budget.budgeted * 0.7 && budget.budgeted > 50) {
+        // Suggest decreasing budget to match spending with a 20% buffer
+        const suggestedAmount = Math.ceil(budget.spent * 1.2);
+        adjustments.push({
+          category: budget.category,
+          currentAmount: budget.budgeted,
+          suggestedAmount,
+          reasoning: `You consistently spend less than budgeted in ${budget.category}. You could reallocate some of this budget to savings or other categories.`,
+          confidence: 0.75
+        });
+        
+        // This is a positive saving (decreased budget)
+        totalSavings += (budget.budgeted - suggestedAmount);
+      }
     }
 
-    // Call PicaHQ API
-    const picahqApiKey = Deno.env.get('PICAHQ_API_KEY')
-    if (!picahqApiKey) {
-      throw new Error('PicaHQ API key not configured')
+    // Check for missing budget categories based on spending patterns
+    for (const pattern of requestData.spendingPatterns) {
+      const hasBudget = requestData.currentBudgets.some(b => b.category === pattern.category);
+      if (!hasBudget && pattern.averageMonthly > 50) {
+        adjustments.push({
+          category: pattern.category,
+          currentAmount: 0,
+          suggestedAmount: Math.ceil(pattern.averageMonthly * 1.1),
+          reasoning: `You regularly spend on ${pattern.category} but don't have a budget for it. Adding this category will help you track these expenses.`,
+          confidence: 0.8
+        });
+      }
     }
 
-    const picahqResponse = await fetch('https://api.picahq.com/v1/agents/budget-optimizer/invoke', {
-      method: 'POST',
-      headers: {
-        'Authorization': `Bearer ${picahqApiKey}`,
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(picahqPayload)
-    })
-
-    if (!picahqResponse.ok) {
-      throw new Error(`PicaHQ API error: ${picahqResponse.status}`)
+    // Generate impact analysis
+    let impactAnalysis = "";
+    if (adjustments.length === 0) {
+      impactAnalysis = "Your budgets are well-aligned with your spending patterns. No adjustments are needed at this time.";
+    } else if (totalSavings > 0) {
+      impactAnalysis = `The suggested adjustments could free up $${totalSavings.toFixed(2)} that you could allocate to savings or other financial goals.`;
+    } else {
+      impactAnalysis = "The suggested adjustments will make your budget more realistic and help you better track your finances, even though they don't result in immediate savings.";
     }
 
-    const picahqData = await picahqResponse.json()
-
-    // Process and format the response
+    // Response object
     const response = {
-      adjustments: picahqData.adjustments || generateFallbackAdjustments(requestData),
-      totalSavings: picahqData.total_savings || 0,
-      impactAnalysis: picahqData.impact_analysis || "Budget adjustments will help optimize your spending."
-    }
+      adjustments,
+      totalSavings: Math.max(0, totalSavings), // Only show positive savings
+      impactAnalysis
+    };
 
     return new Response(JSON.stringify(response), {
-      headers: { ...corsHeaders, 'Content-Type': 'application/json' },
-    })
-
+      headers: { ...corsHeaders, "Content-Type": "application/json" },
+    });
   } catch (error) {
-    console.error('Budget adjustment error:', error)
+    console.error("Budget adjustment error:", error);
     
     // Fallback response
     const fallbackResponse = {
       adjustments: [],
       totalSavings: 0,
       impactAnalysis: "Unable to generate budget adjustments at this time."
-    }
+    };
 
     return new Response(JSON.stringify(fallbackResponse), {
       status: 200,
-      headers: { ...corsHeaders, 'Content-Type': 'application/json' },
-    })
+      headers: { ...corsHeaders, "Content-Type": "application/json" },
+    });
   }
-})
-
-function generateFallbackAdjustments(request: BudgetAdjustmentRequest) {
-  return request.currentBudgets
-    .filter(budget => budget.spent > budget.budgeted)
-    .map(budget => ({
-      category: budget.category,
-      currentAmount: budget.budgeted,
-      suggestedAmount: Math.ceil(budget.spent * 1.1), // 10% buffer
-      reasoning: `Increase budget to accommodate actual spending patterns`,
-      confidence: 0.7
-    }))
-}
+});

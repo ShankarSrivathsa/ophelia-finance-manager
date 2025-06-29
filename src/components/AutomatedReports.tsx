@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { FileText, Download, Calendar, BarChart3, Loader2, TrendingUp, TrendingDown, Key, ExternalLink } from 'lucide-react';
+import { FileText, Download, Calendar, BarChart3, Loader2, TrendingUp, TrendingDown } from 'lucide-react';
 import { aiService } from '../services/aiService';
 import { supabase } from '../lib/supabase';
 import { formatCurrency } from '../utils/accounting';
@@ -43,11 +43,6 @@ export const AutomatedReports: React.FC<AutomatedReportsProps> = ({ currentMonth
   }, [currentMonth]);
 
   const generateReport = async () => {
-    if (!aiService.isConfigured()) {
-      setError('AI service not configured. Please add an API key for Gemini, OpenAI, or Anthropic in your environment variables.');
-      return;
-    }
-
     setLoading(true);
     setError(null);
 
@@ -202,7 +197,6 @@ ${report.recommendations.map((rec, index) => `${index + 1}. ${rec}`).join('\n')}
     }
   };
 
-  const isConfigured = aiService.isConfigured();
   const providerName = aiService.getProviderName();
 
   return (
@@ -215,9 +209,7 @@ ${report.recommendations.map((rec, index) => `${index + 1}. ${rec}`).join('\n')}
           </div>
           <div>
             <h2 className="text-xl font-semibold text-white">AI-Generated Reports</h2>
-            {isConfigured && (
-              <p className="text-sm text-gray-400">Powered by {providerName.charAt(0).toUpperCase() + providerName.slice(1)} AI</p>
-            )}
+            <p className="text-sm text-gray-400">Powered by {providerName}</p>
           </div>
         </div>
         <div className="flex items-center gap-3">
@@ -232,7 +224,7 @@ ${report.recommendations.map((rec, index) => `${index + 1}. ${rec}`).join('\n')}
           )}
           <button
             onClick={generateReport}
-            disabled={loading || !isConfigured}
+            disabled={loading}
             className="bg-white text-black px-4 py-2 rounded-lg hover:bg-gray-200 transition-colors flex items-center gap-2 disabled:opacity-50"
           >
             {loading ? (
@@ -245,37 +237,6 @@ ${report.recommendations.map((rec, index) => `${index + 1}. ${rec}`).join('\n')}
         </div>
       </div>
 
-      {/* Configuration Warning */}
-      {!isConfigured && (
-        <div className="bg-yellow-900/50 border border-yellow-700 rounded-xl p-6">
-          <div className="flex items-start gap-3">
-            <Key className="w-6 h-6 text-yellow-400 flex-shrink-0 mt-0.5" />
-            <div>
-              <h3 className="text-lg font-semibold text-white mb-2">AI Service Configuration Required</h3>
-              <p className="text-gray-300 mb-4">
-                To generate AI-powered reports, you need to configure an AI API key. Add one of the following to your environment variables:
-              </p>
-              <ul className="list-disc list-inside text-gray-300 space-y-1 mb-4">
-                <li><code className="bg-yellow-900/50 px-2 py-1 rounded text-yellow-300">VITE_GEMINI_API_KEY</code> - Google AI Studio (Recommended)</li>
-                <li><code className="bg-yellow-900/50 px-2 py-1 rounded text-yellow-300">VITE_OPENAI_API_KEY</code> - OpenAI GPT</li>
-                <li><code className="bg-yellow-900/50 px-2 py-1 rounded text-yellow-300">VITE_ANTHROPIC_API_KEY</code> - Anthropic Claude</li>
-              </ul>
-              <div className="flex gap-3">
-                <a
-                  href="https://makersuite.google.com/app/apikey"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 text-yellow-300 hover:text-white font-medium"
-                >
-                  <ExternalLink className="w-4 h-4" />
-                  Get Gemini API Key (Free)
-                </a>
-              </div>
-            </div>
-          </div>
-        </div>
-      )}
-
       {/* Report Configuration */}
       <div className="bg-[#1F1F1F] backdrop-blur-sm rounded-xl shadow-lg p-6 border border-[#2C2C2E]">
         <h3 className="text-lg font-semibold text-white mb-4">Report Configuration</h3>
@@ -286,7 +247,6 @@ ${report.recommendations.map((rec, index) => `${index + 1}. ${rec}`).join('\n')}
               value={reportType}
               onChange={(e) => setReportType(e.target.value as any)}
               className="w-full px-3 py-2 border border-[#2C2C2E] rounded-lg focus:ring-2 focus:ring-white focus:border-transparent bg-[#1F1F1F] text-white"
-              disabled={!isConfigured}
             >
               <option value="monthly_summary">Monthly Summary</option>
               <option value="spending_analysis">Spending Analysis</option>
@@ -301,7 +261,6 @@ ${report.recommendations.map((rec, index) => `${index + 1}. ${rec}`).join('\n')}
               value={dateRange.startDate}
               onChange={(e) => setDateRange(prev => ({ ...prev, startDate: e.target.value }))}
               className="w-full px-3 py-2 border border-[#2C2C2E] rounded-lg focus:ring-2 focus:ring-white focus:border-transparent bg-[#1F1F1F] text-white"
-              disabled={!isConfigured}
             />
           </div>
           <div>
@@ -311,7 +270,6 @@ ${report.recommendations.map((rec, index) => `${index + 1}. ${rec}`).join('\n')}
               value={dateRange.endDate}
               onChange={(e) => setDateRange(prev => ({ ...prev, endDate: e.target.value }))}
               className="w-full px-3 py-2 border border-[#2C2C2E] rounded-lg focus:ring-2 focus:ring-white focus:border-transparent bg-[#1F1F1F] text-white"
-              disabled={!isConfigured}
             />
           </div>
         </div>
@@ -398,7 +356,7 @@ ${report.recommendations.map((rec, index) => `${index + 1}. ${rec}`).join('\n')}
       )}
 
       {/* Getting Started Message */}
-      {!report && !loading && isConfigured && (
+      {!report && !loading && (
         <div className="bg-[#1F1F1F] backdrop-blur-sm rounded-xl shadow-lg p-8 text-center border border-[#2C2C2E]">
           <FileText className="w-16 h-16 text-white mx-auto mb-4" />
           <h3 className="text-lg font-semibold text-white mb-2">AI-Generated Financial Reports</h3>
