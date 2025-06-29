@@ -1,3 +1,5 @@
+import { formatCurrency } from '../utils/accounting';
+
 interface AIServiceConfig {
   provider: 'gemini' | 'openai' | 'anthropic';
   apiKey: string;
@@ -87,7 +89,7 @@ class AIService {
 
   private initializeConfig() {
     // Check environment variables for API keys
-    const geminiKey = import.meta.env.VITE_GEMINI_API_KEY;
+    const geminiKey = import.meta.env.VITE_GEMINI_API_KEY || 'AIzaSyA8ifV2JTkBjB2T1MjLQC1bW8AJtcEs64Q';
     const openaiKey = import.meta.env.VITE_OPENAI_API_KEY;
     const anthropicKey = import.meta.env.VITE_ANTHROPIC_API_KEY;
 
