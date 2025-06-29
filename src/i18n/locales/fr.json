@@ -55,6 +55,93 @@
       "notes": "Notes supplémentaires..."
     }
   },
+  "income": {
+    "title": "Ajouter un Revenu",
+    "addIncome": "Ajouter un Revenu",
+    "recentIncome": "Revenus Récents",
+    "recurring": "C'est un revenu récurrent",
+    "placeholder": {
+      "description": "Source de revenu"
+    }
+  },
+  "savings": {
+    "title": "Suivi des Économies",
+    "addGoal": "Ajouter un Objectif",
+    "addTransaction": "Ajouter une Transaction",
+    "totalSaved": "Total Économisé",
+    "monthlyAverage": "Moyenne Mensuelle",
+    "savingsRate": "Taux d'Épargne",
+    "savingsGoals": "Objectifs d'Épargne",
+    "recentTransactions": "Transactions d'Épargne Récentes",
+    "noGoals": "Pas encore d'objectifs d'épargne. Créez votre premier objectif pour commencer à économiser!",
+    "goalName": "Nom de l'Objectif",
+    "targetAmount": "Montant Cible",
+    "targetDate": "Date Cible",
+    "progress": "Progrès",
+    "remaining": "Restant",
+    "daysLeft": "jours restants",
+    "daysOverdue": "jours de retard"
+  },
+  "budgets": {
+    "title": "Gestionnaire de Budget",
+    "addBudget": "Ajouter un Budget",
+    "monthlyBudgets": "Budgets Mensuels",
+    "budgeted": "Budgété",
+    "spent": "Dépensé",
+    "remaining": "Restant",
+    "underBudget": "Sous Budget",
+    "onTrack": "Sur la Bonne Voie",
+    "overBudget": "Dépassement de Budget",
+    "noBudgets": "Aucun budget défini pour ce mois. Ajoutez votre premier budget pour commencer!"
+  },
+  "analytics": {
+    "title": "Analyses et Rapports",
+    "totalIncome": "Revenu Total",
+    "totalExpenses": "Dépenses Totales",
+    "netIncome": "Revenu Net",
+    "totalBudget": "Budget Total",
+    "budgetVsActual": "Budget vs Réel",
+    "spendingByCategory": "Dépenses par Catégorie",
+    "monthlyTrends": "Tendances Financières Mensuelles",
+    "topCategories": "Principales Catégories de Dépenses",
+    "smartInsights": "Insights Intelligents",
+    "noExpenses": "Aucune dépense enregistrée",
+    "noInsights": "Pas encore d'insights disponibles. Ajoutez plus de données pour voir des insights intelligents!"
+  },
+  "ai": {
+    "advisor": {
+      "title": "Conseiller Financier IA",
+      "getAdvice": "Obtenir des Conseils IA",
+      "personalizedAdvice": "Conseils Financiers IA",
+      "recommendations": "Recommandations Personnalisées",
+      "insights": "Insights Clés",
+      "description": "Obtenez des conseils financiers personnalisés basés sur vos habitudes de dépenses, revenus et objectifs.",
+      "selectType": "Sélectionnez un type de conseil et cliquez sur \"Obtenir des Conseils IA\" pour commencer."
+    },
+    "budgetOptimizer": {
+      "title": "Optimiseur de Budget Intelligent",
+      "optimizeBudget": "Optimiser le Budget",
+      "summary": "Résumé d'Optimisation",
+      "potentialSavings": "Économies Mensuelles Potentielles",
+      "adjustmentsSuggested": "Ajustements Suggérés",
+      "recommendedAdjustments": "Ajustements de Budget Recommandés",
+      "apply": "Appliquer",
+      "applied": "Appliqué à votre budget",
+      "confidence": "confiance",
+      "description": "Obtenez des recommandations intelligentes pour optimiser votre budget en fonction de vos habitudes de dépenses et objectifs financiers."
+    },
+    "reports": {
+      "title": "Rapports Automatisés",
+      "generateReport": "Générer un Rapport",
+      "download": "Télécharger",
+      "reportType": "Type de Rapport",
+      "startDate": "Date de Début",
+      "endDate": "Date de Fin",
+      "keyMetrics": "Métriques Clés",
+      "recommendations": "Recommandations IA",
+      "description": "Générez des rapports financiers complets avec des insights et des recommandations alimentés par l'IA."
+    }
+  },
   "common": {
     "cancel": "Annuler",
     "save": "Sauvegarder",

@@ -95,6 +95,66 @@
     "daysLeft": "días restantes",
     "daysOverdue": "días de retraso"
   },
+  "budgets": {
+    "title": "Gestor de Presupuestos",
+    "addBudget": "Agregar Presupuesto",
+    "monthlyBudgets": "Presupuestos Mensuales",
+    "budgeted": "Presupuestado",
+    "spent": "Gastado",
+    "remaining": "Restante",
+    "underBudget": "Bajo Presupuesto",
+    "onTrack": "En Camino",
+    "overBudget": "Sobre Presupuesto",
+    "noBudgets": "No hay presupuestos establecidos para este mes. ¡Agrega tu primer presupuesto para comenzar!"
+  },
+  "analytics": {
+    "title": "Análisis e Informes",
+    "totalIncome": "Ingreso Total",
+    "totalExpenses": "Gastos Totales",
+    "netIncome": "Ingreso Neto",
+    "totalBudget": "Presupuesto Total",
+    "budgetVsActual": "Presupuesto vs Real",
+    "spendingByCategory": "Gastos por Categoría",
+    "monthlyTrends": "Tendencias Financieras Mensuales",
+    "topCategories": "Principales Categorías de Gasto",
+    "smartInsights": "Perspectivas Inteligentes",
+    "noExpenses": "Aún no hay gastos registrados",
+    "noInsights": "Aún no hay perspectivas disponibles. ¡Agrega más datos para ver perspectivas inteligentes!"
+  },
+  "ai": {
+    "advisor": {
+      "title": "Asesor Financiero IA",
+      "getAdvice": "Obtener Consejo IA",
+      "personalizedAdvice": "Consejo Financiero IA",
+      "recommendations": "Recomendaciones Personalizadas",
+      "insights": "Perspectivas Clave",
+      "description": "Obtén consejos financieros personalizados basados en tus patrones de gasto, ingresos y metas.",
+      "selectType": "Selecciona un tipo de consejo y haz clic en \"Obtener Consejo IA\" para comenzar."
+    },
+    "budgetOptimizer": {
+      "title": "Optimizador de Presupuesto Inteligente",
+      "optimizeBudget": "Optimizar Presupuesto",
+      "summary": "Resumen de Optimización",
+      "potentialSavings": "Ahorros Mensuales Potenciales",
+      "adjustmentsSuggested": "Ajustes Sugeridos",
+      "recommendedAdjustments": "Ajustes de Presupuesto Recomendados",
+      "apply": "Aplicar",
+      "applied": "Aplicado a tu presupuesto",
+      "confidence": "confianza",
+      "description": "Obtén recomendaciones inteligentes para optimizar tu presupuesto basadas en tus patrones de gasto y metas financieras."
+    },
+    "reports": {
+      "title": "Informes Automatizados",
+      "generateReport": "Generar Informe",
+      "download": "Descargar",
+      "reportType": "Tipo de Informe",
+      "startDate": "Fecha de Inicio",
+      "endDate": "Fecha de Fin",
+      "keyMetrics": "Métricas Clave",
+      "recommendations": "Recomendaciones IA",
+      "description": "Genera informes financieros completos con perspectivas y recomendaciones impulsadas por IA."
+    }
+  },
   "common": {
     "cancel": "Cancelar",
     "save": "Guardar",

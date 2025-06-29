@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { PiggyBank, Plus, Target, TrendingUp, Calendar, DollarSign, Edit3, Trash2, ArrowUpCircle, ArrowDownCircle } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
 import { SavingsGoal, SavingsTransaction, SavingsAnalysis } from '../types/finance';
 import { supabase } from '../lib/supabase';
 import { formatCurrency, getLastDayOfMonth } from '../utils/accounting';
@@ -22,6 +23,7 @@ const SAVINGS_CATEGORIES = [
 ];
 
 export const SavingsTracker: React.FC<SavingsTrackerProps> = ({ onSavingsUpdated }) => {
+  const { t } = useTranslation();
   const [goals, setGoals] = useState<SavingsGoal[]>([]);
   const [transactions, setTransactions] = useState<SavingsTransaction[]>([]);
   const [analysis, setAnalysis] = useState<SavingsAnalysis | null>(null);
@@ -352,7 +354,7 @@ export const SavingsTracker: React.FC<SavingsTrackerProps> = ({ onSavingsUpdated
   };
 
   const handleDeleteGoal = async (goalId: string) => {
-    if (!confirm('Are you sure you want to delete this savings goal? This will also delete all related transactions.')) return;
+    if (!confirm(t('common.confirm'))) return;
 
     try {
       // Delete transactions first
@@ -408,7 +410,7 @@ export const SavingsTracker: React.FC<SavingsTrackerProps> = ({ onSavingsUpdated
           <div className="w-10 h-10 bg-white rounded-lg flex items-center justify-center">
             <PiggyBank className="w-5 h-5 text-black" />
           </div>
-          <h2 className="text-xl font-semibold text-white">Savings Tracker</h2>
+          <h2 className="text-xl font-semibold text-white">{t('savings.title')}</h2>
         </div>
         <div className="flex gap-2">
           <button
@@ -416,14 +418,14 @@ export const SavingsTracker: React.FC<SavingsTrackerProps> = ({ onSavingsUpdated
             className="bg-white text-black px-4 py-2 rounded-lg hover:bg-gray-200 transition-colors flex items-center gap-2"
           >
             <Target className="w-4 h-4" />
-            Add Goal
+            {t('savings.addGoal')}
           </button>
           <button
             onClick={() => setShowAddTransaction(true)}
             className="bg-white text-black px-4 py-2 rounded-lg hover:bg-gray-200 transition-colors flex items-center gap-2"
           >
             <Plus className="w-4 h-4" />
-            Add Transaction
+            {t('savings.addTransaction')}
           </button>
         </div>
       </div>
@@ -435,7 +437,7 @@ export const SavingsTracker: React.FC<SavingsTrackerProps> = ({ onSavingsUpdated
             <div className="flex items-center gap-3 mb-2">
               <PiggyBank className="w-8 h-8 text-white" />
               <div>
-                <h3 className="text-sm font-medium text-gray-300">Total Saved</h3>
+                <h3 className="text-sm font-medium text-gray-300">{t('savings.totalSaved')}</h3>
                 <p className="text-2xl font-bold text-white">{formatCurrency(analysis.totalSaved)}</p>
               </div>
             </div>
@@ -445,7 +447,7 @@ export const SavingsTracker: React.FC<SavingsTrackerProps> = ({ onSavingsUpdated
             <div className="flex items-center gap-3 mb-2">
               <TrendingUp className="w-8 h-8 text-blue-400" />
               <div>
-                <h3 className="text-sm font-medium text-gray-300">Monthly Average</h3>
+                <h3 className="text-sm font-medium text-gray-300">{t('savings.monthlyAverage')}</h3>
                 <p className="text-2xl font-bold text-white">{formatCurrency(analysis.monthlyAverage)}</p>
               </div>
             </div>
@@ -455,7 +457,7 @@ export const SavingsTracker: React.FC<SavingsTrackerProps> = ({ onSavingsUpdated
             <div className="flex items-center gap-3 mb-2">
               <Target className="w-8 h-8 text-green-400" />
               <div>
-                <h3 className="text-sm font-medium text-gray-300">Savings Rate</h3>
+                <h3 className="text-sm font-medium text-gray-300">{t('savings.savingsRate')}</h3>
                 <p className="text-2xl font-bold text-white">{analysis.savingsRate.toFixed(1)}%</p>
               </div>
             </div>
@@ -465,10 +467,10 @@ export const SavingsTracker: React.FC<SavingsTrackerProps> = ({ onSavingsUpdated
 
       {/* Savings Goals */}
       <div className="bg-[#1F1F1F] backdrop-blur-sm rounded-xl shadow-lg p-6 border border-[#2C2C2E]">
-        <h3 className="text-lg font-semibold text-white mb-4">Savings Goals</h3>
+        <h3 className="text-lg font-semibold text-white mb-4">{t('savings.savingsGoals')}</h3>
         
         {goals.length === 0 ? (
-          <p className="text-gray-400 text-center py-8">No savings goals yet. Create your first goal to start saving!</p>
+          <p className="text-gray-400 text-center py-8">{t('savings.noGoals')}</p>
         ) : (
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             {goals.map((goal) => {
@@ -513,7 +515,7 @@ export const SavingsTracker: React.FC<SavingsTrackerProps> = ({ onSavingsUpdated
 
                   <div className="space-y-2">
                     <div className="flex justify-between text-sm">
-                      <span className="text-gray-300">Progress</span>
+                      <span className="text-gray-300">{t('savings.progress')}</span>
                       <span className="font-medium text-white">{progress.toFixed(1)}%</span>
                     </div>
                     <div className="w-full bg-[#1F1F1F] rounded-full h-2">
@@ -527,9 +529,9 @@ export const SavingsTracker: React.FC<SavingsTrackerProps> = ({ onSavingsUpdated
                       <span>{formatCurrency(goal.target_amount)} goal</span>
                     </div>
                     <div className="flex justify-between text-sm">
-                      <span className="text-gray-300">Remaining: {formatCurrency(remaining)}</span>
+                      <span className="text-gray-300">{t('savings.remaining')}: {formatCurrency(remaining)}</span>
                       <span className={getDaysLeftColor(daysLeft)}>
-                        {daysLeft > 0 ? `${daysLeft} days left` : `${Math.abs(daysLeft)} days overdue`}
+                        {daysLeft > 0 ? `${daysLeft} ${t('savings.daysLeft')}` : `${Math.abs(daysLeft)} ${t('savings.daysOverdue')}`}
                       </span>
                     </div>
                   </div>
@@ -543,7 +545,7 @@ export const SavingsTracker: React.FC<SavingsTrackerProps> = ({ onSavingsUpdated
       {/* Recent Transactions */}
       {transactions.length > 0 && (
         <div className="bg-[#1F1F1F] backdrop-blur-sm rounded-xl shadow-lg p-6 border border-[#2C2C2E]">
-          <h3 className="text-lg font-semibold text-white mb-4">Recent Savings Transactions</h3>
+          <h3 className="text-lg font-semibold text-white mb-4">{t('savings.recentTransactions')}</h3>
           <div className="space-y-3">
             {transactions.map((transaction) => {
               const goal = goals.find(g => g.id === transaction.goal_id);
@@ -579,12 +581,12 @@ export const SavingsTracker: React.FC<SavingsTrackerProps> = ({ onSavingsUpdated
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50">
           <div className="bg-[#1F1F1F] backdrop-blur-sm rounded-xl shadow-lg p-6 w-full max-w-md border border-[#2C2C2E]">
             <h3 className="text-lg font-semibold text-white mb-4">
-              {editingGoal ? 'Edit Savings Goal' : 'Add New Savings Goal'}
+              {editingGoal ? t('common.edit') + ' ' + t('savings.goalName') : t('savings.addGoal')}
             </h3>
             
             <form onSubmit={handleAddGoal} className="space-y-4">
               <div>
-                <label className="block text-sm font-medium text-white mb-2">Goal Name</label>
+                <label className="block text-sm font-medium text-white mb-2">{t('savings.goalName')}</label>
                 <input
                   type="text"
                   value={goalForm.name}
@@ -596,21 +598,21 @@ export const SavingsTracker: React.FC<SavingsTrackerProps> = ({ onSavingsUpdated
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-white mb-2">Target Amount</label>
+                <label className="block text-sm font-medium text-white mb-2">{t('savings.targetAmount')}</label>
                 <input
                   type="number"
                   step="0.01"
                   min="0"
                   value={goalForm.target_amount}
                   onChange={(e) => setGoalForm(prev => ({ ...prev, target_amount: e.target.value }))}
-                  placeholder="0.00"
+                  placeholder={t('expenses.placeholder.amount')}
                   className="w-full px-3 py-2 border border-[#2C2C2E] rounded-lg focus:ring-2 focus:ring-white focus:border-transparent bg-[#1F1F1F] text-white"
                   required
                 />
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-white mb-2">Target Date</label>
+                <label className="block text-sm font-medium text-white mb-2">{t('savings.targetDate')}</label>
                 <input
                   type="date"
                   value={goalForm.target_date}
@@ -621,7 +623,7 @@ export const SavingsTracker: React.FC<SavingsTrackerProps> = ({ onSavingsUpdated
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-white mb-2">Category</label>
+                <label className="block text-sm font-medium text-white mb-2">{t('expenses.category')}</label>
                 <select
                   value={goalForm.category}
                   onChange={(e) => setGoalForm(prev => ({ ...prev, category: e.target.value }))}
@@ -634,7 +636,7 @@ export const SavingsTracker: React.FC<SavingsTrackerProps> = ({ onSavingsUpdated
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-white mb-2">Description (Optional)</label>
+                <label className="block text-sm font-medium text-white mb-2">{t('expenses.description')} ({t('expenses.notes')})</label>
                 <textarea
                   value={goalForm.description}
                   onChange={(e) => setGoalForm(prev => ({ ...prev, description: e.target.value }))}
@@ -660,13 +662,13 @@ export const SavingsTracker: React.FC<SavingsTrackerProps> = ({ onSavingsUpdated
                   }}
                   className="flex-1 px-4 py-2 border border-[#2C2C2E] text-gray-300 rounded-lg hover:bg-[#2C2C2E] transition-colors"
                 >
-                  Cancel
+                  {t('common.cancel')}
                 </button>
                 <button
                   type="submit"
                   className="flex-1 bg-white text-black px-4 py-2 rounded-lg hover:bg-gray-200 transition-colors"
                 >
-                  {editingGoal ? 'Update Goal' : 'Add Goal'}
+                  {editingGoal ? t('common.update') : t('common.add')}
                 </button>
               </div>
             </form>
@@ -678,11 +680,11 @@ export const SavingsTracker: React.FC<SavingsTrackerProps> = ({ onSavingsUpdated
       {showAddTransaction && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50">
           <div className="bg-[#1F1F1F] backdrop-blur-sm rounded-xl shadow-lg p-6 w-full max-w-md border border-[#2C2C2E]">
-            <h3 className="text-lg font-semibold text-white mb-4">Add Savings Transaction</h3>
+            <h3 className="text-lg font-semibold text-white mb-4">{t('savings.addTransaction')}</h3>
             
             <form onSubmit={handleAddTransaction} className="space-y-4">
               <div>
-                <label className="block text-sm font-medium text-white mb-2">Savings Goal</label>
+                <label className="block text-sm font-medium text-white mb-2">{t('savings.savingsGoals')}</label>
                 <select
                   value={transactionForm.goal_id}
                   onChange={(e) => setTransactionForm(prev => ({ ...prev, goal_id: e.target.value }))}
@@ -709,21 +711,21 @@ export const SavingsTracker: React.FC<SavingsTrackerProps> = ({ onSavingsUpdated
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-white mb-2">Amount</label>
+                <label className="block text-sm font-medium text-white mb-2">{t('expenses.amount')}</label>
                 <input
                   type="number"
                   step="0.01"
                   min="0"
                   value={transactionForm.amount}
                   onChange={(e) => setTransactionForm(prev => ({ ...prev, amount: e.target.value }))}
-                  placeholder="0.00"
+                  placeholder={t('expenses.placeholder.amount')}
                   className="w-full px-3 py-2 border border-[#2C2C2E] rounded-lg focus:ring-2 focus:ring-white focus:border-transparent bg-[#1F1F1F] text-white"
                   required
                 />
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-white mb-2">Date</label>
+                <label className="block text-sm font-medium text-white mb-2">{t('expenses.date')}</label>
                 <input
                   type="date"
                   value={transactionForm.date}
@@ -734,7 +736,7 @@ export const SavingsTracker: React.FC<SavingsTrackerProps> = ({ onSavingsUpdated
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-white mb-2">Description</label>
+                <label className="block text-sm font-medium text-white mb-2">{t('expenses.description')}</label>
                 <input
                   type="text"
                   value={transactionForm.description}
@@ -760,13 +762,13 @@ export const SavingsTracker: React.FC<SavingsTrackerProps> = ({ onSavingsUpdated
                   }}
                   className="flex-1 px-4 py-2 border border-[#2C2C2E] text-gray-300 rounded-lg hover:bg-[#2C2C2E] transition-colors"
                 >
-                  Cancel
+                  {t('common.cancel')}
                 </button>
                 <button
                   type="submit"
                   className="flex-1 bg-white text-black px-4 py-2 rounded-lg hover:bg-gray-200 transition-colors"
                 >
-                  Add Transaction
+                  {t('common.add')}
                 </button>
               </div>
             </form>

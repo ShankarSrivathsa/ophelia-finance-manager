@@ -33,6 +33,67 @@
     "smartBudget": "Budget intelligente",
     "aiReports": "Rapporti IA"
   },
+  "language": {
+    "current": "Lingua attuale",
+    "search": "Cerca lingue...",
+    "loading": "Caricamento lingue...",
+    "noResults": "Nessuna lingua trovata"
+  },
+  "expenses": {
+    "title": "Aggiungi Spesa Giornaliera",
+    "amount": "Importo",
+    "date": "Data",
+    "category": "Categoria",
+    "description": "Descrizione",
+    "notes": "Note (Opzionale)",
+    "recurring": "Questa è una spesa ricorrente",
+    "addExpense": "Aggiungi Spesa",
+    "recentExpenses": "Spese Recenti",
+    "placeholder": {
+      "amount": "0.00",
+      "description": "Per cosa hai speso?",
+      "notes": "Note aggiuntive..."
+    }
+  },
+  "income": {
+    "title": "Aggiungi Entrata",
+    "addIncome": "Aggiungi Entrata",
+    "recentIncome": "Entrate Recenti",
+    "recurring": "Questa è un'entrata ricorrente",
+    "placeholder": {
+      "description": "Fonte di reddito"
+    }
+  },
+  "savings": {
+    "title": "Monitoraggio Risparmi",
+    "addGoal": "Aggiungi Obiettivo",
+    "addTransaction": "Aggiungi Transazione",
+    "totalSaved": "Totale Risparmiato",
+    "monthlyAverage": "Media Mensile",
+    "savingsRate": "Tasso di Risparmio",
+    "savingsGoals": "Obiettivi di Risparmio",
+    "recentTransactions": "Transazioni di Risparmio Recenti",
+    "noGoals": "Nessun obiettivo di risparmio ancora. Crea il tuo primo obiettivo per iniziare a risparmiare!",
+    "goalName": "Nome Obiettivo",
+    "targetAmount": "Importo Target",
+    "targetDate": "Data Target",
+    "progress": "Progresso",
+    "remaining": "Rimanente",
+    "daysLeft": "giorni rimanenti",
+    "daysOverdue": "giorni di ritardo"
+  },
+  "budgets": {
+    "title": "Gestore Budget",
+    "addBudget": "Aggiungi Budget",
+    "monthlyBudgets": "Budget Mensili",
+    "budgeted": "Preventivato",
+    "spent": "Speso",
+    "remaining": "Rimanente",
+    "underBudget": "Sotto Budget",
+    "onTrack": "In Linea",
+    "overBudget": "Sopra Budget",
+    "noBudgets": "Nessun budget impostato per questo mese. Aggiungi il tuo primo budget per iniziare!"
+  },
   "common": {
     "cancel": "Annulla",
     "save": "Salva",

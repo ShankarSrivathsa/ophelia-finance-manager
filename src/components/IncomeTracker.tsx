@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Plus, TrendingUp, DollarSign, Calendar, Tag, FileText, Repeat } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
 import { Income } from '../types/finance';
 import { supabase } from '../lib/supabase';
 import { formatCurrency } from '../utils/accounting';
@@ -22,6 +23,7 @@ const INCOME_CATEGORIES = [
 ];
 
 export const IncomeTracker: React.FC<IncomeTrackerProps> = ({ onIncomeAdded }) => {
+  const { t } = useTranslation();
   const [formData, setFormData] = useState({
     amount: '',
     category: 'Salary',
@@ -114,7 +116,7 @@ export const IncomeTracker: React.FC<IncomeTrackerProps> = ({ onIncomeAdded }) =
           <div className="w-10 h-10 bg-white rounded-lg flex items-center justify-center">
             <TrendingUp className="w-5 h-5 text-black" />
           </div>
-          <h2 className="text-xl font-semibold text-white">Add Income</h2>
+          <h2 className="text-xl font-semibold text-white">{t('income.title')}</h2>
         </div>
 
         <form onSubmit={handleSubmit} className="space-y-4">
@@ -122,7 +124,7 @@ export const IncomeTracker: React.FC<IncomeTrackerProps> = ({ onIncomeAdded }) =
             <div>
               <label className="block text-sm font-medium text-white mb-2">
                 <DollarSign className="w-4 h-4 inline mr-1" />
-                Amount
+                {t('expenses.amount')}
               </label>
               <input
                 type="number"
@@ -130,7 +132,7 @@ export const IncomeTracker: React.FC<IncomeTrackerProps> = ({ onIncomeAdded }) =
                 min="0"
                 value={formData.amount}
                 onChange={(e) => setFormData(prev => ({ ...prev, amount: e.target.value }))}
-                placeholder="0.00"
+                placeholder={t('expenses.placeholder.amount')}
                 className="w-full px-3 py-2 border border-[#2C2C2E] rounded-lg focus:ring-2 focus:ring-white focus:border-transparent bg-[#1F1F1F] text-white"
                 required
               />
@@ -139,7 +141,7 @@ export const IncomeTracker: React.FC<IncomeTrackerProps> = ({ onIncomeAdded }) =
             <div>
               <label className="block text-sm font-medium text-white mb-2">
                 <Calendar className="w-4 h-4 inline mr-1" />
-                Date
+                {t('expenses.date')}
               </label>
               <input
                 type="date"
@@ -154,7 +156,7 @@ export const IncomeTracker: React.FC<IncomeTrackerProps> = ({ onIncomeAdded }) =
           <div>
             <label className="block text-sm font-medium text-white mb-2">
               <Tag className="w-4 h-4 inline mr-1" />
-              Category
+              {t('expenses.category')}
             </label>
             <select
               value={formData.category}
@@ -170,24 +172,24 @@ export const IncomeTracker: React.FC<IncomeTrackerProps> = ({ onIncomeAdded }) =
           <div>
             <label className="block text-sm font-medium text-white mb-2">
               <FileText className="w-4 h-4 inline mr-1" />
-              Description
+              {t('expenses.description')}
             </label>
             <input
               type="text"
               value={formData.description}
               onChange={(e) => setFormData(prev => ({ ...prev, description: e.target.value }))}
-              placeholder="Source of income"
+              placeholder={t('income.placeholder.description')}
               className="w-full px-3 py-2 border border-[#2C2C2E] rounded-lg focus:ring-2 focus:ring-white focus:border-transparent bg-[#1F1F1F] text-white"
               required
             />
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-white mb-2">Notes (Optional)</label>
+            <label className="block text-sm font-medium text-white mb-2">{t('expenses.notes')}</label>
             <textarea
               value={formData.notes}
               onChange={(e) => setFormData(prev => ({ ...prev, notes: e.target.value }))}
-              placeholder="Any additional notes..."
+              placeholder={t('expenses.placeholder.notes')}
               rows={2}
               className="w-full px-3 py-2 border border-[#2C2C2E] rounded-lg focus:ring-2 focus:ring-white focus:border-transparent bg-[#1F1F1F] text-white"
             />
@@ -203,7 +205,7 @@ export const IncomeTracker: React.FC<IncomeTrackerProps> = ({ onIncomeAdded }) =
             />
             <label htmlFor="recurring" className="text-sm text-white flex items-center gap-1">
               <Repeat className="w-4 h-4" />
-              This is recurring income
+              {t('income.recurring')}
             </label>
           </div>
 
@@ -217,7 +219,7 @@ export const IncomeTracker: React.FC<IncomeTrackerProps> = ({ onIncomeAdded }) =
             ) : (
               <>
                 <Plus className="w-5 h-5" />
-                Add Income
+                {t('income.addIncome')}
               </>
             )}
           </button>
@@ -227,7 +229,7 @@ export const IncomeTracker: React.FC<IncomeTrackerProps> = ({ onIncomeAdded }) =
       {/* Recent Income */}
       {recentIncome.length > 0 && (
         <div className="bg-[#1F1F1F] backdrop-blur-sm rounded-xl shadow-lg p-6 border border-[#2C2C2E]">
-          <h3 className="text-lg font-semibold text-white mb-4">Recent Income</h3>
+          <h3 className="text-lg font-semibold text-white mb-4">{t('income.recentIncome')}</h3>
           <div className="space-y-3">
             {recentIncome.map((income) => (
               <div key={income.id} className="flex items-center justify-between p-3 bg-[#2C2C2E] rounded-lg">

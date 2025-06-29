@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Target, Plus, Edit3, Trash2, AlertTriangle, CheckCircle } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
 import { Budget, BudgetAnalysis } from '../types/finance';
 import { supabase } from '../lib/supabase';
 import { getLastDayOfMonth, formatCurrency } from '../utils/accounting';
@@ -23,6 +24,7 @@ const BUDGET_CATEGORIES = [
 ];
 
 export const BudgetManager: React.FC<BudgetManagerProps> = ({ currentMonth, onBudgetUpdated }) => {
+  const { t } = useTranslation();
   const [budgets, setBudgets] = useState<Budget[]>([]);
   const [budgetAnalysis, setBudgetAnalysis] = useState<BudgetAnalysis[]>([]);
   const [showAddForm, setShowAddForm] = useState(false);
@@ -160,7 +162,7 @@ export const BudgetManager: React.FC<BudgetManagerProps> = ({ currentMonth, onBu
   };
 
   const handleDelete = async (budgetId: string) => {
-    if (!confirm('Are you sure you want to delete this budget?')) return;
+    if (!confirm(t('common.confirm'))) return;
 
     try {
       const { error } = await supabase
@@ -196,6 +198,15 @@ export const BudgetManager: React.FC<BudgetManagerProps> = ({ currentMonth, onBu
     }
   };
 
+  const getStatusText = (status: string) => {
+    switch (status) {
+      case 'under': return t('budgets.underBudget');
+      case 'on-track': return t('budgets.onTrack');
+      case 'over': return t('budgets.overBudget');
+      default: return '';
+    }
+  };
+
   return (
     <div className="space-y-6">
       {/* Header */}
@@ -204,14 +215,14 @@ export const BudgetManager: React.FC<BudgetManagerProps> = ({ currentMonth, onBu
           <div className="w-10 h-10 bg-white rounded-lg flex items-center justify-center">
             <Target className="w-5 h-5 text-black" />
           </div>
-          <h2 className="text-xl font-semibold text-white">Budget Manager</h2>
+          <h2 className="text-xl font-semibold text-white">{t('budgets.title')}</h2>
         </div>
         <button
           onClick={() => setShowAddForm(true)}
           className="bg-white text-black px-4 py-2 rounded-lg hover:bg-gray-200 transition-colors flex items-center gap-2"
         >
           <Plus className="w-4 h-4" />
-          Add Budget
+          {t('budgets.addBudget')}
         </button>
       </div>
 
@@ -224,22 +235,21 @@ export const BudgetManager: React.FC<BudgetManagerProps> = ({ currentMonth, onBu
                 <h3 className="font-medium text-white">{analysis.category}</h3>
                 <span className={`px-2 py-1 rounded-full text-xs font-medium flex items-center gap-1 border ${getStatusColor(analysis.status)}`}>
                   {getStatusIcon(analysis.status)}
-                  {analysis.status === 'under' ? 'Under Budget' : 
-                   analysis.status === 'on-track' ? 'On Track' : 'Over Budget'}
+                  {getStatusText(analysis.status)}
                 </span>
               </div>
               
               <div className="space-y-2">
                 <div className="flex justify-between text-sm">
-                  <span className="text-gray-300">Budgeted:</span>
+                  <span className="text-gray-300">{t('budgets.budgeted')}:</span>
                   <span className="font-medium text-white">{formatCurrency(analysis.budgeted)}</span>
                 </div>
                 <div className="flex justify-between text-sm">
-                  <span className="text-gray-300">Spent:</span>
+                  <span className="text-gray-300">{t('budgets.spent')}:</span>
                   <span className="font-medium text-white">{formatCurrency(analysis.spent)}</span>
                 </div>
                 <div className="flex justify-between text-sm">
-                  <span className="text-gray-300">Remaining:</span>
+                  <span className="text-gray-300">{t('budgets.remaining')}:</span>
                   <span className={`font-medium ${analysis.remaining >= 0 ? 'text-green-400' : 'text-red-400'}`}>
                     {formatCurrency(analysis.remaining)}
                   </span>
@@ -268,10 +278,10 @@ export const BudgetManager: React.FC<BudgetManagerProps> = ({ currentMonth, onBu
 
       {/* Budget List */}
       <div className="bg-[#1F1F1F] backdrop-blur-sm rounded-xl shadow-lg p-6 border border-[#2C2C2E]">
-        <h3 className="text-lg font-semibold text-white mb-4">Monthly Budgets</h3>
+        <h3 className="text-lg font-semibold text-white mb-4">{t('budgets.monthlyBudgets')}</h3>
         
         {budgets.length === 0 ? (
-          <p className="text-gray-400 text-center py-8">No budgets set for this month. Add your first budget to get started!</p>
+          <p className="text-gray-400 text-center py-8">{t('budgets.noBudgets')}</p>
         ) : (
           <div className="space-y-3">
             {budgets.map((budget) => (
@@ -314,12 +324,12 @@ export const BudgetManager: React.FC<BudgetManagerProps> = ({ currentMonth, onBu
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50">
           <div className="bg-[#1F1F1F] backdrop-blur-sm rounded-xl shadow-lg p-6 w-full max-w-md border border-[#2C2C2E]">
             <h3 className="text-lg font-semibold text-white mb-4">
-              {editingBudget ? 'Edit Budget' : 'Add New Budget'}
+              {editingBudget ? t('common.edit') + ' ' + t('budgets.title') : t('budgets.addBudget')}
             </h3>
             
             <form onSubmit={handleSubmit} className="space-y-4">
               <div>
-                <label className="block text-sm font-medium text-white mb-2">Category</label>
+                <label className="block text-sm font-medium text-white mb-2">{t('expenses.category')}</label>
                 <select
                   value={formData.category}
                   onChange={(e) => setFormData(prev => ({ ...prev, category: e.target.value }))}
@@ -333,14 +343,14 @@ export const BudgetManager: React.FC<BudgetManagerProps> = ({ currentMonth, onBu
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-white mb-2">Monthly Amount</label>
+                <label className="block text-sm font-medium text-white mb-2">{t('expenses.amount')}</label>
                 <input
                   type="number"
                   step="0.01"
                   min="0"
                   value={formData.amount}
                   onChange={(e) => setFormData(prev => ({ ...prev, amount: e.target.value }))}
-                  placeholder="0.00"
+                  placeholder={t('expenses.placeholder.amount')}
                   className="w-full px-3 py-2 border border-[#2C2C2E] rounded-lg focus:ring-2 focus:ring-white focus:border-transparent bg-[#1F1F1F] text-white"
                   required
                 />
@@ -356,14 +366,14 @@ export const BudgetManager: React.FC<BudgetManagerProps> = ({ currentMonth, onBu
                   }}
                   className="flex-1 px-4 py-2 border border-[#2C2C2E] text-gray-300 rounded-lg hover:bg-[#2C2C2E] transition-colors"
                 >
-                  Cancel
+                  {t('common.cancel')}
                 </button>
                 <button
                   type="submit"
                   disabled={isSubmitting}
                   className="flex-1 bg-white text-black px-4 py-2 rounded-lg hover:bg-gray-200 transition-colors disabled:opacity-50"
                 >
-                  {isSubmitting ? 'Saving...' : editingBudget ? 'Update' : 'Add Budget'}
+                  {isSubmitting ? t('common.loading') : editingBudget ? t('common.update') : t('common.add')}
                 </button>
               </div>
             </form>
