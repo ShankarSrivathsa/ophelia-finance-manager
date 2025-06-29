@@ -86,19 +86,13 @@ class AIService {
   }
 
   private initializeConfig() {
-    // Use your provided Gemini API key directly
-    const geminiKey = 'AIzaSyBhsaBId1Tt9wjVYq5V_931at5wY7KEJfs';
-    
-    // Also check environment variables as fallback
-    const envGeminiKey = import.meta.env.VITE_GEMINI_API_KEY;
+    // Check environment variables for API keys
+    const geminiKey = import.meta.env.VITE_GEMINI_API_KEY;
     const openaiKey = import.meta.env.VITE_OPENAI_API_KEY;
     const anthropicKey = import.meta.env.VITE_ANTHROPIC_API_KEY;
 
     if (geminiKey) {
       this.config = { provider: 'gemini', apiKey: geminiKey };
-      console.log('✅ Gemini AI configured successfully');
-    } else if (envGeminiKey) {
-      this.config = { provider: 'gemini', apiKey: envGeminiKey };
       console.log('✅ Gemini AI configured from environment');
     } else if (openaiKey) {
       this.config = { provider: 'openai', apiKey: openaiKey };
