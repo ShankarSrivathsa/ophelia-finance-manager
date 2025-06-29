@@ -89,7 +89,7 @@ export const AuthForm: React.FC = () => {
     <div 
       className="min-h-screen flex items-center justify-center px-4"
       style={{
-        backgroundImage: 'url(/image.png)',
+        backgroundImage: 'url(/bg.jpg)',
         backgroundSize: 'cover',
         backgroundPosition: 'center',
         backgroundRepeat: 'no-repeat'

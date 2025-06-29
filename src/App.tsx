@@ -243,7 +243,7 @@ function AppContent() {
       <div 
         className="min-h-screen flex items-center justify-center"
         style={{
-          backgroundImage: 'url(/image.png)',
+          backgroundImage: 'url(/bg.jpg)',
           backgroundSize: 'cover',
           backgroundPosition: 'center',
           backgroundRepeat: 'no-repeat'
@@ -333,7 +333,7 @@ function AppContent() {
     <div 
       className="min-h-screen"
       style={{
-        backgroundImage: 'url(/image.png)',
+        backgroundImage: 'url(/bg.jpg)',
         backgroundSize: 'cover',
         backgroundPosition: 'center',
         backgroundRepeat: 'no-repeat'

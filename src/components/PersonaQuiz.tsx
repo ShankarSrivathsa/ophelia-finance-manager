@@ -142,7 +142,7 @@ export const PersonaQuiz: React.FC<PersonaQuizProps> = ({ onComplete }) => {
       <div 
         className="min-h-screen flex items-center justify-center px-4"
         style={{
-          backgroundImage: 'url(/image.png)',
+          backgroundImage: 'url(/bg.jpg)',
           backgroundSize: 'cover',
           backgroundPosition: 'center',
           backgroundRepeat: 'no-repeat'
@@ -165,7 +165,7 @@ export const PersonaQuiz: React.FC<PersonaQuizProps> = ({ onComplete }) => {
     <div 
       className="min-h-screen flex items-center justify-center px-4"
       style={{
-        backgroundImage: 'url(/image.png)',
+        backgroundImage: 'url(/bg.jpg)',
         backgroundSize: 'cover',
         backgroundPosition: 'center',
         backgroundRepeat: 'no-repeat'
