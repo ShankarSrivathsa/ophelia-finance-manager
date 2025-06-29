@@ -256,7 +256,7 @@ export const AIFinancialAdvisor: React.FC<AIFinancialAdvisorProps> = ({ onAdvice
               <h3 className="text-lg font-semibold text-white">AI Financial Advice</h3>
             </div>
             <div className="prose prose-gray max-w-none">
-              <p className="text-gray-300 leading-relaxed">{advice.advice}</p>
+              <p className="text-white leading-relaxed">{advice.advice}</p>
             </div>
           </div>
 
@@ -277,8 +277,8 @@ export const AIFinancialAdvisor: React.FC<AIFinancialAdvisorProps> = ({ onAdvice
                         {rec.priority} priority
                       </span>
                     </div>
-                    <p className="text-gray-300 mb-2 font-medium">{rec.action}</p>
-                    <p className="text-sm text-gray-400">{rec.impact}</p>
+                    <p className="text-white mb-2 font-medium">{rec.action}</p>
+                    <p className="text-sm text-gray-300">{rec.impact}</p>
                   </div>
                 ))}
               </div>
@@ -294,10 +294,10 @@ export const AIFinancialAdvisor: React.FC<AIFinancialAdvisorProps> = ({ onAdvice
                   <div key={index} className="flex items-start gap-3 p-3 bg-[#2C2C2E] rounded-lg">
                     {getInsightIcon(insight.type)}
                     <div>
-                      <p className="text-gray-300">{insight.message}</p>
+                      <p className="text-white">{insight.message}</p>
                       {insight.data && (
-                        <div className="mt-2 text-sm text-gray-400">
-                          <pre className="bg-[#1F1F1F] p-2 rounded text-xs overflow-x-auto">
+                        <div className="mt-2 text-sm text-gray-300">
+                          <pre className="bg-[#1F1F1F] p-2 rounded text-xs overflow-x-auto text-gray-300">
                             {JSON.stringify(insight.data, null, 2)}
                           </pre>
                         </div>
@@ -316,10 +316,10 @@ export const AIFinancialAdvisor: React.FC<AIFinancialAdvisorProps> = ({ onAdvice
         <div className="bg-[#1F1F1F] backdrop-blur-sm rounded-xl shadow-lg p-8 text-center border border-[#2C2C2E]">
           <Brain className="w-16 h-16 text-white mx-auto mb-4" />
           <h3 className="text-lg font-semibold text-white mb-2">AI-Powered Financial Guidance</h3>
-          <p className="text-gray-300 mb-4">
+          <p className="text-white mb-4">
             Get personalized financial advice based on your spending patterns, income, and goals.
           </p>
-          <p className="text-sm text-gray-400">
+          <p className="text-sm text-gray-300">
             Select an advice type and click "Get AI Advice" to start.
           </p>
         </div>
