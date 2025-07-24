@@ -3,6 +3,7 @@
 Ophelia is a comprehensive money management and accounting application designed to help users track expenses, income, manage budgets, set savings goals, and gain insightful financial overviews. It leverages cutting-edge AI for personalized advice and reports, and includes traditional accounting features like journal entries, ledger accounts, and profit & loss statements for a complete financial management experience.
 
 Try it out at: [Ophelia](https://admirable-macaron-4c4433.netlify.app/)
+Vibe-coded for bolt.new Hackathon
 ## Features
 
 -   **User Authentication:** Secure sign-up and sign-in powered by Supabase.
